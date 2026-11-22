@@ -3,428 +3,371 @@ const dynamicsCategories = [
 { key: “naming”, title: “Заттарды атау” },
 { key: “repetition”, title: “Қайталап айту” },
 { key: “vocabulary”, title: “Сөздік қор” },
-{ key: “reading”, title: “Оқу дағдысы” },
-{ key: “writing”, title: “Жазу дағдысы” }
+{ key: “reading”, title: “Оқу” },
+{ key: “writing”, title: “Жазу” }
 ];
 
 function loadDynamics() {
 const content = document.getElementById(“patientContent”);
 
 if (!content) return;
-
-let patient = {};
-
-try {
-patient = JSON.parse(
-localStorage.getItem(“aphasiaPatient”) || “{}”
-);
-} catch (error) {
-patient = {};
+const savedPatient = localStorage.getItem("aphasiaPatient");
+if (!savedPatient) {
+    content.innerHTML = `
+        <h2>ДАМУ ДИНАМИКАСЫ</h2>
+        <p>Алдымен пациент мәліметтерін енгізіңіз.</p>
+        <button onclick="backToCabinetMenu()">АРТҚА</button>
+    `;
+    return;
 }
-
+let patient;
+try {
+    patient = JSON.parse(savedPatient);
+} catch (error) {
+    content.innerHTML = "<p>Пациент мәліметтерін оқу мүмкін болмады.</p>";
+    return;
+}
 if (!patient.fullName || !patient.birthDate) {
-content.innerHTML = <button class="content-back" onclick="backToCabinetMenu()"> ← АРТҚА </button> <h2>ДАМУ ДИНАМИКАСЫ</h2> <p>Алдымен пациенттің мәліметтерін сақтаңыз.</p>;
-return;
+    content.innerHTML = `
+        <p>Пациенттің аты-жөні мен туған күні қажет.</p>
+        <button onclick="backToCabinetMenu()">АРТҚА</button>
+    `;
+    return;
 }
-
 const patientId =
-patient.fullName.trim().toLowerCase() +
-“_” +
-patient.birthDate;
-
-let allResults = [];
-
-try {
-allResults = JSON.parse(
-localStorage.getItem(“aphasiaDiagnosticResults”) || “[]”
+    patient.fullName.trim().toLowerCase() + "_" + patient.birthDate;
+const allResults = JSON.parse(
+    localStorage.getItem("aphasiaDiagnosticResults") || "[]"
 );
-
-if (!Array.isArray(allResults)) allResults = [];
-
-} catch (error) {
-allResults = [];
-}
-
-const patientResults = allResults.filter(
-result => result.patientId === patientId
+const patientResults = allResults.filter(result =>
+    result.patientId === patientId &&
+    result.completed === true
 );
-
-const initialResults = patientResults.filter(
-result => result.assessmentType === “initial”
+const initialResults = patientResults.filter(result =>
+    result.assessmentType === "initial"
 );
-
-const repeatResults = patientResults.filter(
-result => result.assessmentType === “repeat”
+const repeatResults = patientResults.filter(result =>
+    result.assessmentType === "repeat"
 );
-
-const rows = dynamicsCategories.map(category => {
-const initial = getDynamicsLatest(
-initialResults,
-category.key
-);
-
-const repeat = getDynamicsLatest(
-  repeatResults,
-  category.key
-);
-const initialPercent = initial
-  ? Number(initial.percentage)
-  : null;
-const repeatPercent = repeat
-  ? Number(repeat.percentage)
-  : null;
-const change =
-  initialPercent !== null && repeatPercent !== null
-    ? repeatPercent - initialPercent
-    : null;
-return {
-  ...category,
-  initialPercent,
-  repeatPercent,
-  change
-};
-
-});
-
-const completed = rows.filter(
-row =>
-row.initialPercent !== null &&
-row.repeatPercent !== null
-);
-
-const initialAverage = completed.length
-? completed.reduce(
-(sum, row) => sum + row.initialPercent, 0
-) / completed.length
-: null;
-
-const repeatAverage = completed.length
-? completed.reduce(
-(sum, row) => sum + row.repeatPercent, 0
-) / completed.length
-: null;
-
-const totalChange =
-initialAverage !== null && repeatAverage !== null
-? repeatAverage - initialAverage
-: null;
-
 renderDynamics(
-content,
-patient,
-rows,
-initialAverage,
-repeatAverage,
-totalChange,
-completed.length
+    content,
+    patient,
+    initialResults,
+    repeatResults
 );
+
 }
 
-function getDynamicsLatest(results, categoryKey) {
-const matching = results.filter(
-result => result.categoryKey === categoryKey
+function getLatestResult(results, categoryKey) {
+const matching = results.filter(result =>
+result.categoryKey === categoryKey
 );
 
-if (!matching.length) return null;
+if (matching.length === 0) return null;
+return matching.sort(
+    (a, b) => Number(b.timestamp) - Number(a.timestamp)
+)[0];
 
-matching.sort(
-(a, b) => Number(b.timestamp || 0) -
-Number(a.timestamp || 0)
-);
-
-return matching[0];
 }
 
-function renderDynamics(
-content,
-patient,
-rows,
-initialAverage,
-repeatAverage,
-totalChange,
-completedCount
-) {
+function renderDynamics(content, patient, initialResults, repeatResults) {
+const comparisons = dynamicsCategories.map(category => {
+const initial = getLatestResult(initialResults, category.key);
+const repeat = getLatestResult(repeatResults, category.key);
+
+    let difference = null;
+    if (initial && repeat) {
+        difference =
+            Number(repeat.percentage) -
+            Number(initial.percentage);
+    }
+    return {
+        ...category,
+        initial,
+        repeat,
+        difference
+    };
+});
+const comparable = comparisons.filter(item =>
+    item.initial && item.repeat
+);
+let averageInitial = 0;
+let averageRepeat = 0;
+let averageDifference = 0;
+if (comparable.length > 0) {
+    averageInitial = Math.round(
+        comparable.reduce(
+            (sum, item) => sum + Number(item.initial.percentage), 0
+        ) / comparable.length
+    );
+    averageRepeat = Math.round(
+        comparable.reduce(
+            (sum, item) => sum + Number(item.repeat.percentage), 0
+        ) / comparable.length
+    );
+    averageDifference = averageRepeat - averageInitial;
+}
 content.innerHTML = `
-← АРТҚА
-<h2 class="dyn-title">ДАМУ ДИНАМИКАСЫ</h2>
-<div class="dyn-patient">
-  <strong>Пациент:</strong>
-  ${escapeHTML(patient.fullName)}
-  <br>
-  <strong>Диагноз:</strong>
-  ${escapeHTML(patient.diagnosis || "Көрсетілмеген")}
-</div>
-<div class="dyn-summary">
-  <div class="dyn-stat">
-    <span>Бастапқы көрсеткіш</span>
-    <strong>
-      ${initialAverage === null
-        ? "—"
-        : initialAverage.toFixed(1) + "%"}
-    </strong>
-  </div>
-  <div class="dyn-stat">
-    <span>Кейінгі көрсеткіш</span>
-    <strong>
-      ${repeatAverage === null
-        ? "—"
-        : repeatAverage.toFixed(1) + "%"}
-    </strong>
-  </div>
-  <div class="dyn-stat">
-    <span>Жалпы өзгеріс</span>
-    <strong>
-      ${totalChange === null
-        ? "—"
-        : (totalChange > 0 ? "+" : "") +
-          totalChange.toFixed(1) + "%"}
-    </strong>
-  </div>
-</div>
-<h3 class="dyn-heading">
-  ДИАГНОСТИКА НӘТИЖЕЛЕРІН САЛЫСТЫРУ
-</h3>
-<div class="dyn-table-wrap">
-  <table class="dyn-table">
-    <thead>
-      <tr>
-        <th>Бағалау бөлімі</th>
-        <th>Бастапқы</th>
-        <th>Кейінгі</th>
-        <th>Өзгеріс</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${rows.map(row => `
-        <tr>
-          <td>${row.title}</td>
-          <td>
-            ${row.initialPercent === null
-              ? "—"
-              : row.initialPercent + "%"}
-          </td>
-          <td>
-            ${row.repeatPercent === null
-              ? "—"
-              : row.repeatPercent + "%"}
-          </td>
-          <td class="${
-            row.change === null
-              ? ""
-              : row.change > 0
-                ? "dyn-positive"
-                : row.change < 0
-                  ? "dyn-negative"
-                  : ""
-          }">
-            ${row.change === null
-              ? "—"
-              : (row.change > 0 ? "+" : "") +
-                row.change.toFixed(1) + "%"}
-          </td>
-        </tr>
-      `).join("")}
-    </tbody>
-  </table>
-</div>
-<h3 class="dyn-heading">
-  НӘТИЖЕЛЕРДІҢ ГРАФИКАЛЫҚ КӨРІНІСІ
-</h3>
-<div class="dyn-chart">
-  ${rows.map(row => `
-    <div class="dyn-chart-card">
-      <h4>${row.title}</h4>
-      <div class="dyn-bar-row">
-        <span>Бастапқы</span>
-        <div class="dyn-track">
-          <div class="dyn-bar dyn-initial"
-            style="width:${row.initialPercent ?? 0}%">
-          </div>
+    <div class="dynamics-container">
+        <div class="dynamics-heading">
+            <h2>ДАМУ ДИНАМИКАСЫ</h2>
+            <h3>${escapeHTML(patient.fullName)}</h3>
+            <p>Афазия кезіндегі сөйлеу дағдыларының өзгеруін бақылау</p>
         </div>
-        <b>${row.initialPercent === null
-          ? "—"
-          : row.initialPercent + "%"}</b>
-      </div>
-      <div class="dyn-bar-row">
-        <span>Кейінгі</span>
-        <div class="dyn-track">
-          <div class="dyn-bar dyn-repeat"
-            style="width:${row.repeatPercent ?? 0}%">
-          </div>
+        <div class="dynamics-summary">
+            <div class="dynamics-card">
+                <span>Бастапқы көрсеткіш</span>
+                <strong>${comparable.length ? averageInitial + "%" : "—"}</strong>
+            </div>
+            <div class="dynamics-card">
+                <span>Қайталама көрсеткіш</span>
+                <strong>${comparable.length ? averageRepeat + "%" : "—"}</strong>
+            </div>
+            <div class="dynamics-card">
+                <span>Өзгеріс</span>
+                <strong>
+                    ${comparable.length
+                        ? (averageDifference > 0 ? "+" : "") + averageDifference + " п.т."
+                        : "—"}
+                </strong>
+            </div>
         </div>
-        <b>${row.repeatPercent === null
-          ? "—"
-          : row.repeatPercent + "%"}</b>
-      </div>
+        <h3>Бағыттар бойынша салыстыру</h3>
+        <div class="dynamics-table-wrapper">
+            <table class="dynamics-table">
+                <thead>
+                    <tr>
+                        <th>Бағыт</th>
+                        <th>Бастапқы</th>
+                        <th>Қайталама</th>
+                        <th>Өзгеріс</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${comparisons.map(item => `
+                        <tr>
+                            <td>${item.title}</td>
+                            <td>
+                                ${item.initial
+                                    ? item.initial.percentage + "%"
+                                    : "Өткізілмеген"}
+                            </td>
+                            <td>
+                                ${item.repeat
+                                    ? item.repeat.percentage + "%"
+                                    : "Өткізілмеген"}
+                            </td>
+                            <td class="${
+                                item.difference === null
+                                    ? ""
+                                    : item.difference > 0
+                                        ? "positive"
+                                        : item.difference < 0
+                                            ? "negative"
+                                            : ""
+                            }">
+                                ${item.difference === null
+                                    ? "—"
+                                    : (item.difference > 0 ? "+" : "") +
+                                        item.difference + " п.т."}
+                            </td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        </div>
+        <h3>Нәтижелер диаграммасы</h3>
+        <div class="dynamics-chart">
+            ${comparisons.map(item => `
+                <div class="chart-item">
+                    <p>${item.title}</p>
+                    <div class="chart-line">
+                        <span>Бастапқы</span>
+                        <div class="chart-track">
+                            <div class="chart-bar initial-bar"
+                                 style="width:${item.initial ? Math.min(100, Math.max(0, Number(item.initial.percentage) || 0)) : 0}%">
+                            </div>
+                        </div>
+                        <b>${item.initial ? item.initial.percentage + "%" : "—"}</b>
+                    </div>
+                    <div class="chart-line">
+                        <span>Қайталама</span>
+                        <div class="chart-track">
+                            <div class="chart-bar repeat-bar"
+                                 style="width:${item.repeat ? Math.min(100, Math.max(0, Number(item.repeat.percentage) || 0)) : 0}%">
+                            </div>
+                        </div>
+                        <b>${item.repeat ? item.repeat.percentage + "%" : "—"}</b>
+                    </div>
+                </div>
+            `).join("")}
+        </div>
+        <div class="dynamics-conclusion">
+            <h3>Қорытынды</h3>
+            ${
+                comparable.length > 0
+                ? `
+                    <p>
+                        Салыстырылған ${comparable.length} бағыт бойынша
+                        бастапқы орташа көрсеткіш ${averageInitial}%,
+                        қайталама орташа көрсеткіш ${averageRepeat}% болды.
+                    </p>
+                    <p>
+                        Өзгеріс: <b>
+                        ${(averageDifference > 0 ? "+" : "") +
+                            averageDifference} пайыздық пункт.</b>
+                    </p>
+                    <p>
+                        Бұл көрсеткіштер орындалған тапсырмалар нәтижесін
+                        сипаттайды. Клиникалық қорытындыны логопед
+                        пациенттің жалпы жағдайын ескере отырып жасайды.
+                    </p>
+                `
+                : `
+                    <p>
+                        Даму динамикасын есептеу үшін кемінде бір бағыт
+                        бойынша бастапқы және қайталама диагностика
+                        нәтижелері қажет.
+                    </p>
+                    <p>
+                        Алдымен бастапқы диагностиканы, кейін қайталама
+                        диагностиканы орындаңыз.
+                    </p>
+                `
+            }
+        </div>
+        <button onclick="window.location.href='diagnostics.html'">
+            ДИАГНОСТИКАҒА ӨТУ
+        </button>
+        <button onclick="backToCabinetMenu()" class="dynamics-back">
+            ← КАБИНЕТКЕ ҚАЙТУ
+        </button>
     </div>
-  `).join("")}
-</div>
-<div class="dyn-conclusion">
-  <h3>ЛОГОПЕД ҚОРЫТЫНДЫСЫ</h3>
-  ${
-    completedCount === 0
-      ? "<p>Салыстыру үшін бастапқы және кейінгі диагностика нәтижелері қажет.</p>"
-      : `
-        <p>Салыстыруға ${completedCount} бағалау бөлімі енгізілді.</p>
-        <p>${
-          totalChange > 0
-            ? "Салыстырылған көрсеткіштер бойынша оң өзгеріс байқалады."
-            : totalChange < 0
-              ? "Салыстырылған көрсеткіштер бойынша төмендеу байқалады. Түзету жұмысын қайта қарау қажет."
-              : "Салыстырылған көрсеткіштер өзгеріссіз қалған."
-        }</p>
-        <p>Жалпы өзгеріс: ${
-          totalChange > 0 ? "+" : ""
-        }${totalChange.toFixed(1)} пайыздық тармақ.</p>
-      `
-  }
-  <small>
-    Есеп диагностика кезінде тіркелген ұпайлар негізінде жасалады.
-    Соңғы қорытындыны логопед тексереді.
-  </small>
-</div>
-
 `;
+addDynamicsStyles();
 
-addDynamicsDesign();
 }
 
-function addDynamicsDesign() {
-if (document.getElementById(“dynStyles”)) return;
+function addDynamicsStyles() {
+if (document.getElementById(“dynamics-styles”)) return;
 
-const style = document.createElement(“style”);
-style.id = “dynStyles”;
-
+const style = document.createElement("style");
+style.id = "dynamics-styles";
 style.textContent = `
-.dyn-title {
-color:#a77c36;
-margin:20px 0;
-font-size:25px;
-}
-
-.dyn-patient {
-  background:#fffaf2;
-  border:1px solid #eadcc3;
-  border-radius:13px;
-  padding:17px;
-  line-height:1.9;
-  margin-bottom:20px;
-}
-.dyn-summary {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-}
-.dyn-stat {
-  background:#fffaf2;
-  border:1px solid #eadcc3;
-  border-radius:15px;
-  padding:17px;
-}
-.dyn-stat span {
-  color:#887963;
-  font-size:13px;
-}
-.dyn-stat strong {
-  display:block;
-  color:#a77c36;
-  font-size:25px;
-  margin-top:10px;
-}
-.dyn-heading {
-  color:#98703a;
-  margin:27px 0 15px;
-}
-.dyn-table-wrap {
-  overflow-x:auto;
-}
-.dyn-table {
-  width:100%;
-  min-width:520px;
-  border-collapse:collapse;
-}
-.dyn-table th,
-.dyn-table td {
-  padding:13px 10px;
-  border:1px solid #eadcc3;
-  text-align:left;
-  font-size:13px;
-}
-.dyn-table th {
-  background:#fbf3e5;
-  color:#896a39;
-}
-.dyn-positive {
-  color:#42835b;
-  font-weight:bold;
-}
-.dyn-negative {
-  color:#b35e52;
-  font-weight:bold;
-}
-.dyn-chart-card {
-  background:#fffaf2;
-  border:1px solid #eadcc3;
-  border-radius:15px;
-  padding:16px;
-  margin-bottom:13px;
-}
-.dyn-chart-card h4 {
-  color:#705b3c;
-  margin-bottom:14px;
-}
-.dyn-bar-row {
-  display:grid;
-  grid-template-columns:75px minmax(0,1fr) 45px;
-  gap:8px;
-  align-items:center;
-  margin:10px 0;
-  font-size:12px;
-}
-.dyn-track {
-  height:13px;
-  background:#eee8dd;
-  border-radius:20px;
-  overflow:hidden;
-}
-.dyn-bar {
-  height:100%;
-  border-radius:20px;
-}
-.dyn-initial {
-  background:#c7a66d;
-}
-.dyn-repeat {
-  background:#83ad91;
-}
-.dyn-conclusion {
-  background:#fffaf2;
-  border:1px solid #eadcc3;
-  padding:20px;
-  border-radius:15px;
-  margin-top:25px;
-  line-height:1.8;
-}
-.dyn-conclusion h3 {
-  color:#98703a;
-  margin-bottom:12px;
-}
-.dyn-conclusion small {
-  display:block;
-  color:#887963;
-  margin-top:12px;
-}
-@media(max-width:600px) {
-  .dyn-summary {
-    grid-template-columns:1fr;
-  }
-  .dyn-bar-row {
-    grid-template-columns:65px minmax(0,1fr) 40px;
-    gap:5px;
-  }
-}
-
+    .dynamics-container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 25px;
+        background: #fff;
+        border: 1px solid #ead9b7;
+        border-radius: 20px;
+        color: #493b2b;
+    }
+    .dynamics-heading {
+        text-align: center;
+    }
+    .dynamics-heading h2 {
+        color: #a77a27;
+    }
+    .dynamics-summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 25px 0;
+    }
+    .dynamics-card {
+        padding: 20px 10px;
+        background: #fff8e9;
+        border: 1px solid #ead9b7;
+        border-radius: 14px;
+        text-align: center;
+    }
+    .dynamics-card span {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    .dynamics-card strong {
+        font-size: 25px;
+        color: #a77a27;
+    }
+    .dynamics-table-wrapper {
+        overflow-x: auto;
+    }
+    .dynamics-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 520px;
+    }
+    .dynamics-table th,
+    .dynamics-table td {
+        padding: 13px;
+        border: 1px solid #ead9b7;
+        text-align: center;
+    }
+    .dynamics-table th {
+        background: #fff8e9;
+    }
+    .positive {
+        color: #278044;
+        font-weight: bold;
+    }
+    .negative {
+        color: #b34b3d;
+        font-weight: bold;
+    }
+    .chart-item {
+        padding: 15px;
+        margin: 15px 0;
+        border: 1px solid #ead9b7;
+        border-radius: 12px;
+    }
+    .chart-line {
+        display: grid;
+        grid-template-columns: 85px 1fr 45px;
+        align-items: center;
+        gap: 8px;
+        margin: 10px 0;
+        font-size: 13px;
+    }
+    .chart-track {
+        height: 13px;
+        background: #eee7da;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    .chart-bar {
+        height: 100%;
+        border-radius: 20px;
+    }
+    .initial-bar {
+        background: #c9a66b;
+    }
+    .repeat-bar {
+        background: #77a88a;
+    }
+    .dynamics-conclusion {
+        padding: 18px;
+        margin: 20px 0;
+        background: #fff8e9;
+        border-radius: 14px;
+        line-height: 1.7;
+    }
+    .dynamics-back {
+        background: #776b59;
+    }
+    @media(max-width: 650px) {
+        .dynamics-container {
+            padding: 15px;
+        }
+        .dynamics-summary {
+            grid-template-columns: 1fr;
+        }
+        .chart-line {
+            grid-template-columns: 75px 1fr 40px;
+        }
+    }
 `;
-
 document.head.appendChild(style);
+
 }
