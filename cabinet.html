@@ -1,251 +1,252 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Логопед кабинеті | Тілашар</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТІЛАШАР — Логопед кабинеті</title>
 <style>
-    .cabinet-page {
-        width: 94%;
-        max-width: 1250px;
-        margin: 35px auto;
-    }
-    .cabinet-welcome {
-        text-align: center;
-        padding: 35px 20px;
-        margin-bottom: 30px;
-        background: linear-gradient(135deg, #4b101b, #210810);
-        border: 1px solid #e8bd67;
-        border-radius: 22px;
-    }
-    .cabinet-welcome h2 {
-        color: #ffe5a6;
-        font-size: 30px;
-        margin-bottom: 12px;
-    }
-    .cabinet-welcome p {
-        color: #fff8ed;
-        font-size: 17px;
-    }
+:root {
+    --gold: #b58a43;
+    --gold-light: #e6c98e;
+    --cream: #fffaf0;
+    --white: #ffffff;
+    --text: #574735;
+    --muted: #8d7b65;
+    --border: #eadcc3;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fffaf0, #f5ead6);
+    color: var(--text);
+}
+header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.logo {
+    color: var(--gold);
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.header-title {
+    font-size: 14px;
+    color: var(--muted);
+}
+.container {
+    max-width: 1150px;
+    margin: 35px auto;
+    padding: 20px;
+}
+.page-title {
+    text-align: center;
+    color: var(--gold);
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+.subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 35px;
+}
+.patient-box {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 5px 20px #a98b4b12;
+    margin-bottom: 35px;
+}
+.patient-box h2 {
+    color: var(--gold);
+}
+.patient-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text);
+    font-weight: bold;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fffdf8;
+    color: var(--text);
+    font-size: 15px;
+}
+.save-button,
+.cabinet-card button,
+.back-button {
+    background: linear-gradient(135deg, #d8b46d, #b58a43);
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 11px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+.save-button {
+    margin-top: 20px;
+}
+.message {
+    color: #54834e;
+    margin-top: 12px;
+}
+.menu-title {
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 22px;
+}
+.cabinet-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.cabinet-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 7px 25px #a98b4b12;
+    transition: 0.25s;
+}
+.cabinet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px #a98b4b25;
+}
+.cabinet-card .icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+.cabinet-card h3 {
+    color: var(--gold);
+    font-size: 18px;
+}
+.cabinet-card p {
+    color: var(--muted);
+    min-height: 38px;
+}
+#patientContent {
+    display: none;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 25px;
+    box-shadow: 0 5px 20px #a98b4b12;
+}
+.back-button {
+    margin-bottom: 20px;
+}
+@media(max-width:650px) {
+    .cabinet-menu,
     .patient-form {
-        padding: 25px;
-        margin-bottom: 30px;
-        background: #321018;
-        border: 1px solid #a8792d;
-        border-radius: 20px;
+        grid-template-columns: 1fr;
     }
-    .patient-form h3 {
-        color: #ffe5a6;
-        font-size: 22px;
-        margin-bottom: 20px;
-    }
-    .form-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    .form-field label {
-        display: block;
-        color: #ffe5a6;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-    .form-field input,
-    .form-field textarea {
-        width: 100%;
-        padding: 13px;
-        border-radius: 9px;
-        border: 1px solid #e8bd67;
-        background: #fffaf1;
-        color: #241015;
-        font-size: 15px;
-    }
-    .cabinet-save {
-        margin-top: 20px;
-        padding: 14px 25px;
-        border: none;
-        border-radius: 30px;
-        background: linear-gradient(135deg, #f3d58f, #c08b3b);
-        color: #350b12;
-        font-weight: 900;
-        cursor: pointer;
-    }
-    .cabinet-menu-title {
-        color: #ffe5a6;
+    .page-title {
         font-size: 25px;
-        text-align: center;
-        margin: 35px 0 20px;
     }
-    .cabinet-menu {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+    .container {
+        padding: 12px;
     }
-    .cabinet-card {
-        min-height: 170px;
-        padding: 25px;
-        border: 1px solid #e8bd67;
-        border-radius: 18px;
-        background: linear-gradient(145deg, #541421, #270a12);
-        color: #fff8ed;
-        cursor: pointer;
-        text-align: left;
-        transition: 0.25s;
-    }
-    .cabinet-card:hover {
-        transform: translateY(-5px);
-        background: linear-gradient(145deg, #761d2d, #3c0b17);
-    }
-    .cabinet-card .icon {
-        font-size: 35px;
-        display: block;
-        margin-bottom: 12px;
-    }
-    .cabinet-card h3 {
-        color: #ffe5a6;
-        font-size: 19px;
-        margin-bottom: 8px;
-    }
-    .cabinet-card p {
-        color: #fff1df;
-        font-size: 14px;
-    }
-    #patientContent {
-        margin-top: 30px;
-    }
-    .patient-message {
-        margin-top: 15px;
-        color: #ffe5a6;
-        font-weight: bold;
-    }
-    @media(max-width:650px) {
-        .form-grid,
-        .cabinet-menu {
-            grid-template-columns: 1fr;
-        }
-        .cabinet-welcome h2 {
-            font-size: 23px;
-        }
-    }
+}
 </style>
 </head>
 <body>
-<!-- ЖОҒАРҒЫ БӨЛІК -->
-<header class="main-header">
-<div class="brand">✦ ТІЛАШАР ✦</div>
-<h1>ЛОГОПЕД КАБИНЕТІ</h1>
-<button class="cabinet-button"
-        onclick="window.location.href='index.html'">
-    ← БАҒДАРЛАМАҒА ҚАЙТУ
-</button>
+<header>
+    <div class="logo">ТІЛАШАР</div>
+    <div class="header-title">ЛОГОПЕД КАБИНЕТІ</div>
 </header>
-<main class="cabinet-page">
-<!-- ҚОШ КЕЛДІҢІЗ -->
-<section class="cabinet-welcome">
-    <h2>ЛОГОПЕДТІҢ ЖҰМЫС КЕҢІСТІГІ</h2>
-    <p>
-        «Тілашар» логопедиялық кабинетіне қош келдіңіз!
-    </p>
-    <p>
-        Мұнда жеке мәліметтерді тіркеуге,
-        сөйлеу картасын толтыруға,
-        диагностика жүргізуге және даму динамикасын бақылауға болады.
-    </p>
-</section>
-<!-- ПАЦИЕНТ МӘЛІМЕТТЕРІ -->
-<section class="patient-form">
-    <h3>👤 ПАЦИЕНТ ТУРАЛЫ МӘЛІМЕТТЕР</h3>
-    <form id="patientForm">
-        <div class="form-grid">
-            <div class="form-field">
-                <label for="fullName">Аты-жөні</label>
-                <input
-                    type="text"
-                    id="fullName"
-                    placeholder="Аты-жөнін енгізіңіз"
-                    required>
-            </div>
-            <div class="form-field">
-                <label for="birthDate">Туған күні</label>
-                <input
-                    type="date"
-                    id="birthDate">
-            </div>
-            <div class="form-field">
-                <label for="age">Жасы</label>
-                <input
-                    type="number"
-                    id="age"
-                    min="18"
-                    placeholder="Жасын енгізіңіз">
-            </div>
-            <div class="form-field">
-                <label for="diagnosis">Медициналық қорытынды</label>
-                <input
-                    type="text"
-                    id="diagnosis"
-                    placeholder="Маман енгізген қорытынды">
-            </div>
-            <div class="form-field">
-                <label for="testDate">Тексеру күні</label>
-                <input
-                    type="date"
-                    id="testDate">
-            </div>
+<main class="container">
+<h1 class="page-title">ЛОГОПЕД КАБИНЕТІ</h1>
+<p class="subtitle">Афазиясы бар ересектердің сөйлеу дағдыларын бақылау жүйесі</p>
+<section class="patient-box">
+    <h2>Науқас туралы мәлімет</h2>
+<form id="patientForm">
+    <div class="patient-form">
+        <div class="form-group">
+            <label>Аты-жөні</label>
+            <input id="fullName" type="text" placeholder="Аты-жөнін енгізіңіз">
         </div>
-        <button type="submit" class="cabinet-save">
-            💾 МӘЛІМЕТТЕРДІ САҚТАУ
-        </button>
-        <p id="patientMessage" class="patient-message"></p>
-    </form>
+        <div class="form-group">
+            <label>Туған күні</label>
+            <input id="birthDate" type="date">
+        </div>
+        <div class="form-group">
+            <label>Жасы</label>
+            <input id="age" type="number" readonly>
+        </div>
+        <div class="form-group">
+            <label>Диагнозы</label>
+            <input id="diagnosis" type="text" placeholder="Маман енгізеді">
+        </div>
+        <div class="form-group">
+            <label>Тексеру күні</label>
+            <input id="testDate" type="date">
+        </div>
+    </div>
+    <button class="save-button" type="submit">
+        Мәліметтерді сақтау
+    </button>
+    <div id="patientMessage" class="message"></div>
+</form>
 </section>
-<!-- КАБИНЕТ МӘЗІРІ -->
-<h2 class="cabinet-menu-title">
-    ✦ ЛОГОПЕДТІҢ ЖҰМЫС МӘЗІРІ ✦
-</h2>
-<section class="cabinet-menu">
-    <button class="cabinet-card"
-            onclick="showPatientSection('speechCard')">
-        <span class="icon">📋</span>
-        <h3>СӨЙЛЕУ КАРТАСЫ</h3>
-        <p>
-            Пациенттің жеке мәліметтері,
-            сөйлеу дағдылары және логопед қорытындысы.
-        </p>
+<h2 class="menu-title">ЖҰМЫС БӨЛІМДЕРІ</h2>
+<section class="cabinet-menu" id="cabinetMenu">
+<div class="cabinet-card">
+    <div class="icon">📋</div>
+    <h3>СӨЙЛЕУ КАРТАСЫ</h3>
+    <p>Науқастың сөйлеу ерекшеліктерін тіркеу</p>
+    <button type="button" onclick="showPatientSection('speechCard')">
+        Ашу
     </button>
-    <button class="cabinet-card"
-            onclick="showPatientSection('diagnostics')">
-        <span class="icon">🧠</span>
-        <h3>ДИАГНОСТИКА</h3>
-        <p>
-            Сөйлеу дағдыларын тексеруге
-            арналған тапсырмалар.
-        </p>
+</div>
+<div class="cabinet-card">
+    <div class="icon">🧠</div>
+    <h3>ДИАГНОСТИКА</h3>
+    <p>Алты бағыт бойынша диагностикалық тапсырмалар</p>
+    <button type="button" onclick="showPatientSection('diagnostics')">
+        Ашу
     </button>
-    <button class="cabinet-card"
-            onclick="showPatientSection('initialResult')">
-        <span class="icon">📊</span>
-        <h3>БАСТАПҚЫ НӘТИЖЕ</h3>
-        <p>
-            Алғашқы тексеру нәтижелері
-            мен балдық көрсеткіштер.
-        </p>
+</div>
+<div class="cabinet-card">
+    <div class="icon">📊</div>
+    <h3>БАСТАПҚЫ НӘТИЖЕ</h3>
+    <p>Алғашқы диагностика көрсеткіштері</p>
+    <button type="button" onclick="showPatientSection('initialResult')">
+        Ашу
     </button>
-    <button class="cabinet-card"
-            onclick="showPatientSection('dynamics')">
-        <span class="icon">📈</span>
-        <h3>ДАМУ ДИНАМИКАСЫ</h3>
-        <p>
-            Бастапқы және қайталама
-            бақылау нәтижелерін салыстыру.
-        </p>
+</div>
+<div class="cabinet-card">
+    <div class="icon">📈</div>
+    <h3>ДАМУ ДИНАМИКАСЫ</h3>
+    <p>Бастапқы және қайталама нәтижелерді салыстыру</p>
+    <button type="button" onclick="showPatientSection('dynamics')">
+        Ашу
     </button>
+</div>
 </section>
-<!-- ТАҢДАЛҒАН БӨЛІМ -->
-<div id="patientContent" style="display:none;"></div>
+<section id="patientContent"></section>
 </main>
-<!-- СКРИПТТЕР -->
 <script src="cabinet.js"></script>
 <script src="speech-card.js"></script>
 <script src="dynamics.js"></script>
