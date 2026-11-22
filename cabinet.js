@@ -1,47 +1,53 @@
-document.addEventListener(“DOMContentLoaded”, function () {
-const form = document.getElementById(“patientForm”);
-const birthDate = document.getElementById(“birthDate”);
-const testDate = document.getElementById(“testDate”);
-
-if (testDate && !testDate.value) {
-    testDate.value = new Date().toISOString().split("T")[0];
-}
-if (birthDate) {
-    birthDate.addEventListener("change", calculateAge);
-}
+document.addEventListener(“DOMContentLoaded”, () => {
+setDefaultDate();
 loadPatient();
+
+const form = document.getElementById(“patientForm”);
+
 if (form) {
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        savePatient();
-    });
+form.addEventListener(“submit”, (event) => {
+event.preventDefault();
+savePatient();
+});
 }
 
+const birthDate = document.getElementById(“birthDate”);
+
+if (birthDate) {
+birthDate.addEventListener(“change”, calculateAge);
+}
 });
 
-// Жасын есептеу
+function setDefaultDate() {
+const field = document.getElementById(“testDate”);
+
+if (field && !field.value) {
+field.value = new Date().toISOString().slice(0, 10);
+}
+}
+
 function calculateAge() {
-const birth = document.getElementById(“birthDate”).value;
+const birth = document.getElementById(“birthDate”)?.value;
 const ageField = document.getElementById(“age”);
 
 if (!birth || !ageField) return;
-const date = new Date(birth);
+
+const date = new Date(birth + “T00:00:00”);
 const today = new Date();
+
 let age = today.getFullYear() - date.getFullYear();
+
 if (
-    today.getMonth() < date.getMonth() ||
-    (
-        today.getMonth() === date.getMonth() &&
-        today.getDate() < date.getDate()
-    )
+today.getMonth() < date.getMonth() ||
+(today.getMonth() === date.getMonth() &&
+today.getDate() < date.getDate())
 ) {
-    age--;
-}
-ageField.value = age >= 0 ? age : "";
-
+age–;
 }
 
-// Мәліметтерді сақтау
+ageField.value = age >= 0 ? age : “”;
+}
+
 function savePatient() {
 const patient = {
 fullName: document.getElementById(“fullName”).value.trim(),
@@ -52,146 +58,153 @@ testDate: document.getElementById(“testDate”).value
 };
 
 if (!patient.fullName) {
-    showPatientMessage("Аты-жөнін енгізіңіз.");
-    return;
-}
-localStorage.setItem("aphasiaPatient", JSON.stringify(patient));
-showPatientMessage("Мәліметтер сәтті сақталды!");
-
+showMessage(“Пациенттің аты-жөнін енгізіңіз.”);
+return;
 }
 
-// Мәліметтерді жүктеу
+localStorage.setItem(“aphasiaPatient”, JSON.stringify(patient));
+
+showMessage(“Пациент мәліметтері сәтті сақталды!”);
+}
+
 function loadPatient() {
-const saved = localStorage.getItem(“aphasiaPatient”);
+try {
+const patient = JSON.parse(
+localStorage.getItem(“aphasiaPatient”) || “null”
+);
 
-if (!saved) return;
-const patient = JSON.parse(saved);
-Object.keys(patient).forEach(function (key) {
-    const field = document.getElementById(key);
-    if (field) {
-        field.value = patient[key] || "";
-    }
+if (!patient) return;
+Object.keys(patient).forEach((key) => {
+  const field = document.getElementById(key);
+  if (field) field.value = patient[key] || "";
 });
 
+} catch (error) {
+console.error(“Пациент мәліметін оқу қатесі:”, error);
+}
 }
 
-// Хабарлама
-function showPatientMessage(message) {
+function showMessage(message) {
 const box = document.getElementById(“patientMessage”);
 
 if (box) {
-    box.textContent = message;
+box.textContent = message;
+} else {
+alert(message);
+}
 }
 
-}
+// ТӨРТ БӨЛІМНІҢ АШЫЛУЫ
 
-// Бөлімді ашу
 function showPatientSection(section) {
-const content = document.getElementById(“patientContent”);
 const menu = document.getElementById(“cabinetMenu”);
+const content = document.getElementById(“patientContent”);
 
-if (!content || !menu) return;
-if (!localStorage.getItem("aphasiaPatient")) {
-    showPatientMessage("Алдымен науқастың мәліметтерін сақтаңыз.");
-    return;
-}
-if (section === "diagnostics") {
-    window.location.href = "diagnostics.html";
-    return;
-}
-menu.style.display = "none";
-content.style.display = "block";
-content.innerHTML = "";
-if (section === "speechCard") {
-    if (typeof loadSpeechCard === "function") {
-        loadSpeechCard();
-    } else {
-        content.innerHTML = "<h2>Сөйлеу картасы жүктелмеді. speech-card.js файлын тексеріңіз.</h2>";
-    }
-}
-else if (section === "initialResult") {
-    showInitialResult();
-}
-else if (section === "dynamics") {
-    if (typeof loadDynamics === "function") {
-        loadDynamics();
-    } else {
-        content.innerHTML = "<h2>Даму динамикасы жүктелмеді. dynamics.js файлын тексеріңіз.</h2>";
-    }
+if (!menu || !content) {
+alert(“Бөлім контейнерлері табылмады. cabinet.html файлын тексеріңіз.”);
+return;
 }
 
+menu.style.display = “none”;
+content.style.display = “block”;
+
+if (section === “speechCard”) {
+if (typeof loadSpeechCard === “function”) {
+loadSpeechCard();
+} else {
+showError(“speech-card.js файлы жүктелмеді.”);
+}
+return;
 }
 
-// Бастапқы нәтиже
+if (section === “diagnostics”) {
+window.location.href = “diagnostics.html”;
+return;
+}
+
+if (section === “initialResult”) {
+showInitialResult();
+return;
+}
+
+if (section === “dynamics”) {
+if (typeof loadDynamics === “function”) {
+loadDynamics();
+} else {
+showError(“dynamics.js файлы жүктелмеді.”);
+}
+return;
+}
+
+showError(“Бөлім табылмады.”);
+}
+
+function showError(message) {
+const content = document.getElementById(“patientContent”);
+
+content.innerHTML = <button class="content-back" onclick="backToCabinetMenu()"> ← АРТҚА </button> <h2>Қате</h2> <p>${escapeHTML(message)}</p>;
+}
+
+// БАСТАПҚЫ НӘТИЖЕ
+
 function showInitialResult() {
 const content = document.getElementById(“patientContent”);
 
-const results = JSON.parse(
-    localStorage.getItem("aphasiaDiagnosticResults") || "[]"
+let results = [];
+
+try {
+results = JSON.parse(
+localStorage.getItem(“aphasiaDiagnosticResults”) || “[]”
 );
+} catch (error) {
+results = [];
+}
+
 const initial = results.filter(
-    item => item.assessmentType === "initial"
+item => item.assessmentType === “initial”
 );
-let html = `
-    <button class="back-button" onclick="backToCabinetMenu()">
-        ← Кабинетке оралу
-    </button>
-    <h2 style="color:#b58a43;">БАСТАПҚЫ ДИАГНОСТИКАЛЫҚ НӘТИЖЕ</h2>
+
+content.innerHTML = `
+← АРТҚА
+<h2>БАСТАПҚЫ ДИАГНОСТИКА НӘТИЖЕЛЕРІ</h2>
+${
+  initial.length
+    ? initial.map(item => `
+      <div class="result-card">
+        <h3>${escapeHTML(item.category || "Бағалау бөлімі")}</h3>
+        <p>Жинаған ұпайы: ${Number(item.score) || 0} / ${Number(item.maxScore) || 0}</p>
+        <p>Нәтиже: ${Number(item.percentage) || 0}%</p>
+        <p>Күні: ${escapeHTML(item.date || "Көрсетілмеген")}</p>
+      </div>
+    `).join("")
+    : "<p>Бастапқы диагностика әлі орындалмаған. Алдымен «Диагностика» бөліміндегі бастапқы тапсырмаларды орындаңыз.</p>"
+}
+
 `;
-if (initial.length === 0) {
-    html += `
-        <p>Әзірге бастапқы диагностика нәтижесі жоқ.</p>
-        <button class="back-button"
-            onclick="window.location.href='diagnostics.html'">
-            Диагностикаға өту
-        </button>
-    `;
-} else {
-    initial.forEach(function (item) {
-        html += `
-            <div style="
-                background:#fffaf0;
-                border:1px solid #eadcc3;
-                padding:18px;
-                border-radius:12px;
-                margin:15px 0;
-                color:#574735;">
-                <h3>${escapeHTML(item.category)}</h3>
-                <p>Ұпай: ${Number(item.score)} / ${Number(item.maxScore)}</p>
-                <p>Нәтиже: ${Number(item.percentage)}%</p>
-                <p>Күні: ${escapeHTML(item.date || "")}</p>
-            </div>
-        `;
-    });
-}
-content.innerHTML = html;
-
 }
 
-// Мәзірге оралу
+// МӘЗІРГЕ ҚАЙТУ
+
 function backToCabinetMenu() {
-const content = document.getElementById(“patientContent”);
 const menu = document.getElementById(“cabinetMenu”);
+const content = document.getElementById(“patientContent”);
 
 if (content) {
-    content.style.display = "none";
-    content.innerHTML = "";
+content.style.display = “none”;
+content.innerHTML = “”;
 }
+
 if (menu) {
-    menu.style.display = "grid";
+menu.style.display = “grid”;
+}
 }
 
-}
-
-// HTML қауіпсіздігі
 function escapeHTML(value) {
-return String(value ?? “”).replace(/[&<>”’]/g, function (char) {
-return {
+return String(value ?? “”).replace(/[&<>”’]/g, character => ({
 “&”: “&”,
 “<”: “<”,
 “>”: “>”,
 ‘”’: “"”,
 “’”: “'”
-}[char];
-});
+})[character]);
 }
