@@ -3,141 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>АФАЗИЯ | Тілашар</title>
-<link rel="stylesheet" href="style.css">
+    <title>ТІЛАШАР | Афазия</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- БАСТЫ БЕТ -->
 <section id="home" class="home-panel">
-    <div class="home-label">ТІЛАШАР ЛОГОПЕДИЯЛЫҚ ЖОБАСЫ</div>
-    <h1>АФАЗИЯ</h1>
-    <div class="home-line"></div>
-    <h2>Сөйлеуді қалпына келтіру бағдарламасы</h2>
-    <p>
-        Афазиясы бар адамдардың сөйлеу, түсіну,
-        оқу және жазу дағдыларын дамытуға арналған
-        интерактивті логопедиялық бағдарлама.
-    </p>
-    <button class="enter-button" onclick="enterCabinet()">
-        БАҒДАРЛАМАҒА КІРУ
-    </button>
-    <div class="home-footer">
-        ТІЛАШАР • ЛОГОПЕДИЯЛЫҚ КАБИНЕТ
+    <div class="home-content">
+        <div class="home-logo">ТІЛАШАР</div>
+        <h1>АФАЗИЯ</h1>
+        <p>Сөйлеуді қалпына келтіруге арналған интерактивті логопедиялық бағдарлама</p>
+        <button class="enter-button" onclick="enterCabinet()">
+            БАҒДАРЛАМАҒА КІРУ
+        </button>
     </div>
 </section>
-<!-- ЛОГОПЕДИЯЛЫҚ БАҒДАРЛАМА -->
+<!-- НЕГІЗГІ БАҒДАРЛАМА -->
 <section id="cabinet" style="display:none;">
-    <header class="cabinet-header">
-        <div class="logo" onclick="goHome()">
-            ТІЛАШАР
-        </div>
-        <div class="header-title">
-            АФАЗИЯ
-        </div>
-        <button
-            class="cabinet-button"
-            onclick="window.location.href='cabinet.html'">
-            ЛОГОПЕД КАБИНЕТІ
+    <header class="main-header">
+        <div class="logo" onclick="goHome()">ТІЛАШАР</div>
+        <div class="header-title">АФАЗИЯ</div>
+        <button class="cabinet-button"
+            onclick="window.location.href='./cabinet.html'">
+            🩺 ЛОГОПЕД КАБИНЕТІ
         </button>
     </header>
     <div class="main-layout">
         <!-- СОЛ ЖАҚ МӘЗІР -->
         <aside class="sidebar">
-            <h3>БАҒДАРЛАМА</h3>
-            <button class="menu-button active"
-                onclick="openSection('breathing', this)">
-                🌬️ Тыныс алу
+            <h2>БӨЛІМДЕР</h2>
+            <button class="menu-button" onclick="openSection('breathing', this)">
+                🌬 Тыныс алу
             </button>
-            <button class="menu-button"
-                onclick="openSection('articulation', this)">
+            <button class="menu-button" onclick="openSection('articulation', this)">
                 👄 Артикуляция
             </button>
-            <button class="menu-button"
-                onclick="openSection('vocabulary', this)">
+            <button class="menu-button" onclick="openSection('vocabulary', this)">
                 📚 Сөздік қор
             </button>
-            <button class="menu-button"
-                onclick="openSection('understanding', this)">
-                👂 Сөйлеуді түсіну
+            <button class="menu-button" onclick="openSection('understanding', this)">
+                🧠 Сөйлеуді түсіну
             </button>
-            <button class="menu-button"
-                onclick="openSection('speech', this)">
-                🗣️ Сөйлеуді қалыптастыру
+            <button class="menu-button" onclick="openSection('speech', this)">
+                🗣 Сөйлеуді қалыптастыру
             </button>
-            <button class="menu-button"
-                onclick="openSection('reading', this)">
-                📖 Оқу және жазу
+            <button class="menu-button" onclick="openSection('reading', this)">
+                ✍️ Оқу және жазу
             </button>
-            <button class="menu-button"
-                onclick="openSection('rhythm', this)">
+            <button class="menu-button" onclick="openSection('rhythm', this)">
                 🎵 Логоритмика
             </button>
-            <button class="menu-button"
-                onclick="openSection('results', this)">
+            <button class="menu-button" onclick="openSection('results', this)">
                 🏆 Нәтижелер
             </button>
         </aside>
-        <!-- НЕГІЗГІ БӨЛІМ -->
-        <main class="workspace">
-            <div id="welcome" class="welcome-card">
-                <span class="welcome-icon">✦</span>
-                <h1>Сөйлеу әлеміне қош келдіңіз!</h1>
-                <p>
-                    Өзіңізге қажетті жаттығу бағытын таңдаңыз.
-                    Әр бөлім сөйлеу дағдыларын дамытуға арналған.
-                </p>
+        <!-- НЕГІЗГІ МАЗМҰН -->
+        <main class="main-content">
+            <section id="welcome">
+                <div class="welcome-box">
+                    <span class="welcome-icon">✨</span>
+                    <h1>ҚОШ КЕЛДІҢІЗ!</h1>
+                    <p>
+                        «ТІЛАШАР» логопедиялық бағдарламасына қош келдіңіз!
+                        Өзіңізге қажетті бөлімді таңдап, тапсырмаларды орындаңыз.
+                    </p>
+                </div>
+                <h2 class="section-heading">БАҒДАРЛАМА БӨЛІМДЕРІ</h2>
                 <div class="world-grid">
-                    <div class="world-card"
-                        onclick="openSection('breathing')">
-                        <div class="world-icon">🌬️</div>
+                    <div class="world-card" onclick="openSection('breathing')">
+                        <span>🌬</span>
                         <h3>Тыныс алу</h3>
-                        <p>Тыныс жаттығулары</p>
+                        <p>Дұрыс тыныс алу жаттығулары</p>
                     </div>
-                    <div class="world-card"
-                        onclick="openSection('articulation')">
-                        <div class="world-icon">👄</div>
+                    <div class="world-card" onclick="openSection('articulation')">
+                        <span>👄</span>
                         <h3>Артикуляция</h3>
-                        <p>Артикуляциялық жаттығулар</p>
+                        <p>Сөйлеу мүшелеріне арналған жаттығулар</p>
                     </div>
-                    <div class="world-card"
-                        onclick="openSection('vocabulary')">
-                        <div class="world-icon">📚</div>
+                    <div class="world-card" onclick="openSection('vocabulary')">
+                        <span>📚</span>
                         <h3>Сөздік қор</h3>
-                        <p>Сөздерді дамыту</p>
+                        <p>Сөздерді тану және атау</p>
                     </div>
-                    <div class="world-card"
-                        onclick="openSection('understanding')">
-                        <div class="world-icon">👂</div>
+                    <div class="world-card" onclick="openSection('understanding')">
+                        <span>🧠</span>
                         <h3>Сөйлеуді түсіну</h3>
-                        <p>Тыңдау және түсіну</p>
+                        <p>Сөздер мен нұсқауларды түсіну</p>
                     </div>
-                    <div class="world-card"
-                        onclick="openSection('speech')">
-                        <div class="world-icon">🗣️</div>
+                    <div class="world-card" onclick="openSection('speech')">
+                        <span>🗣</span>
                         <h3>Сөйлеуді қалыптастыру</h3>
-                        <p>Сөйлеу жаттығулары</p>
+                        <p>Сөйлеу дағдыларын дамыту</p>
                     </div>
-                    <div class="world-card"
-                        onclick="openSection('reading')">
-                        <div class="world-icon">📖</div>
+                    <div class="world-card" onclick="openSection('reading')">
+                        <span>✍️</span>
                         <h3>Оқу және жазу</h3>
-                        <p>Жазбаша сөйлеу</p>
+                        <p>Оқу және жазу жаттығулары</p>
                     </div>
-                    <div class="world-card"
-                        onclick="openSection('rhythm')">
-                        <div class="world-icon">🎵</div>
+                    <div class="world-card" onclick="openSection('rhythm')">
+                        <span>🎵</span>
                         <h3>Логоритмика</h3>
-                        <p>Ырғақ және қозғалыс</p>
+                        <p>Қимыл мен ырғақты үйлестіру</p>
                     </div>
-                    <div class="world-card"
-                        onclick="openSection('results')">
-                        <div class="world-icon">🏆</div>
+                    <div class="world-card" onclick="openSection('results')">
+                        <span>🏆</span>
                         <h3>Нәтижелер</h3>
-                        <p>Жаттығу көрсеткіштері</p>
+                        <p>Орындалған тапсырмалар мен ұпайлар</p>
                     </div>
                 </div>
-            </div>
-            <!-- ТАПСЫРМАЛАР ШЫҒАТЫН ОРЫН -->
+            </section>
+            <!-- БӨЛІМДЕР ОСЫ ЖЕРДЕ АШЫЛАДЫ -->
             <div id="section-content" style="display:none;"></div>
         </main>
     </div>
