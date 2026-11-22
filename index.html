@@ -3,83 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ТІЛАШАР — Афазия</title>
-    <link rel="stylesheet" href="style.css">
+    <title>ТІЛАШАР — Логопед кабинеті</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #fffaf0;
+        color: #493b2b;
+    }
+    .header {
+        max-width: 1100px;
+        margin: 15px auto 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+    .logo {
+        font-size: 25px;
+        font-weight: bold;
+        color: #a77a27;
+        letter-spacing: 2px;
+    }
+    .header button,
+    button {
+        border: none;
+        border-radius: 10px;
+        padding: 13px 20px;
+        background: #b58a3b;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: .2s;
+    }
+    button:hover {
+        background: #94702e;
+        transform: translateY(-2px);
+    }
+    .container {
+        max-width: 1100px;
+        margin: auto;
+    }
+    .page-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .page-title h1 {
+        color: #a77a27;
+        font-size: 32px;
+    }
+    .page-title p {
+        color: #85765e;
+        line-height: 1.6;
+    }
+    .patient-form {
+        background: white;
+        padding: 25px;
+        border: 1px solid #ead9b7;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(120, 90, 40, .06);
+    }
+    .patient-form h2 {
+        color: #98702c;
+        margin-top: 0;
+    }
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+    .field label {
+        font-weight: bold;
+    }
+    .field input {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #ddc99f;
+        border-radius: 9px;
+        font-size: 15px;
+        background: #fffdf8;
+    }
+    .save-button {
+        margin-top: 20px;
+        width: 100%;
+    }
+    .message {
+        margin-top: 15px;
+        padding: 12px;
+        border-radius: 9px;
+    }
+    .message.success {
+        background: #e9f7e9;
+        color: #286b35;
+    }
+    .message.error {
+        background: #ffe9e5;
+        color: #a33b30;
+    }
+    .menu-title {
+        text-align: center;
+        color: #98702c;
+        margin: 35px 0 20px;
+    }
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .menu-card {
+        background: white;
+        border: 1px solid #ead9b7;
+        border-radius: 18px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(120, 90, 40, .05);
+    }
+    .menu-card .icon {
+        font-size: 40px;
+        margin-bottom: 12px;
+    }
+    .menu-card h3 {
+        color: #a77a27;
+        min-height: 25px;
+    }
+    .menu-card p {
+        color: #82745f;
+        line-height: 1.5;
+        min-height: 45px;
+    }
+    .open-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+    #patientContent {
+        display: none;
+        margin: 25px auto;
+    }
+    .back-home {
+        display: block;
+        margin: 35px auto 10px;
+        background: #776b59;
+    }
+    @media(max-width: 650px) {
+        body {
+            padding: 12px;
+        }
+        .header {
+            flex-direction: column;
+        }
+        .form-grid,
+        .menu-grid {
+            grid-template-columns: 1fr;
+        }
+        .patient-form {
+            padding: 17px;
+        }
+        .page-title h1 {
+            font-size: 26px;
+        }
+    }
+</style>
 </head>
 <body>
-<!-- БАСТЫ БЕТ -->
-<section id="home">
-    <h1>АФАЗИЯ</h1>
-    <p>Сөйлеуді қалпына келтіру бағдарламасы</p>
-    <button onclick="enterProgram()">КІРУ</button>
-</section>
-<!-- БАҒДАРЛАМА МӘЗІРІ -->
-<section id="program" style="display:none;">
-<header class="program-header">
+<header class="header">
     <div class="logo">ТІЛАШАР</div>
-    <button class="cabinet-button" onclick="openLogopedCabinet()">
-        ЛОГОПЕД КАБИНЕТІ
-    </button>
+<button onclick="window.location.href='index.html'">
+    БАСТЫ БЕТ
+</button>
 </header>
-<h1 class="program-title">АФАЗИЯ</h1>
-<p class="program-description">
-    Сөйлеу дағдыларын қалпына келтіруге арналған
-    логопедиялық түзету бағдарламасы
-</p>
-<div id="world-grid">
-    <button class="world-card" onclick="openSection('breathing')">
-        <span class="world-icon">🌬️</span>
-        ТЫНЫС АЛУ
-    </button>
-    <button class="world-card" onclick="openSection('articulation')">
-        <span class="world-icon">👄</span>
-        АРТИКУЛЯЦИЯ
-    </button>
-    <button class="world-card" onclick="openSection('vocabulary')">
-        <span class="world-icon">📚</span>
-        СӨЗДІК ҚОР
-    </button>
-    <button class="world-card" onclick="openSection('understanding')">
-        <span class="world-icon">👂</span>
-        СӨЙЛЕУДІ ТҮСІНУ
-    </button>
-    <button class="world-card" onclick="openSection('speech')">
-        <span class="world-icon">🗣️</span>
-        СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ
-    </button>
-    <button class="world-card" onclick="openSection('reading')">
-        <span class="world-icon">📖</span>
-        ОҚУ ЖӘНЕ ЖАЗУ
-    </button>
-    <button class="world-card" onclick="openSection('logorhythmics')">
-        <span class="world-icon">🎵</span>
-        ЛОГОРИТМИКА
-    </button>
-    <button class="world-card" onclick="openSection('results')">
-        <span class="world-icon">📊</span>
-        НӘТИЖЕЛЕР
-    </button>
-</div>
-<div id="section-content" style="display:none;"></div>
-</section>
-<!-- ЛОГОПЕД КАБИНЕТІНЕ ӨТУ -->
-<section id="logopedLogin" style="display:none;">
-<div class="login-box">
-    <div class="logo">ТІЛАШАР</div>
-    <h2>ЛОГОПЕД КАБИНЕТІ</h2>
+<main class="container">
+<section class="page-title">
+    <h1>ЛОГОПЕДИЯЛЫҚ КАБИНЕТ</h1>
     <p>
-        Сөйлеу картасы, диагностика және
-        даму динамикасын бақылау жүйесі
+        Афазиясы бар ересектердің сөйлеу дағдыларын
+        диагностикалау, бағалау және даму динамикасын бақылау жүйесі.
     </p>
-    <button onclick="enterLogopedCabinet()">
-        КАБИНЕТКЕ КІРУ
-    </button>
-    <button onclick="backToProgram()"
-        style="background:#f8f0df;color:#574735;">
-        ← БАС МӘЗІРГЕ ҚАЙТУ
-    </button>
-</div>
 </section>
-<script src="script.js"></script>
+<!-- ПАЦИЕНТ МӘЛІМЕТТЕРІ -->
+<section class="patient-form">
+    <h2>ПАЦИЕНТ ТУРАЛЫ МӘЛІМЕТ</h2>
+    <form id="patientForm">
+        <div class="form-grid">
+            <div class="field">
+                <label for="fullName">Аты-жөні</label>
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Аты-жөнін енгізіңіз"
+                    required
+                >
+            </div>
+            <div class="field">
+                <label for="birthDate">Туған күні</label>
+                <input
+                    type="date"
+                    id="birthDate"
+                    required
+                >
+            </div>
+            <div class="field">
+                <label for="age">Жасы</label>
+                <input
+                    type="number"
+                    id="age"
+                    placeholder="Жасы"
+                    readonly
+                >
+            </div>
+            <div class="field">
+                <label for="diagnosis">Диагнозы</label>
+                <input
+                    type="text"
+                    id="diagnosis"
+                    placeholder="Диагнозын енгізіңіз"
+                >
+            </div>
+            <div class="field">
+                <label for="testDate">Тексеру күні</label>
+                <input
+                    type="date"
+                    id="testDate"
+                >
+            </div>
+        </div>
+        <button type="submit" class="save-button">
+            ПАЦИЕНТ МӘЛІМЕТТЕРІН САҚТАУ
+        </button>
+        <div id="patientMessage"></div>
+    </form>
+</section>
+<!-- КАБИНЕТТІҢ НЕГІЗГІ БӨЛІМДЕРІ -->
+<h2 class="menu-title">ЛОГОПЕД КАБИНЕТІНІҢ БӨЛІМДЕРІ</h2>
+<section id="cabinetMenu" class="menu-grid">
+    <div class="menu-card">
+        <div class="icon">📋</div>
+        <h3>СӨЙЛЕУ КАРТАСЫ</h3>
+        <p>
+            Пациенттің жалпы мәліметтері, анамнезі,
+            сөйлеу дағдылары және логопедиялық қорытындысы.
+        </p>
+        <button
+            class="open-button"
+            onclick="showPatientSection('speechCard')">
+            АШУ
+        </button>
+    </div>
+    <div class="menu-card">
+        <div class="icon">🔎</div>
+        <h3>ДИАГНОСТИКА</h3>
+        <p>
+            Сөйлеуді түсіну, заттарды атау, қайталау,
+            сөздік қор, оқу және жазу дағдыларын бағалау.
+        </p>
+        <button
+            class="open-button"
+            onclick="showPatientSection('diagnostics')">
+            АШУ
+        </button>
+    </div>
+    <div class="menu-card">
+        <div class="icon">📊</div>
+        <h3>БАСТАПҚЫ НӘТИЖЕ</h3>
+        <p>
+            Алғашқы диагностика нәтижелері,
+            жинаған баллдары және пайыздық көрсеткіштері.
+        </p>
+        <button
+            class="open-button"
+            onclick="showPatientSection('initialResult')">
+            АШУ
+        </button>
+    </div>
+    <div class="menu-card">
+        <div class="icon">📈</div>
+        <h3>ДАМУ ДИНАМИКАСЫ</h3>
+        <p>
+            Бастапқы және қайталама диагностика нәтижелерін
+            салыстыру және өзгерістерді бақылау.
+        </p>
+        <button
+            class="open-button"
+            onclick="showPatientSection('dynamics')">
+            АШУ
+        </button>
+    </div>
+</section>
+<!-- ТАҢДАЛҒАН БӨЛІМ ОСЫ ЖЕРДЕ АШЫЛАДЫ -->
+<section id="patientContent"></section>
+<button
+    class="back-home"
+    onclick="window.location.href='index.html'">
+    ← БАСТЫ БЕТКЕ ҚАЙТУ
+</button>
+</main>
+<!-- JAVASCRIPT ФАЙЛДАРЫ -->
+<script src="cabinet.js"></script>
+<script src="speech-card.js"></script>
+<script src="dynamics.js"></script>
 </body>
 </html>
