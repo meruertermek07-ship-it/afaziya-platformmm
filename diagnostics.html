@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Афазия диагностикасы</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="cabinet-header">
+    <div class="logo" onclick="location.href='cabinet.html'">
+        АФАЗИЯ
+    </div>
+
+    <h2>БАСТАПҚЫ ДИАГНОСТИКА</h2>
+</header>
+
+<main class="workspace">
+
+    <div class="welcome-card">
+        <h2>Сөйлеу қызметін диагностикалау</h2>
+
+        <p>
+            Төмендегі тапсырмалар пациенттің сөйлеу,
+            түсіну, қайталау, оқу және жазу дағдыларын
+            бастапқы бағалауға арналған.
+        </p>
+    </div>
+
+    <div id="patientName" class="game-section">
+        Пациент туралы мәлімет жүктелуде...
+    </div>
+
+    <div class="game-section">
+
+        <h2>ДИАГНОСТИКА БАҒЫТТАРЫ</h2>
+
+        <div class="world-grid">
+
+            <button class="world-card" onclick="startCategory('understanding')">
+                <div class="world-icon">🧠</div>
+                <h3>Сөйлеуді түсіну</h3>
+                <p>Сөздер мен нұсқауларды түсіну.</p>
+            </button>
+
+            <button class="world-card" onclick="startCategory('naming')">
+                <div class="world-icon">🖼️</div>
+                <h3>Заттарды атау</h3>
+                <p>Заттардың атауын еске түсіру.</p>
+            </button>
+
+            <button class="world-card" onclick="startCategory('repetition')">
+                <div class="world-icon">🗣️</div>
+                <h3>Қайталау</h3>
+                <p>Сөздер мен сөйлемдерді қайталау.</p>
+            </button>
+
+            <button class="world-card" onclick="startCategory('vocabulary')">
+                <div class="world-icon">📚</div>
+                <h3>Сөздік қор</h3>
+                <p>Сөздерді еске түсіру және топтастыру.</p>
+            </button>
+
+            <button class="world-card" onclick="startCategory('reading')">
+                <div class="world-icon">📖</div>
+                <h3>Оқу</h3>
+                <p>Сөздер мен сөйлемдерді оқу.</p>
+            </button>
+
+            <button class="world-card" onclick="startCategory('writing')">
+                <div class="world-icon">✍️</div>
+                <h3>Жазу</h3>
+                <p>Сөздерді жазу тапсырмалары.</p>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="taskArea" class="game-section" style="display:none;"></div>
+
+    <div id="diagnosticResult" class="game-section" style="display:none;"></div>
+
+</main>
+
+<script src="diagnostics.js"></script>
+
+</body>
+</html>
