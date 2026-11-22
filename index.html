@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АФАЗИЯ | Логопедиялық платформа</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- БАСТЫ БЕТ -->
+    <section id="home" class="home-page">
+        <div class="home-content">
+            <h1>АФАЗИЯ</h1>
+            <p>Афазиясы бар ересектерге арналған
+                логопедиялық түзету платформасы</p>
+
+            <button onclick="enterCabinet()">КІРУ</button>
+        </div>
+    </section>
+
+
+    <!-- ЛОГОПЕД КАБИНЕТІ -->
+    <section id="cabinet" class="cabinet-page" style="display:none;">
+
+        <!-- ЖОҒАРҒЫ БӨЛІК -->
+        <header class="header">
+            <div class="header-logo">АФАЗИЯ</div>
+            <div class="cabinet-title">ЛОГОПЕД КАБИНЕТІ</div>
+        </header>
+
+
+        <div class="main-layout">
+
+            <!-- СОЛ ЖАҚ МӘЗІР -->
+            <aside class="sidebar">
+
+                <button onclick="openSection('breathing')">
+                    Тыныс алу
+                </button>
+
+                <button onclick="openSection('articulation')">
+                    Артикуляция
+                </button>
+
+                <button onclick="openSection('vocabulary')">
+                    Сөздік қор
+                </button>
+
+                <button onclick="openSection('understanding')">
+                    Сөйлеуді түсіну
+                </button>
+
+                <button onclick="openSection('speech')">
+                    Сөйлеуді қалыптастыру
+                </button>
+
+                <button onclick="openSection('reading')">
+                    Оқу және жазу
+                </button>
+
+                <button onclick="openSection('rhythm')">
+                    Логоритмика
+                </button>
+
+                <button onclick="openSection('results')">
+                    Нәтижелер
+                </button>
+
+            </aside>
+
+
+            <!-- ОРТАЛЫҚ ЖҰМЫС АЙМАҒЫ -->
+            <main class="workspace">
+
+                <div id="welcome">
+                    <h2>Қош келдіңіз!</h2>
+
+                    <p>
+                        Логопедиялық түзету жұмысына арналған
+                        интерактивті кабинет.
+                    </p>
+
+                    <p>
+                        Жұмысты бастау үшін сол жақ мәзірден
+                        қажетті бөлімді таңдаңыз.
+                    </p>
+                </div>
+
+                <div id="section-content"></div>
+
+            </main>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
