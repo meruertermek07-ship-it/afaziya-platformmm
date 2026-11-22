@@ -3,78 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Логопед кабинеті | Афазия</title>
+    <title>ТІЛАШАР | Логопед кабинеті</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<header class="cabinet-header">
-    <div class="logo" onclick="location.href='index.html'">
-        АФАЗИЯ
+<body class="cabinet-page">
+<header class="main-header">
+    <div class="logo" onclick="window.location.href='index.html'">
+        ТІЛАШАР
     </div>
-    <h2>ЛОГОПЕД КАБИНЕТІ</h2>
+    <div class="header-title">ЛОГОПЕД КАБИНЕТІ</div>
+    <button class="cabinet-button"
+        onclick="window.location.href='index.html'">
+        ← БАСТЫ БЕТ
+    </button>
 </header>
-<main class="workspace">
-    <div class="welcome-card">
-        <h2>Логопедтің жеке кабинеті</h2>
-        <p>
-            Афазиясы бар пациенттерді диагностикалау,
-            сөйлеу картасын толтыру және нәтижелерін бақылау жүйесі.
-        </p>
-    </div>
-    <section class="game-section">
-        <h2>ПАЦИЕНТ ТУРАЛЫ МӘЛІМЕТТЕР</h2>
+<main class="cabinet-container">
+    <section class="welcome-box">
+        <h1>🩺 ЛОГОПЕД КАБИНЕТІ</h1>
+        <p>Пациент туралы мәліметтерді енгізіп, диагностика нәтижелерін бақылаңыз.</p>
+    </section>
+    <!-- ПАЦИЕНТТІ ТІРКЕУ -->
+    <section class="patient-form">
+        <h2>👤 ПАЦИЕНТТІ ТІРКЕУ</h2>
         <form id="patientForm">
-            <label>Аты-жөні</label>
+            <label for="fullName">Аты-жөні:</label>
             <input type="text" id="fullName"
                 placeholder="Пациенттің аты-жөнін енгізіңіз" required>
-            <label>Туған күні</label>
+            <label for="birthDate">Туған күні:</label>
             <input type="date" id="birthDate" required>
-            <label>Жасы</label>
+            <label for="age">Жасы:</label>
             <input type="number" id="age"
                 placeholder="Жасы" min="1" max="120" required>
-            <label>Диагнозы</label>
+            <label for="diagnosis">Диагнозы:</label>
             <input type="text" id="diagnosis"
-                placeholder="Диагнозын енгізіңіз">
-            <label>Тексеру күні</label>
+                placeholder="Диагнозды енгізіңіз">
+            <label for="testDate">Тексеру күні:</label>
             <input type="date" id="testDate" required>
             <button type="submit" class="enter-button">
-                МӘЛІМЕТТЕРДІ САҚТАУ
+                💾 МӘЛІМЕТТЕРДІ САҚТАУ
             </button>
         </form>
-        <div id="saveMessage"></div>
+        <div id="patientMessage"></div>
     </section>
-    <section class="world-grid">
-        <button class="world-card"
-            onclick="showPatientSection('speechCard')">
-            <div class="world-icon">📋</div>
-            <span class="card-level">01 • ҚҰЖАТ</span>
-            <h3>СӨЙЛЕУ КАРТАСЫ</h3>
-            <p>Пациенттің сөйлеу ерекшеліктері мен тексеру мәліметтері.</p>
-        </button>
-        <button class="world-card"
-            onclick="showPatientSection('diagnostics')">
-            <div class="world-icon">🧠</div>
-            <span class="card-level">02 • ТЕКСЕРУ</span>
-            <h3>БАСТАПҚЫ ДИАГНОСТИКА</h3>
-            <p>Афазия кезіндегі сөйлеу дағдыларын диагностикалау.</p>
-        </button>
-        <button class="world-card"
-            onclick="showPatientSection('initialResult')">
-            <div class="world-icon">📊</div>
-            <span class="card-level">03 • БАҒАЛАУ</span>
-            <h3>БАСТАПҚЫ НӘТИЖЕ</h3>
-            <p>Диагностикалық тапсырмалар бойынша бастапқы көрсеткіштер.</p>
-        </button>
-        <button class="world-card"
-            onclick="showPatientSection('dynamics')">
-            <div class="world-icon">🏆</div>
-            <span class="card-level">04 • МОНИТОРИНГ</span>
-            <h3>НӘТИЖЕЛЕР ДИНАМИКАСЫ</h3>
-            <p>Бастапқы және қайталама нәтижелерді салыстыру.</p>
-        </button>
+    <!-- ПАЦИЕНТ БӨЛІМДЕРІ -->
+    <section class="patient-sections">
+        <h2>📋 ПАЦИЕНТТІҢ ЖҰМЫС КАРТАСЫ</h2>
+        <div class="world-grid">
+            <button class="world-card"
+                onclick="showPatientSection('speechCard')">
+                <span>📄</span>
+                <h3>СӨЙЛЕУ КАРТАСЫ</h3>
+                <p>Пациенттің жеке сөйлеу картасы</p>
+            </button>
+            <button class="world-card"
+                onclick="showPatientSection('diagnostics')">
+                <span>🔎</span>
+                <h3>ДИАГНОСТИКА</h3>
+                <p>Сөйлеу дағдыларын тексеру тапсырмалары</p>
+            </button>
+            <button class="world-card"
+                onclick="showPatientSection('initialResult')">
+                <span>📊</span>
+                <h3>БАСТАПҚЫ НӘТИЖЕ</h3>
+                <p>Алғашқы тексеру көрсеткіштері</p>
+            </button>
+            <button class="world-card"
+                onclick="showPatientSection('dynamics')">
+                <span>📈</span>
+                <h3>ДИНАМИКА</h3>
+                <p>Бастапқы және қайталама нәтижелерді салыстыру</p>
+            </button>
+        </div>
     </section>
+    <!-- ТАҢДАЛҒАН БӨЛІМ -->
     <section id="patientContent" class="game-section"
-        style="display:none; margin-top:30px;">
+        style="display:none;">
     </section>
 </main>
 <script src="cabinet.js"></script>
