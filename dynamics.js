@@ -1,107 +1,120 @@
 function loadDynamics() {
 const content = document.getElementById(“patientContent”);
+if (!content) return;
 
-const allResults = JSON.parse(
+const results = JSON.parse(
     localStorage.getItem("aphasiaDiagnosticResults") || "[]"
 );
 const categories = [
-    { id: "understanding", name: "Сөйлеуді түсіну" },
-    { id: "naming", name: "Заттарды атау" },
-    { id: "repetition", name: "Қайталау" },
-    { id: "vocabulary", name: "Сөздік қор" },
-    { id: "reading", name: "Оқу" },
-    { id: "writing", name: "Жазу" }
+    "Сөйлеуді түсіну",
+    "Заттарды атау",
+    "Қайталап айту",
+    "Сөздік қор",
+    "Оқу",
+    "Жазу"
 ];
-function getLatest(categoryId, type) {
-    const found = allResults.filter(function (item) {
-        return item.category === categoryId &&
-               item.assessmentType === type;
-    });
-    return found.length ? found[found.length - 1] : null;
+function getLatestResult(category, type) {
+    return results
+        .filter(item =>
+            item.assessmentType === type &&
+            (item.category === category || item.title === category)
+        )
+        .slice(-1)[0];
 }
-let initialTotal = 0;
-let repeatTotal = 0;
-let initialMax = 0;
-let repeatMax = 0;
-let html = "";
-categories.forEach(function (category) {
-    const initial = getLatest(category.id, "initial");
-    const repeat = getLatest(category.id, "repeat");
-    if (initial) {
-        initialTotal += Number(initial.score) || 0;
-        initialMax += Number(initial.maxScore) || 0;
+function getPercentage(result) {
+    if (!result) return null;
+    if (result.percentage !== undefined) {
+        return Number(result.percentage);
     }
-    if (repeat) {
-        repeatTotal += Number(repeat.score) || 0;
-        repeatMax += Number(repeat.maxScore) || 0;
+    if (Number(result.maxScore) > 0) {
+        return Math.round(
+            Number(result.score) / Number(result.maxScore) * 100
+        );
     }
-    let differenceText = "Салыстыру үшін екі нәтиже де қажет.";
-    if (initial && repeat) {
-        const difference =
-            Number(repeat.score) - Number(initial.score);
-        if (difference > 0) {
-            differenceText = `+${difference} балл — көрсеткіш өскен.`;
-        } else if (difference < 0) {
-            differenceText = `${difference} балл — көрсеткіш төмендеген.`;
+    return 0;
+}
+let html = `
+    <div class="dynamics-section">
+        <h2>ДАМУ ДИНАМИКАСЫ</h2>
+        <button class="back-cabinet-button"
+            onclick="backToCabinetMenu()">
+            ← Кабинетке оралу
+        </button>
+        <p class="dynamics-description">
+            Бұл бөлім бастапқы және қайталама диагностика
+            нәтижелерін салыстыруға арналған.
+        </p>
+        <div class="dynamics-table-wrapper">
+            <table class="dynamics-table">
+                <thead>
+                    <tr>
+                        <th>Бағыттар</th>
+                        <th>Бастапқы нәтиже</th>
+                        <th>Қайталама нәтиже</th>
+                        <th>Өзгеріс</th>
+                    </tr>
+                </thead>
+                <tbody>
+`;
+let hasResults = false;
+categories.forEach(category => {
+    const initial = getLatestResult(category, "initial");
+    const repeat = getLatestResult(category, "repeat");
+    const initialPercent = getPercentage(initial);
+    const repeatPercent = getPercentage(repeat);
+    if (initial || repeat) hasResults = true;
+    let difference = "—";
+    if (initialPercent !== null && repeatPercent !== null) {
+        const change = repeatPercent - initialPercent;
+        if (change > 0) {
+            difference = `+${change}%`;
+        } else if (change < 0) {
+            difference = `${change}%`;
         } else {
-            differenceText = "Көрсеткіш өзгермеген.";
+            difference = "0%";
         }
     }
     html += `
-        <div class="result-item">
-            <h3>${category.name}</h3>
-            <p>
-                <b>Бастапқы нәтиже:</b>
-                ${initial
-                    ? `${initial.score} / ${initial.maxScore} балл`
-                    : "Өткізілмеген"}
-            </p>
-            <p>
-                <b>Қайталама нәтиже:</b>
-                ${repeat
-                    ? `${repeat.score} / ${repeat.maxScore} балл`
-                    : "Өткізілмеген"}
-            </p>
-            <p><b>Өзгеріс:</b> ${differenceText}</p>
-        </div>
+        <tr>
+            <td>${category}</td>
+            <td>${initialPercent === null ? "—" : initialPercent + "%"}</td>
+            <td>${repeatPercent === null ? "—" : repeatPercent + "%"}</td>
+            <td>${difference}</td>
+        </tr>
     `;
 });
-const initialPercent = initialMax
-    ? Math.round(initialTotal / initialMax * 100)
-    : 0;
-const repeatPercent = repeatMax
-    ? Math.round(repeatTotal / repeatMax * 100)
-    : 0;
-const overallDifference = repeatPercent - initialPercent;
-html = `
-    <h2>📈 ДИАГНОСТИКАЛЫҚ ДИНАМИКА</h2>
-    <div class="result-item">
-        <h3>ЖАЛПЫ САЛЫСТЫРУ</h3>
-        <p>Бастапқы көрсеткіш: ${initialMax
-            ? `${initialTotal} / ${initialMax} (${initialPercent}%)`
-            : "Әзірге нәтиже жоқ"}</p>
-        <p>Қайталама көрсеткіш: ${repeatMax
-            ? `${repeatTotal} / ${repeatMax} (${repeatPercent}%)`
-            : "Әзірге нәтиже жоқ"}</p>
-        <p><b>Пайыздық айырмашылық:</b>
-            ${initialMax && repeatMax
-                ? `${overallDifference > 0 ? "+" : ""}${overallDifference}%`
-                : "Салыстыру мүмкін емес"}
-        </p>
-    </div>
-    <h3>БАҒЫТТАР БОЙЫНША САЛЫСТЫРУ</h3>
-    ${html}
-    <div class="result-item">
-        <h3>ЕСКЕРТПЕ</h3>
-        <p>
-            Нәтижелер тек орындалған тапсырмалар бойынша жиналған
-            балдарды салыстырады. Бұл медициналық диагноз немесе
-            афазияның ауырлық дәрежесін автоматты анықтау емес.
-            Қорытындыны логопед маман бағалайды.
-        </p>
-    </div>
+html += `
+                </tbody>
+            </table>
+        </div>
 `;
-content.style.display = "block";
+if (!hasResults) {
+    html += `
+        <div class="dynamics-empty">
+            <h3>Әзірге нәтиже жоқ</h3>
+            <p>
+                Даму динамикасын көру үшін алдымен бастапқы,
+                кейін қайталама диагностиканы орындаңыз.
+            </p>
+            <button onclick="window.location.href='diagnostics.html'">
+                Диагностикаға өту
+            </button>
+        </div>
+    `;
+} else {
+    html += `
+        <div class="dynamics-note">
+            <h3>Ескерту</h3>
+            <p>
+                Көрсетілген пайыздар орындалған тапсырмалар
+                нәтижесінің өзгерісін сипаттайды.
+                Олар медициналық диагноз немесе афазияның
+                ауырлық дәрежесін автоматты анықтамайды.
+            </p>
+        </div>
+    `;
+}
+html += `</div>`;
 content.innerHTML = html;
 
 }
