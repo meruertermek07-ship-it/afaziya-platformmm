@@ -3,101 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>АФАЗИЯ | Логопедиялық платформа</title>
+
+    <title>АФАЗИЯ | Логопедиялық кабинет</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- БАСТЫ БЕТ -->
-    <section id="home" class="home-page">
-        <div class="home-content">
-            <h1>АФАЗИЯ</h1>
-            <p>Афазиясы бар ересектерге арналған
-                логопедиялық түзету платформасы</p>
+<!-- =========================
+     1. БАСТЫ БЕТ
+========================= -->
 
-            <button onclick="enterCabinet()">КІРУ</button>
+<section id="home" class="home-page">
+
+    <div class="home-content">
+
+        <div class="home-decoration">✦</div>
+
+        <h1>АФАЗИЯ</h1>
+
+        <div class="home-line"></div>
+
+        <p>
+            Афазиясы бар ересектерге арналған
+            логопедиялық түзету және сөйлеуді
+            қалпына келтіру платформасы
+        </p>
+
+        <button class="enter-button" onclick="enterCabinet()">
+            КІРУ
+            <span>→</span>
+        </button>
+
+        <div class="home-footer">
+            ЛОГОПЕДИЯЛЫҚ ТҮЗЕТУ ПЛАТФОРМАСЫ
         </div>
-    </section>
+
+    </div>
+
+</section>
 
 
-    <!-- ЛОГОПЕД КАБИНЕТІ -->
-    <section id="cabinet" class="cabinet-page" style="display:none;">
+<!-- =========================
+     2. ЛОГОПЕД КАБИНЕТІ
+========================= -->
 
-        <!-- ЖОҒАРҒЫ БӨЛІК -->
-        <header class="header">
-            <div class="header-logo">АФАЗИЯ</div>
-            <div class="cabinet-title">ЛОГОПЕД КАБИНЕТІ</div>
-        </header>
+<section id="cabinet" class="cabinet-page" style="display:none;">
 
+    <!-- ЖОҒАРҒЫ ЖОЛАҚ -->
 
-        <div class="main-layout">
+    <header class="header">
 
-            <!-- СОЛ ЖАҚ МӘЗІР -->
-            <aside class="sidebar">
+        <div class="header-logo">
+            <span>✦</span> АФАЗИЯ
+        </div>
 
-                <button onclick="openSection('breathing')">
-                    Тыныс алу
-                </button>
+        <div class="cabinet-title">
+            ЛОГОПЕД КАБИНЕТІ
+        </div>
 
-                <button onclick="openSection('articulation')">
-                    Артикуляция
-                </button>
-
-                <button onclick="openSection('vocabulary')">
-                    Сөздік қор
-                </button>
-
-                <button onclick="openSection('understanding')">
-                    Сөйлеуді түсіну
-                </button>
-
-                <button onclick="openSection('speech')">
-                    Сөйлеуді қалыптастыру
-                </button>
-
-                <button onclick="openSection('reading')">
-                    Оқу және жазу
-                </button>
-
-                <button onclick="openSection('rhythm')">
-                    Логоритмика
-                </button>
-
-                <button onclick="openSection('results')">
-                    Нәтижелер
-                </button>
-
-            </aside>
+    </header>
 
 
-            <!-- ОРТАЛЫҚ ЖҰМЫС АЙМАҒЫ -->
-            <main class="workspace">
+    <!-- НЕГІЗГІ ОРНАЛАСУ -->
 
-                <div id="welcome">
-                    <h2>Қош келдіңіз!</h2>
+    <div class="main-layout">
 
-                    <p>
-                        Логопедиялық түзету жұмысына арналған
-                        интерактивті кабинет.
-                    </p>
 
-                    <p>
-                        Жұмысты бастау үшін сол жақ мәзірден
-                        қажетті бөлімді таңдаңыз.
-                    </p>
+        <!-- СОЛ ЖАҚ МӘЗІР -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-heading">
+                ЖҰМЫС БАҒЫТТАРЫ
+            </div>
+
+            <button class="menu-button"
+                onclick="openSection('breathing', this)">
+
+                <span class="menu-number">01</span>
+                <span>Тыныс алу</span>
+
+            </button>
+
+
+            <button class="menu-button"
+                onclick="openSection('articulation', this)">
+
+                <span class="menu-number">02</span>
+                <span>Артикуляция</span>
+
+            </button>
+
+
+            <button class="menu-button"
+                onclick="openSection('vocabulary', this)">
+
+                <span class="menu-number">03</span>
+                <span>Сөздік қор</span>
+
+            </button>
+
+
+            <button class="menu-button"
+                onclick="openSection('understanding', this)">
+
+                <span class="menu-number">04</span>
+                <span>Сөйлеуді түсіну</span>
+
+            </button>
+
+
+            <button class="menu-button"
+                onclick="openSection('speech', this)">
+
+                <span class="menu-number">05</span>
+                <span>Сөйлеуді қалыптастыру</span>
+
+            </button>
+
+
+            <button class="menu-button"
+                onclick="openSection('reading', this)">
+
+                <span class="menu-number">06</span>
+                <span>Оқу және жазу</span>
+
+            </button>
+
+
+            <button class="menu-button"
+                onclick="openSection('rhythm', this)">
+
+                <span class="menu-number">07</span>
+                <span>Логоритмика</span>
+
+            </button>
+
+
+            <button class="menu-button"
+                onclick="openSection('results', this)">
+
+                <span class="menu-number">08</span>
+                <span>Нәтижелер</span>
+
+            </button>
+
+
+            <div class="sidebar-footer">
+                АФАЗИЯ
+                <span>СӨЙЛЕУДІ ҚАЛПЫНА КЕЛТІРУ</span>
+            </div>
+
+        </aside>
+
+
+        <!-- ОРТАЛЫҚ ЖҰМЫС АЙМАҒЫ -->
+
+        <main class="workspace">
+
+            <div class="workspace-top">
+
+                <div>
+                    <span class="workspace-label">
+                        ЖЕКЕ ЖҰМЫС АЙМАҒЫ
+                    </span>
+
+                    <h2>Логопедиялық кабинет</h2>
                 </div>
 
-                <div id="section-content"></div>
+                <div class="workspace-symbol">
+                    ✦
+                </div>
 
-            </main>
-
-        </div>
-
-    </section>
+            </div>
 
 
-    <script src="script.js"></script>
+            <!-- БАСТАПҚЫ АҚПАРАТ -->
+
+            <div id="welcome" class="welcome-card">
+
+                <div class="welcome-decoration">
+                    ✦
+                </div>
+
+                <span class="welcome-label">
+                    ЛОГОПЕДИЯЛЫҚ ТҮЗЕТУ ПЛАТФОРМАСЫ
+                </span>
+
+                <h2>
+                    Логопед кабинетіне қош келдіңіз!
+                </h2>
+
+                <div class="welcome-line"></div>
+
+                <p class="welcome-description">
+                    «Тілашар» логопедиялық кабинеті
+                </p>
+
+                <p>
+                    Бұл платформа афазиясы бар ересектердің
+                    сөйлеу қабілетін қалпына келтіруге және
+                    дамытуға бағытталған.
+                </p>
+
+                <p>
+                    Жұмыс бағытын таңдау үшін сол жақ мәзірдегі
+                    қажетті бөлімді басыңыз.
+                </p>
+
+                <div class="welcome-footer">
+                    АФАЗИЯ
+                    <span>•</span>
+                    СӨЙЛЕУДІ ҚАЛПЫНА КЕЛТІРУ
+                </div>
+
+            </div>
+
+
+            <!-- БӨЛІМДЕРДІҢ ЖҰМЫС АЙМАҒЫ -->
+
+            <div id="section-content" style="display:none;">
+
+            </div>
+
+
+            <!-- ТӨМЕНГІ ЖАЗУ -->
+
+            <footer class="workspace-footer">
+
+                <span>АФАЗИЯ</span>
+
+                <span>
+                    ЛОГОПЕДИЯЛЫҚ ТҮЗЕТУ ЖҮЙЕСІ
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
 
 </body>
 </html>
