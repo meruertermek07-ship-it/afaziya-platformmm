@@ -1,373 +1,502 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ТІЛАШАР — Афазия</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТІЛАШАР — Афазия</title>
+<link rel="stylesheet" href="style.css">
 <style>
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffaf0;
+    color: #59452d;
+}
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 6%;
+    background: white;
+    border-bottom: 1px solid #ead7ae;
+}
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #b68a35;
+    letter-spacing: 3px;
+}
+.cabinet-button {
+    padding: 13px 20px;
+    border: 1px solid #c49a45;
+    border-radius: 25px;
+    background: white;
+    color: #956b23;
+    font-weight: bold;
+}
+.home-screen {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+.home-content h1 {
+    font-size: clamp(50px, 10vw, 90px);
+    color: #b68a35;
+    letter-spacing: 7px;
+    margin-bottom: 10px;
+}
+.home-content p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: #806b50;
+}
+.enter-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 17px 70px;
+    border: none;
+    border-radius: 35px;
+    background: linear-gradient(135deg, #d7b56d, #ad7c2b);
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    box-shadow: 0 7px 20px #d9c69f;
+}
+.program-screen {
+    display: none;
+    padding: 45px 6%;
+    min-height: 80vh;
+}
+.program-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+.program-heading h2 {
+    color: #a8792b;
+    font-size: 30px;
+}
+.program-heading p {
+    color: #806b50;
+}
+.world-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.world-card {
+    min-height: 170px;
+    padding: 25px 15px;
+    border: 1px solid #ead7ae;
+    border-radius: 20px;
+    background: white;
+    color: #654b2c;
+    font-size: 17px;
+    font-weight: bold;
+    box-shadow: 0 5px 16px rgba(120,90,35,.08);
+}
+.world-card:hover {
+    background: #fff2d7;
+    transform: translateY(-4px);
+}
+.world-icon {
+    display: block;
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+.section-content {
+    max-width: 950px;
+    margin: auto;
+}
+.section-page {
+    padding: 30px;
+    background: white;
+    border: 1px solid #ead7ae;
+    border-radius: 20px;
+}
+.section-page h2 {
+    color: #a8792b;
+}
+.back-to-menu {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #ead9b4;
+    color: #634a28;
+    font-weight: bold;
+}
+.task-list {
+    display: grid;
+    gap: 13px;
+    margin-top: 25px;
+}
+.task-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 17px;
+    border: 1px solid #ead7ae;
+    border-radius: 13px;
+    background: #fffaf0;
+}
+.task-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #d7b56d;
+    color: white;
+}
+.task-card button {
+    margin-left: auto;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    background: #b68a35;
+    color: white;
+    font-weight: bold;
+}
+.login-screen {
+    display: none;
+    min-height: 75vh;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+.login-box {
+    max-width: 500px;
+    width: 100%;
+    padding: 35px;
+    text-align: center;
+    background: white;
+    border: 1px solid #ead7ae;
+    border-radius: 22px;
+}
+.login-box h2 {
+    color: #a8792b;
+}
+.login-box button {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    background: #b68a35;
+    color: white;
+    font-weight: bold;
+}
+.login-box .back-button {
+    background: #eee3cd;
+    color: #654b2c;
+}
+footer {
+    padding: 25px;
+    text-align: center;
+    background: white;
+    color: #947d5b;
+}
+@media(max-width:850px) {
+    .world-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #fffaf0;
-        color: #513c25;
-    }
-    button {
-        cursor: pointer;
-        font-family: inherit;
-    }
-    .top-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 6%;
-        background: #fff;
-        border-bottom: 1px solid #ead7ae;
+}
+@media(max-width:500px) {
+    header {
+        padding: 15px;
     }
     .logo {
-        font-size: 25px;
-        font-weight: bold;
-        color: #b68a35;
-        letter-spacing: 2px;
+        font-size: 19px;
     }
     .cabinet-button {
-        padding: 13px 22px;
-        border: 1px solid #c49a45;
-        border-radius: 25px;
-        background: #fff;
-        color: #956b23;
-        font-weight: bold;
-    }
-    .cabinet-button:hover {
-        background: #c49a45;
-        color: white;
-    }
-    .home-screen {
-        min-height: 85vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 30px 20px;
-    }
-    .home-content {
-        max-width: 700px;
-    }
-    .home-content h1 {
-        font-size: clamp(45px, 9vw, 85px);
-        color: #b68a35;
-        margin: 0 0 15px;
-        letter-spacing: 7px;
-    }
-    .home-content p {
-        font-size: 20px;
-        line-height: 1.6;
-        color: #806b50;
-    }
-    .enter-button {
-        margin-top: 30px;
-        padding: 17px 65px;
-        border: none;
-        border-radius: 35px;
-        background: linear-gradient(135deg, #d7b56d, #ad7c2b);
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-        box-shadow: 0 7px 20px #d9c69f;
-    }
-    .enter-button:hover {
-        transform: translateY(-3px);
-    }
-    .program-screen {
-        padding: 45px 6%;
-        min-height: 80vh;
-    }
-    .program-heading {
-        text-align: center;
-        margin-bottom: 35px;
-    }
-    .program-heading h2 {
-        color: #a8792b;
-        font-size: 32px;
-    }
-    .program-heading p {
-        color: #806b50;
-        font-size: 17px;
+        font-size: 11px;
+        padding: 10px;
     }
     .world-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
-    .world-card {
-        min-height: 170px;
-        padding: 25px 15px;
-        border: 1px solid #ead7ae;
-        border-radius: 20px;
-        background: white;
-        box-shadow: 0 5px 16px rgba(120, 90, 35, 0.08);
-        color: #654b2c;
-        font-size: 18px;
-        font-weight: bold;
-        transition: 0.2s;
-    }
-    .world-card:hover {
-        transform: translateY(-5px);
-        border-color: #c49a45;
-        background: #fff5df;
-    }
-    .world-icon {
-        display: block;
-        font-size: 38px;
-        margin-bottom: 15px;
-    }
-    .section-content {
-        max-width: 950px;
-        margin: 0 auto;
-    }
-    .section-page {
-        padding: 30px;
-        background: white;
-        border: 1px solid #ead7ae;
-        border-radius: 20px;
-        box-shadow: 0 5px 20px rgba(120, 90, 35, 0.08);
-    }
-    .section-page h2 {
-        color: #a8792b;
-        font-size: 28px;
-    }
-    .section-page p {
-        line-height: 1.7;
-    }
-    .back-to-menu {
-        padding: 12px 20px;
-        border: none;
-        border-radius: 25px;
-        background: #ead9b4;
-        color: #634a28;
-        font-weight: bold;
-    }
-    .task-list {
-        display: grid;
-        gap: 13px;
-        margin-top: 25px;
+        grid-template-columns: 1fr;
     }
     .task-card {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 17px;
-        border: 1px solid #ead7ae;
-        border-radius: 13px;
-        background: #fffaf0;
+        flex-wrap: wrap;
     }
-    .task-number {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        background: #d7b56d;
-        color: white;
-        font-weight: bold;
-    }
-    .task-card button {
-        margin-left: auto;
-        padding: 10px 18px;
-        border: none;
-        border-radius: 20px;
-        background: #b68a35;
-        color: white;
-        font-weight: bold;
-    }
-    .task-instruction {
-        margin-top: 25px;
-        padding: 20px;
-        border-radius: 15px;
-        background: #fff5df;
-    }
-    .login-screen {
-        min-height: 75vh;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        padding: 30px;
-    }
-    .login-box {
-        max-width: 500px;
-        width: 100%;
-        padding: 40px 25px;
-        text-align: center;
-        background: white;
-        border: 1px solid #ead7ae;
-        border-radius: 22px;
-        box-shadow: 0 5px 20px rgba(120, 90, 35, 0.1);
-    }
-    .login-box h2 {
-        color: #a8792b;
-    }
-    .login-box button {
-        display: block;
-        width: 100%;
-        margin-top: 20px;
-        padding: 15px;
-        border: none;
-        border-radius: 25px;
-        background: #b68a35;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    .login-box .back-button {
-        background: #eee3cd;
-        color: #654b2c;
-    }
-    footer {
-        padding: 25px;
-        text-align: center;
-        color: #947d5b;
-        background: white;
-        border-top: 1px solid #ead7ae;
-    }
-    @media (max-width: 850px) {
-        .world-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (max-width: 500px) {
-        .top-header {
-            padding: 15px;
-            gap: 10px;
-        }
-        .logo {
-            font-size: 19px;
-        }
-        .cabinet-button {
-            padding: 10px 12px;
-            font-size: 11px;
-        }
-        .world-grid {
-            grid-template-columns: 1fr;
-        }
-        .task-card {
-            flex-wrap: wrap;
-        }
-        .task-card button {
-            margin-left: 50px;
-        }
-    }
+}
 </style>
 </head>
 <body>
-<!-- ЖОҒАРҒЫ МӘЗІР -->
-<header class="top-header">
+<header>
     <div class="logo">ТІЛАШАР</div>
-    <button
-        class="cabinet-button"
-        onclick="openLogopedCabinet()">
-        ЛОГОПЕД КАБИНЕТІ
-    </button>
+<button class="cabinet-button" id="cabinetButton">
+    ЛОГОПЕД КАБИНЕТІ
+</button>
 </header>
 <!-- БАСТЫ БЕТ -->
 <section id="home" class="home-screen">
     <div class="home-content">
         <h1>АФАЗИЯ</h1>
-        <p>
-            Сөйлеуді қалпына келтіру бағдарламасы
-        </p>
-        <p>
-            Сөйлеу дағдыларын дамытуға және қалпына келтіруге
-            арналған логопедиялық платформа.
-        </p>
-        <button
-            class="enter-button"
-            onclick="enterProgram()">
-            КІРУ
-        </button>
-    </div>
+    <p>Сөйлеуді қалпына келтіру бағдарламасы</p>
+    <p>
+        Сөйлеу дағдыларын дамытуға және қалпына келтіруге
+        арналған логопедиялық платформа.
+    </p>
+    <button id="enterButton" class="enter-button" type="button">
+        КІРУ
+    </button>
+</div>
 </section>
-<!-- БАҒДАРЛАМА МӘЗІРІ -->
+<!-- 8 БӨЛІМ -->
 <main id="program" class="program-screen">
-    <div id="program-heading" class="program-heading">
-        <h2>ЛОГОПЕДИЯЛЫҚ БАҒДАРЛАМА</h2>
-        <p>Өзіңізге қажетті бөлімді таңдаңыз</p>
-    </div>
-    <!-- СЕГІЗ БӨЛІМ -->
-    <div id="world-grid" class="world-grid">
-        <button class="world-card"
-            onclick="openSection('breathing')">
-            <span class="world-icon">🌬️</span>
-            ТЫНЫС АЛУ
-        </button>
-        <button class="world-card"
-            onclick="openSection('articulation')">
-            <span class="world-icon">👄</span>
-            АРТИКУЛЯЦИЯ
-        </button>
-        <button class="world-card"
-            onclick="openSection('vocabulary')">
-            <span class="world-icon">📚</span>
-            СӨЗДІК ҚОР
-        </button>
-        <button class="world-card"
-            onclick="openSection('understanding')">
-            <span class="world-icon">🧠</span>
-            СӨЙЛЕУДІ ТҮСІНУ
-        </button>
-        <button class="world-card"
-            onclick="openSection('speech')">
-            <span class="world-icon">💬</span>
-            СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ
-        </button>
-        <button class="world-card"
-            onclick="openSection('reading')">
-            <span class="world-icon">✍️</span>
-            ОҚУ ЖӘНЕ ЖАЗУ
-        </button>
-        <button class="world-card"
-            onclick="openSection('logorhythmics')">
-            <span class="world-icon">🎵</span>
-            ЛОГОРИТМИКА
-        </button>
-        <button class="world-card"
-            onclick="openSection('results')">
-            <span class="world-icon">📊</span>
-            НӘТИЖЕЛЕР
-        </button>
-    </div>
-    <!-- ТАҢДАЛҒАН БӨЛІМ ОСЫНДА АШЫЛАДЫ -->
-    <div id="section-content"
-         class="section-content"
-         style="display:none;">
-    </div>
+<div id="program-heading" class="program-heading">
+    <h2>ЛОГОПЕДИЯЛЫҚ БАҒДАРЛАМА</h2>
+    <p>Өзіңізге қажетті бөлімді таңдаңыз</p>
+</div>
+<div id="world-grid" class="world-grid">
+    <button class="world-card" onclick="openSection('breathing')">
+        <span class="world-icon">🌬️</span>
+        ТЫНЫС АЛУ
+    </button>
+    <button class="world-card" onclick="openSection('articulation')">
+        <span class="world-icon">👄</span>
+        АРТИКУЛЯЦИЯ
+    </button>
+    <button class="world-card" onclick="openSection('vocabulary')">
+        <span class="world-icon">📚</span>
+        СӨЗДІК ҚОР
+    </button>
+    <button class="world-card" onclick="openSection('understanding')">
+        <span class="world-icon">🧠</span>
+        СӨЙЛЕУДІ ТҮСІНУ
+    </button>
+    <button class="world-card" onclick="openSection('speech')">
+        <span class="world-icon">💬</span>
+        СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ
+    </button>
+    <button class="world-card" onclick="openSection('reading')">
+        <span class="world-icon">✍️</span>
+        ОҚУ ЖӘНЕ ЖАЗУ
+    </button>
+    <button class="world-card" onclick="openSection('logorhythmics')">
+        <span class="world-icon">🎵</span>
+        ЛОГОРИТМИКА
+    </button>
+    <button class="world-card" onclick="openSection('results')">
+        <span class="world-icon">📊</span>
+        НӘТИЖЕЛЕР
+    </button>
+</div>
+<div id="section-content" class="section-content"
+     style="display:none;"></div>
 </main>
-<!-- ЛОГОПЕД КАБИНЕТІНЕ КІРУ -->
+<!-- ЛОГОПЕД КАБИНЕТІ -->
 <section id="logopedLogin" class="login-screen">
     <div class="login-box">
         <h2>ЛОГОПЕД КАБИНЕТІ</h2>
-        <p>
-            «Тілашар» логопедиялық кабинетінің
-            жеке жұмыс бөліміне қош келдіңіз!
-        </p>
-        <button onclick="enterLogopedCabinet()">
-            КАБИНЕТКЕ КІРУ
-        </button>
-        <button class="back-button"
-            onclick="backToProgram()">
-            ← АРТҚА ҚАЙТУ
-        </button>
-    </div>
+    <p>«Тілашар» логопедиялық кабинетіне қош келдіңіз!</p>
+    <button id="cabinetEnterButton">
+        КАБИНЕТКЕ КІРУ
+    </button>
+    <button class="back-button" id="backButton">
+        ← АРТҚА ҚАЙТУ
+    </button>
+</div>
 </section>
-<!-- ТӨМЕНГІ БӨЛІК -->
 <footer>
     <p>ТІЛАШАР — АФАЗИЯ</p>
     <p>Сөйлеуді қалпына келтіру бағдарламасы</p>
 </footer>
-<!-- JAVASCRIPT -->
-<script src="script.js"></script>
+<!-- БАРЛЫҚ БАТЫРМАЛАРДЫҢ ЖҰМЫСЫ -->
+<script>
+(function () {
+    const home = document.getElementById("home");
+    const program = document.getElementById("program");
+    const login = document.getElementById("logopedLogin");
+    const grid = document.getElementById("world-grid");
+    const content = document.getElementById("section-content");
+    const heading = document.getElementById("program-heading");
+    const sections = {
+        breathing: {
+            title: "ТЫНЫС АЛУ",
+            description: "Сөйлеу тынысын дамытуға арналған бөлім.",
+            tasks: [
+                "Дұрыс тыныс алуды үйрену",
+                "Мұрын арқылы тыныс алу",
+                "Ауыз арқылы дем шығару",
+                "Ұзақ дем шығару",
+                "Демді бірқалыпты реттеу"
+            ]
+        },
+        articulation: {
+            title: "АРТИКУЛЯЦИЯ",
+            description: "Сөйлеу мүшелерінің қимылын дамыту.",
+            tasks: [
+                "Ерін жаттығулары",
+                "Тіл жаттығулары",
+                "Жақ жаттығулары",
+                "Артикуляциялық қалыптар",
+                "Қимылдарды қайталау"
+            ]
+        },
+        vocabulary: {
+            title: "СӨЗДІК ҚОР",
+            description: "Сөздерді түсіну және қолдану.",
+            tasks: [
+                "Заттарды атау",
+                "Суреттерді сәйкестендіру",
+                "Заттардың атауын табу",
+                "Сөздерді топтастыру",
+                "Сөздерді сөйлемде қолдану"
+            ]
+        },
+        understanding: {
+            title: "СӨЙЛЕУДІ ТҮСІНУ",
+            description: "Сөздер мен сөйлемдерді түсінуді дамыту.",
+            tasks: [
+                "Жеке сөздерді түсіну",
+                "Қарапайым нұсқауларды орындау",
+                "Сөйлемдерді түсіну",
+                "Сұрақтарға жауап беру",
+                "Мәтін мазмұнын түсіну"
+            ]
+        },
+        speech: {
+            title: "СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ",
+            description: "Ойын сөз арқылы жеткізу дағдыларын дамыту.",
+            tasks: [
+                "Жеке сөздерді айту",
+                "Сөз тіркестерін құрастыру",
+                "Сөйлем құрау",
+                "Сурет бойынша әңгімелеу",
+                "Өз ойын жеткізу"
+            ]
+        },
+        reading: {
+            title: "ОҚУ ЖӘНЕ ЖАЗУ",
+            description: "Оқу және жазу дағдыларын дамыту.",
+            tasks: [
+                "Әріптерді тану",
+                "Буындарды оқу",
+                "Сөздерді оқу",
+                "Сөздерді жазу",
+                "Сөйлем жазу"
+            ]
+        },
+        logorhythmics: {
+            title: "ЛОГОРИТМИКА",
+            description: "Қимыл, ырғақ және сөйлеуді үйлестіру.",
+            tasks: [
+                "Ырғақты сезіну",
+                "Қимылды қайталау",
+                "Музыка ырғағымен қозғалу",
+                "Сөз бен қимылды үйлестіру",
+                "Қимылды сөйлеу жаттығулары"
+            ]
+        },
+        results: {
+            title: "НӘТИЖЕЛЕР",
+            description: "Орындалған тапсырмалар мен даму көрсеткіштері.",
+            tasks: [
+                "Орындалған тапсырмалар",
+                "Диагностика нәтижелері",
+                "Бастапқы көрсеткіштер",
+                "Қайталама көрсеткіштер",
+                "Даму динамикасы"
+            ]
+        }
+    };
+    // КІРУ БАТЫРМАСЫ
+    document.getElementById("enterButton").addEventListener("click", function () {
+        home.style.display = "none";
+        login.style.display = "none";
+        program.style.display = "block";
+        showMenu();
+        window.scrollTo(0, 0);
+    });
+    // ЛОГОПЕД КАБИНЕТІ
+    document.getElementById("cabinetButton").addEventListener("click", function () {
+        home.style.display = "none";
+        program.style.display = "none";
+        login.style.display = "flex";
+        window.scrollTo(0, 0);
+    });
+    // КАБИНЕТКЕ ӨТУ
+    document.getElementById("cabinetEnterButton").addEventListener("click", function () {
+        window.location.href = "cabinet.html";
+    });
+    // АРТҚА ҚАЙТУ
+    document.getElementById("backButton").addEventListener("click", function () {
+        login.style.display = "none";
+        program.style.display = "block";
+        showMenu();
+    });
+    // БӨЛІМДІ АШУ
+    window.openSection = function (key) {
+        const section = sections[key];
+        if (!section) return;
+        grid.style.display = "none";
+        heading.style.display = "none";
+        content.style.display = "block";
+        content.innerHTML = `
+            <div class="section-page">
+                <button class="back-to-menu" onclick="showMenu()">
+                    ← МӘЗІРГЕ ҚАЙТУ
+                </button>
+                <h2>${section.title}</h2>
+                <p>${section.description}</p>
+                <div class="task-list">
+                    ${section.tasks.map((task, index) => `
+                        <div class="task-card">
+                            <span class="task-number">${index + 1}</span>
+                            <span>${task}</span>
+                            <button onclick="openTask('${key}', ${index})">
+                                АШУ
+                            </button>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `;
+    };
+    // ТАПСЫРМАНЫ АШУ
+    window.openTask = function (key, index) {
+        const section = sections[key];
+        if (!section) return;
+        const task = section.tasks[index];
+        content.innerHTML = `
+            <div class="section-page">
+                <button class="back-to-menu" onclick="openSection('${key}')">
+                    ← АРТҚА
+                </button>
+                <h2>${task}</h2>
+                <p>${section.description}</p>
+                <div class="task-instruction">
+                    <h3>Тапсырманың мақсаты</h3>
+                    <p>${section.description}</p>
+                    <h3>Орындау тәртібі</h3>
+                    <p>
+                        Логопед нұсқауды түсіндіреді, тапсырманы көрсетеді
+                        және орындалуын бақылайды.
+                    </p>
+                </div>
+            </div>
+        `;
+    };
+    // МӘЗІРГЕ ҚАЙТУ
+    window.showMenu = function () {
+        grid.style.display = "grid";
+        heading.style.display = "block";
+        content.style.display = "none";
+        content.innerHTML = "";
+    };
+})();
+</script>
 </body>
 </html>
