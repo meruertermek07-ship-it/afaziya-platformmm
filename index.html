@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>АФАЗИЯ | ТІЛАШАР</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АФАЗИЯ | ТІЛАШАР</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- 1. БАСТЫ БЕТ -->
+<!-- =========================
+     1. БАСТЫ БЕТ
+========================= -->
 <section id="home" class="home-panel">
 <div class="home-content">
     <div class="home-logo">✦ ТІЛАШАР ✦</div>
@@ -18,92 +20,143 @@
     </button>
 </div>
 </section>
-<!-- 2. БАҒДАРЛАМА -->
+<!-- =========================
+     2. НЕГІЗГІ БАҒДАРЛАМА
+========================= -->
 <section id="program" style="display:none;">
-<!-- ЖОҒАРҒЫ БӨЛІК -->
 <header class="main-header">
     <div class="brand">✦ ТІЛАШАР</div>
     <h1>АФАЗИЯ</h1>
-    <button class="cabinet-button" onclick="openLogopedCabinet()">
+    <button type="button"
+            class="cabinet-button"
+            onclick="openLogopedCabinet()">
         🩺 ЛОГОПЕД КАБИНЕТІ
     </button>
 </header>
-<!-- БӨЛІМДЕР -->
 <main class="program-container">
-    <div class="program-heading">
+    <div id="program-heading" class="program-heading">
         <h2>СӨЙЛЕУ ӘЛЕМІНЕ ҚОШ КЕЛДІҢІЗ!</h2>
         <p>Өзіңізге қажетті бөлімді таңдаңыз</p>
     </div>
-    <div class="world-grid">
-        <button class="world-card" onclick="openSection('breathing', this)">
+    <!-- БӨЛІМДЕР МӘЗІРІ -->
+    <div id="world-grid" class="world-grid">
+        <button class="world-card"
+                onclick="openSection('breathing', this)">
             <span>🌬️</span>
             <h3>ТЫНЫС АЛУ</h3>
             <p>Тыныс алу жаттығулары</p>
             <b>КІРУ →</b>
         </button>
-        <button class="world-card" onclick="openSection('articulation', this)">
+        <button class="world-card"
+                onclick="openSection('articulation', this)">
             <span>👄</span>
             <h3>АРТИКУЛЯЦИЯ</h3>
             <p>Артикуляциялық жаттығулар</p>
             <b>КІРУ →</b>
         </button>
-        <button class="world-card" onclick="openSection('vocabulary', this)">
+        <button class="world-card"
+                onclick="openSection('vocabulary', this)">
             <span>📚</span>
             <h3>СӨЗДІК ҚОР</h3>
             <p>Сөздік қорды дамыту</p>
             <b>КІРУ →</b>
         </button>
-        <button class="world-card" onclick="openSection('understanding', this)">
+        <button class="world-card"
+                onclick="openSection('understanding', this)">
             <span>🧠</span>
             <h3>СӨЙЛЕУДІ ТҮСІНУ</h3>
             <p>Сөзді тыңдау және түсіну</p>
             <b>КІРУ →</b>
         </button>
-        <button class="world-card" onclick="openSection('speech', this)">
+        <button class="world-card"
+                onclick="openSection('speech', this)">
             <span>💬</span>
             <h3>СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ</h3>
             <p>Сөйлеу дағдыларын дамыту</p>
             <b>КІРУ →</b>
         </button>
-        <button class="world-card" onclick="openSection('reading', this)">
+        <button class="world-card"
+                onclick="openSection('reading', this)">
             <span>📖</span>
             <h3>ОҚУ ЖӘНЕ ЖАЗУ</h3>
             <p>Оқу және жазу тапсырмалары</p>
             <b>КІРУ →</b>
         </button>
-        <button class="world-card" onclick="openSection('logorhythmics', this)">
+        <button class="world-card"
+                onclick="openSection('logorhythmics', this)">
             <span>🎵</span>
             <h3>ЛОГОРИТМИКА</h3>
             <p>Қимыл мен ырғақ жаттығулары</p>
             <b>КІРУ →</b>
         </button>
-        <button class="world-card" onclick="openSection('results', this)">
+        <button class="world-card"
+                onclick="openSection('results', this)">
             <span>🏆</span>
             <h3>НӘТИЖЕЛЕР</h3>
             <p>Жетістіктер мен көрсеткіштер</p>
             <b>КІРУ →</b>
         </button>
     </div>
+    <!-- ТАҢДАЛҒАН БӨЛІМНІҢ МАЗМҰНЫ -->
     <div id="section-content" style="display:none;"></div>
-    <button type="button" class="back-button" onclick="showProgramMenu()">
+    <button type="button"
+            id="back-to-menu"
+            class="back-button"
+            style="display:none;"
+            onclick="showProgramMenu()">
         ← БӨЛІМДЕРГЕ ҚАЙТУ
     </button>
 </main>
 </section>
+<!-- =========================
+     3. ЛОГОПЕД КАБИНЕТІНЕ КІРУ
+========================= -->
+<section id="logopedLogin"
+         class="home-panel"
+         style="display:none;">
+<div class="home-content">
+    <div class="home-logo">✦ ТІЛАШАР ✦</div>
+    <h1>ЛОГОПЕД КАБИНЕТІ</h1>
+    <p>Маманның жеке жұмыс кеңістігі</p>
+    <button type="button"
+            class="start-button"
+            onclick="enterLogopedCabinet()">
+        КАБИНЕТКЕ КІРУ →
+    </button>
+    <button type="button"
+            class="back-button"
+            onclick="backToProgram()">
+        ← АРТҚА ҚАЙТУ
+    </button>
+</div>
+</section>
+<!-- =========================
+     4. JAVASCRIPT
+========================= -->
 <script src="script.js"></script>
 <script>
 function enterProgram() {
-    document.getElementById('home').style.display = 'none';
-    document.getElementById('program').style.display = 'block';
+    document.getElementById("home").style.display = "none";
+    document.getElementById("logopedLogin").style.display = "none";
+    document.getElementById("program").style.display = "block";
 }
 function openLogopedCabinet() {
-    window.location.href = 'cabinet.html';
+    document.getElementById("home").style.display = "none";
+    document.getElementById("program").style.display = "none";
+    document.getElementById("logopedLogin").style.display = "flex";
+}
+function enterLogopedCabinet() {
+    window.location.href = "./cabinet.html";
+}
+function backToProgram() {
+    document.getElementById("logopedLogin").style.display = "none";
+    document.getElementById("program").style.display = "block";
 }
 function showProgramMenu() {
-    document.getElementById('section-content').style.display = 'none';
-    document.querySelector('.world-grid').style.display = 'grid';
-    document.querySelector('.program-heading').style.display = 'block';
-    document.querySelector('.back-button').style.display = 'none';
+    document.getElementById("section-content").style.display = "none";
+    document.getElementById("world-grid").style.display = "grid";
+    document.getElementById("program-heading").style.display = "block";
+    document.getElementById("back-to-menu").style.display = "none";
 }
 </script>
 </body>
