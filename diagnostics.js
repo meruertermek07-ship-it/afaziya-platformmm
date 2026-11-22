@@ -2,296 +2,230 @@ const diagnosticTasks = {
 understanding: {
 title: “Сөйлеуді түсіну”,
 tasks: [
-{
-question: “«Алма» сөзін таңдаңыз.”,
-options: [“Алма”, “Үстел”, “Кітап”],
-answer: “Алма”
-},
-{
-question: “«Мысық» сөзін таңдаңыз.”,
-options: [“Ит”, “Мысық”, “Құс”],
-answer: “Мысық”
-},
-{
-question: “«Қыста қар жауады» сөйлемін аяқтаңыз.”,
-options: [“Қар”, “Жапырақ”, “Гүл”],
-answer: “Қар”
-},
-{
-question: “«Көзіңізді жұмыңыз» нұсқауын орындаңыз.”,
-options: [“Көзді жұму”, “Қолды көтеру”, “Орныңыздан тұру”],
-answer: “Көзді жұму”
-},
-{
-question: “«Қасықпен не істейміз?»”,
-options: [“Тамақ ішеміз”, “Жазамыз”, “Сурет саламыз”],
-answer: “Тамақ ішеміз”
-}
+{ question: “«Кітап» сөзін таңдаңыз.”, options: [“Кітап”, “Алма”, “Доп”], answer: “Кітап” },
+{ question: “«Мысық» сөзін таңдаңыз.”, options: [“Үстел”, “Мысық”, “Гүл”], answer: “Мысық” },
+{ question: “«Су ішіңіз» деген нұсқауды таңдаңыз.”, options: [“Отырыңыз”, “Су ішіңіз”, “Жазыңыз”], answer: “Су ішіңіз” },
+{ question: “«Күн» сөзін таңдаңыз.”, options: [“Ай”, “Күн”, “Бұлт”], answer: “Күн” },
+{ question: “«Есікті ашыңыз» деген нұсқауды таңдаңыз.”, options: [“Есікті ашыңыз”, “Кітап оқыңыз”, “Қолды жуыңыз”], answer: “Есікті ашыңыз” }
 ]
 },
 
 naming: {
     title: "Заттарды атау",
     tasks: [
-        {
-            question: "Суретсіз берілген сөз: жемістің атауын таңдаңыз.",
-            options: ["Алма", "Орындық", "Қалам"],
-            answer: "Алма"
-        },
-        {
-            question: "Көлік атауын таңдаңыз.",
-            options: ["Автобус", "Қасық", "Гүл"],
-            answer: "Автобус"
-        },
-        {
-            question: "Жануар атауын таңдаңыз.",
-            options: ["Мысық", "Үстел", "Терезе"],
-            answer: "Мысық"
-        },
-        {
-            question: "Киім атауын таңдаңыз.",
-            options: ["Көйлек", "Алмұрт", "Кесе"],
-            answer: "Көйлек"
-        },
-        {
-            question: "Ыдыс атауын таңдаңыз.",
-            options: ["Кесе", "Доп", "Ағаш"],
-            answer: "Кесе"
-        }
+        { question: "Жемісті таңдаңыз.", options: ["Алма", "Орындық", "Қалам"], answer: "Алма" },
+        { question: "Көлікті таңдаңыз.", options: ["Мысық", "Автобус", "Гүл"], answer: "Автобус" },
+        { question: "Киімді таңдаңыз.", options: ["Көйлек", "Қасық", "Доп"], answer: "Көйлек" },
+        { question: "Ыдысты таңдаңыз.", options: ["Кесе", "Ағаш", "Құс"], answer: "Кесе" },
+        { question: "Жануарды таңдаңыз.", options: ["Үстел", "Ит", "Дәптер"], answer: "Ит" }
     ]
 },
 repetition: {
-    title: "Қайталап айту",
+    title: "Қайталау",
     tasks: [
-        {
-            question: "«Ана» сөзін қайталаңыз. Өзіңізге сәйкес жауапты таңдаңыз.",
-            options: ["Дұрыс қайталадым", "Қиналдым", "Қайталай алмадым"],
-            manual: true
-        },
-        {
-            question: "«Бала» сөзін қайталаңыз.",
-            options: ["Дұрыс қайталадым", "Қиналдым", "Қайталай алмадым"],
-            manual: true
-        },
-        {
-            question: "«Мен үйге барамын» сөйлемін қайталаңыз.",
-            options: ["Дұрыс қайталадым", "Қиналдым", "Қайталай алмадым"],
-            manual: true
-        },
-        {
-            question: "«Кітап» сөзін қайталаңыз.",
-            options: ["Дұрыс қайталадым", "Қиналдым", "Қайталай алмадым"],
-            manual: true
-        },
-        {
-            question: "«Бүгін күн жылы» сөйлемін қайталаңыз.",
-            options: ["Дұрыс қайталадым", "Қиналдым", "Қайталай алмадым"],
-            manual: true
-        }
+        { question: "«Ана» сөзін қайталаңыз.", manual: true },
+        { question: "«Бала» сөзін қайталаңыз.", manual: true },
+        { question: "«Мен үйге барамын» сөйлемін қайталаңыз.", manual: true },
+        { question: "«Кітап оқыдым» сөйлемін қайталаңыз.", manual: true },
+        { question: "«Бүгін күн жылы» сөйлемін қайталаңыз.", manual: true }
     ]
 },
 vocabulary: {
     title: "Сөздік қор",
     tasks: [
-        {
-            question: "«Алма» қай топқа жатады?",
-            options: ["Жеміс", "Киім", "Жиһаз"],
-            answer: "Жеміс"
-        },
-        {
-            question: "«Қасық» не үшін қолданылады?",
-            options: ["Тамақ ішу", "Жазу", "Ұшу"],
-            answer: "Тамақ ішу"
-        },
-        {
-            question: "«Қыс» мезгілінен кейін қай мезгіл келеді?",
-            options: ["Көктем", "Күз", "Жаз"],
-            answer: "Көктем"
-        },
-        {
-            question: "«Қуаныш» сөзіне қарама-қарсы мағыналы сөзді таңдаңыз.",
-            options: ["Қайғы", "Күлкі", "Бақыт"],
-            answer: "Қайғы"
-        },
-        {
-            question: "«Дәрігер» қай жерде жұмыс істейді?",
-            options: ["Ауруханада", "Мектепте", "Дүкенде"],
-            answer: "Ауруханада"
-        }
+        { question: "«Қыс» мезгіліне қатысты сөзді таңдаңыз.", options: ["Қар", "Қарбыз", "Гүл"], answer: "Қар" },
+        { question: "«Ас үй» бөлмесіне қатысты затты таңдаңыз.", options: ["Төсек", "Қасық", "Теледидар"], answer: "Қасық" },
+        { question: "«Көлік» түрін таңдаңыз.", options: ["Пойыз", "Алма", "Көйлек"], answer: "Пойыз" },
+        { question: "«Мамандық» атауын таңдаңыз.", options: ["Дәрігер", "Терезе", "Қарындаш"], answer: "Дәрігер" },
+        { question: "«Табиғат» сөзіне қатысты ұғымды таңдаңыз.", options: ["Өзен", "Телефон", "Орындық"], answer: "Өзен" }
     ]
 },
 reading: {
     title: "Оқу",
     tasks: [
-        {
-            question: "«АНА» сөзін оқып, дұрыс нұсқаны таңдаңыз.",
-            options: ["АНА", "АТА", "АЛА"],
-            answer: "АНА"
-        },
-        {
-            question: "«ҮЙ» сөзін оқыңыз.",
-            options: ["ҮЙ", "КҮН", "АЙ"],
-            answer: "ҮЙ"
-        },
-        {
-            question: "«КІТАП» сөзін табыңыз.",
-            options: ["КІТАП", "ҚАЛАМ", "ДӘПТЕР"],
-            answer: "КІТАП"
-        },
-        {
-            question: "«АЛМА» сөзін табыңыз.",
-            options: ["АЛМА", "АЛҒА", "АЛТЫН"],
-            answer: "АЛМА"
-        },
-        {
-            question: "«БАЛА ҮЙГЕ КЕЛДІ» сөйлемін оқыңыз.",
-            options: [
-                "БАЛА ҮЙГЕ КЕЛДІ",
-                "БАЛА ДАЛАҒА КЕТТІ",
-                "ӘКЕ ЖҰМЫСҚА КЕТТІ"
-            ],
-            answer: "БАЛА ҮЙГЕ КЕЛДІ"
-        }
+        { question: "«АНА» сөзін оқыңыз.", manual: true },
+        { question: "«БАЛА» сөзін оқыңыз.", manual: true },
+        { question: "«КІТАП» сөзін оқыңыз.", manual: true },
+        { question: "«ҮЙ» сөзін оқыңыз.", manual: true },
+        { question: "«МЕН КІТАП ОҚЫЙМЫН» сөйлемін оқыңыз.", manual: true }
     ]
 },
 writing: {
     title: "Жазу",
     tasks: [
-        {
-            question: "«АНА» сөзін дәптерге жазыңыз.",
-            options: ["Дұрыс жаздым", "Қателестім", "Жаза алмадым"],
-            manual: true
-        },
-        {
-            question: "«ҮЙ» сөзін жазыңыз.",
-            options: ["Дұрыс жаздым", "Қателестім", "Жаза алмадым"],
-            manual: true
-        },
-        {
-            question: "«КІТАП» сөзін көшіріп жазыңыз.",
-            options: ["Дұрыс жаздым", "Қателестім", "Жаза алмадым"],
-            manual: true
-        },
-        {
-            question: "«АЛМА» сөзін жазыңыз.",
-            options: ["Дұрыс жаздым", "Қателестім", "Жаза алмадым"],
-            manual: true
-        },
-        {
-            question: "«БАЛА ҮЙГЕ КЕЛДІ» сөйлемін жазыңыз.",
-            options: ["Дұрыс жаздым", "Қателестім", "Жаза алмадым"],
-            manual: true
-        }
+        { question: "«АНА» сөзін жазыңыз.", manual: true },
+        { question: "«ҮЙ» сөзін жазыңыз.", manual: true },
+        { question: "«БАЛА» сөзін жазыңыз.", manual: true },
+        { question: "«КІТАП» сөзін жазыңыз.", manual: true },
+        { question: "«МЕН ҮЙГЕ БАРАМЫН» сөйлемін жазыңыз.", manual: true }
     ]
 }
 
 };
 
-let currentCategory = null;
+let currentCategory = “”;
+let currentAssessmentType = “initial”;
 let currentTaskIndex = 0;
 let currentAnswers = [];
-let currentAssessmentType = “initial”;
+let currentScore = 0;
 
 function startCategory(category) {
-if (!diagnosticTasks[category]) return;
+if (!diagnosticTasks[category]) {
+alert(“Диагностика бөлімі табылмады.”);
+return;
+}
 
+const typeSelect = document.getElementById("assessmentType");
+currentAssessmentType = typeSelect ? typeSelect.value : "initial";
 currentCategory = category;
 currentTaskIndex = 0;
 currentAnswers = [];
-currentAssessmentType =
-    document.getElementById("assessmentType")?.value || "initial";
+currentScore = 0;
 renderDiagnosticTask();
 
 }
 
 function renderDiagnosticTask() {
 const page = document.querySelector(”.diagnostics-page”);
-if (!page || !currentCategory) return;
 
+if (!page) return;
 const category = diagnosticTasks[currentCategory];
 const task = category.tasks[currentTaskIndex];
-let html = `
-    <section class="assessment-box">
-        <h2>${category.title}</h2>
-        <p>Тапсырма ${currentTaskIndex + 1} / ${category.tasks.length}</p>
-        <div style="background:#50302b;height:9px;border-radius:10px;margin:20px 0;">
-            <div style="
-                width:${((currentTaskIndex + 1) / category.tasks.length) * 100}%;
-                height:9px;
-                background:var(--gold);
-                border-radius:10px;">
-            </div>
+const progress = Math.round(
+    ((currentTaskIndex + 1) / category.tasks.length) * 100
+);
+let answerHTML = "";
+if (task.manual) {
+    answerHTML = `
+        <div class="manual-box">
+            <p>Тапсырманы орындағаннан кейін логопед бағасын белгілейді.</p>
+            <label>Бағалау:</label>
+            <select id="manualScore">
+                <option value="3">3 — дұрыс орындады</option>
+                <option value="1">1 — жартылай орындады</option>
+                <option value="0">0 — орындай алмады</option>
+            </select>
         </div>
-        <h3 style="color:var(--gold-light);margin:25px 0;">
-            ${task.question}
-        </h3>
-        <div class="diagnostic-options">
-`;
-task.options.forEach((option, index) => {
-    html += `
-        <label style="
-            display:block;
-            background:#49202a;
-            padding:15px;
-            border-radius:10px;
-            margin:10px 0;
-            cursor:pointer;
-            color:white;">
-            <input type="radio" name="taskAnswer" value="${index}">
-            ${option}
-        </label>
     `;
-});
-html += `
+} else {
+    answerHTML = `
+        <div class="answer-options">
+            ${task.options.map(option => `
+                <button class="answer-option"
+                    onclick="selectAnswer(this, '${escapeDiagnosticText(option)}')">
+                    ${escapeDiagnosticText(option)}
+                </button>
+            `).join("")}
         </div>
-        <p id="taskError" style="color:#ffb4b4;"></p>
-        <button class="back-cabinet-button"
-            onclick="submitDiagnosticAnswer()">
-            ${currentTaskIndex === category.tasks.length - 1
-                ? "Нәтижені аяқтау"
-                : "Келесі тапсырма"}
-        </button>
-        <button class="back-cabinet-button"
-            onclick="showDiagnosticMenu()">
-            Тоқтату
-        </button>
-    </section>
-`;
+    `;
+}
 page.innerHTML = `
     <header class="diagnostics-header">
-        <h1>АФАЗИЯ ДИАГНОСТИКАСЫ</h1>
+        <div class="logo">ТІЛАШАР</div>
+        <button class="back-button" onclick="showDiagnosticMenu()">
+            ← Диагностикаға қайту
+        </button>
     </header>
-    ${html}
+    <div style="
+        background:white;
+        border:1px solid #eadcc3;
+        border-radius:20px;
+        padding:25px;
+        max-width:750px;
+        margin:35px auto;
+    ">
+        <h2 style="color:#b58a43;text-align:center;">
+            ${category.title}
+        </h2>
+        <p style="text-align:center;color:#8d7b65;">
+            ${currentTaskIndex + 1} / ${category.tasks.length} тапсырма
+        </p>
+        <div style="
+            height:9px;
+            background:#f0e7d7;
+            border-radius:20px;
+            overflow:hidden;
+            margin:20px 0;
+        ">
+            <div style="
+                height:100%;
+                width:${progress}%;
+                background:#b58a43;
+                border-radius:20px;
+            "></div>
+        </div>
+        <h3 style="text-align:center;margin:35px 0;color:#574735;">
+            ${task.question}
+        </h3>
+        ${answerHTML}
+        <button id="nextDiagnosticButton"
+            onclick="submitDiagnosticAnswer()"
+            style="
+                display:block;
+                width:100%;
+                padding:15px;
+                margin-top:30px;
+                border:0;
+                border-radius:12px;
+                background:#b58a43;
+                color:white;
+                font-size:16px;
+                cursor:pointer;
+            ">
+            ${currentTaskIndex === category.tasks.length - 1
+                ? "НӘТИЖЕНІ АЛУ"
+                : "КЕЛЕСІ ТАПСЫРМА"}
+        </button>
+    </div>
 `;
+if (task.manual) {
+    const select = document.getElementById("manualScore");
+    if (select) select.value = "3";
+}
+
+}
+
+function selectAnswer(button, answer) {
+document.querySelectorAll(”.answer-option”).forEach(item => {
+item.style.background = “white”;
+item.style.borderColor = “#eadcc3”;
+item.style.color = “#574735”;
+});
+
+button.style.background = "#f8f0df";
+button.style.borderColor = "#b58a43";
+button.style.color = "#574735";
+window.selectedDiagnosticAnswer = answer;
 
 }
 
 function submitDiagnosticAnswer() {
-const selected = document.querySelector(
-‘input[name=“taskAnswer”]:checked’
-);
+const category = diagnosticTasks[currentCategory];
+const task = category.tasks[currentTaskIndex];
 
-const task = diagnosticTasks[currentCategory].tasks[currentTaskIndex];
-if (!selected) {
-    document.getElementById("taskError").textContent =
-        "Жауап нұсқасын таңдаңыз.";
-    return;
-}
-const selectedIndex = Number(selected.value);
 let score = 0;
+let answer = "";
 if (task.manual) {
-    score = selectedIndex === 0 ? 3 :
-            selectedIndex === 1 ? 1 : 0;
+    const select = document.getElementById("manualScore");
+    score = select ? Number(select.value) : 0;
+    answer = "Логопед бағалауы";
 } else {
-    score = task.options[selectedIndex] === task.answer ? 3 : 0;
+    answer = window.selectedDiagnosticAnswer || "";
+    if (!answer) {
+        alert("Алдымен жауапты таңдаңыз.");
+        return;
+    }
+    score = answer === task.answer ? 3 : 0;
 }
 currentAnswers.push({
     question: task.question,
-    answer: task.options[selectedIndex],
+    answer: answer,
     score: score
 });
-currentTaskIndex++;
-if (currentTaskIndex < diagnosticTasks[currentCategory].tasks.length) {
+currentScore += score;
+window.selectedDiagnosticAnswer = "";
+if (currentTaskIndex < category.tasks.length - 1) {
+    currentTaskIndex++;
     renderDiagnosticTask();
 } else {
     finishDiagnostic();
@@ -302,29 +236,33 @@ if (currentTaskIndex < diagnosticTasks[currentCategory].tasks.length) {
 function finishDiagnostic() {
 const category = diagnosticTasks[currentCategory];
 
-const totalScore = currentAnswers.reduce(
-    (sum, answer) => sum + answer.score, 0
-);
 const maxScore = category.tasks.length * 3;
-const percentage = Math.round(totalScore / maxScore * 100);
+const percentage = Math.round((currentScore / maxScore) * 100);
 const result = {
     category: category.title,
     categoryKey: currentCategory,
     assessmentType: currentAssessmentType,
-    score: totalScore,
+    score: currentScore,
     maxScore: maxScore,
     percentage: percentage,
     completed: category.tasks.length,
     answers: currentAnswers,
-    date: new Date().toLocaleDateString("kk-KZ")
+    date: new Date().toLocaleDateString("kk-KZ"),
+    timestamp: Date.now()
 };
-const allResults = JSON.parse(
-    localStorage.getItem("aphasiaDiagnosticResults") || "[]"
-);
-allResults.push(result);
+let results = [];
+try {
+    results = JSON.parse(
+        localStorage.getItem("aphasiaDiagnosticResults") || "[]"
+    );
+    if (!Array.isArray(results)) results = [];
+} catch (error) {
+    results = [];
+}
+results.push(result);
 localStorage.setItem(
     "aphasiaDiagnosticResults",
-    JSON.stringify(allResults)
+    JSON.stringify(results)
 );
 showDiagnosticResult(result);
 
@@ -332,41 +270,101 @@ showDiagnosticResult(result);
 
 function showDiagnosticResult(result) {
 const page = document.querySelector(”.diagnostics-page”);
-if (!page) return;
 
+if (!page) return;
+let interpretation = "";
+if (result.percentage >= 80) {
+    interpretation = "Тапсырмалардың басым бөлігін дұрыс орындады.";
+} else if (result.percentage >= 50) {
+    interpretation = "Дағдыларды орындауда белгілі бір қиындықтар байқалды.";
+} else {
+    interpretation = "Бұл бағыт бойынша қосымша логопедиялық жұмыс қажет.";
+}
 page.innerHTML = `
-    <section class="assessment-box" style="text-align:center;">
-        <h1 style="color:var(--gold);">
-            ДИАГНОСТИКА АЯҚТАЛДЫ
-        </h1>
-        <h2>${result.category}</h2>
+    <header class="diagnostics-header">
+        <div class="logo">ТІЛАШАР</div>
+    </header>
+    <div style="
+        max-width:650px;
+        margin:40px auto;
+        background:white;
+        border:1px solid #eadcc3;
+        border-radius:22px;
+        padding:30px;
+        text-align:center;
+    ">
+        <div style="font-size:45px;">📊</div>
+        <h2 style="color:#b58a43;">ДИАГНОСТИКА НӘТИЖЕСІ</h2>
+        <h3>${result.category}</h3>
         <div style="
-            font-size:42px;
-            color:var(--gold);
+            font-size:48px;
             font-weight:bold;
-            margin:25px;">
+            color:#b58a43;
+            margin:20px;
+        ">
             ${result.percentage}%
         </div>
-        <p>Жинаған ұпай: ${result.score} / ${result.maxScore}</p>
-        <p>Орындалған тапсырма: ${result.completed}</p>
-        <p style="color:var(--muted);">
-            Нәтиже логопед кабинетінде сақталды.
-            Бұл көрсеткіштер тапсырмалардың орындалуын сипаттайды,
-            клиникалық диагноз болып саналмайды.
+        <p>Жиналған ұпай: ${result.score} / ${result.maxScore}</p>
+        <p>Тапсырма саны: ${result.completed}</p>
+        <p>Бағалау түрі: ${
+            result.assessmentType === "initial"
+                ? "Бастапқы диагностика"
+                : "Қайта диагностика"
+        }</p>
+        <p>Күні: ${result.date}</p>
+        <div style="
+            background:#f8f0df;
+            padding:16px;
+            border-radius:12px;
+            line-height:1.6;
+            margin:20px 0;
+        ">
+            ${interpretation}
+        </div>
+        <p style="font-size:12px;color:#8d7b65;">
+            Нәтиже автоматты есептелді. Қорытындыны логопед
+            қосымша бақылау және бағалау арқылы нақтылайды.
         </p>
-        <button class="back-cabinet-button"
-            onclick="showDiagnosticMenu()">
-            Диагностика мәзіріне оралу
+        <button onclick="showDiagnosticMenu()"
+            style="
+                width:100%;
+                padding:14px;
+                margin-top:12px;
+                background:#b58a43;
+                color:white;
+                border:0;
+                border-radius:12px;
+                cursor:pointer;
+            ">
+            ДИАГНОСТИКА МӘЗІРІ
         </button>
-        <button class="back-cabinet-button"
-            onclick="window.location.href='cabinet.html'">
-            Логопед кабинетіне өту
+        <button onclick="window.location.href='cabinet.html'"
+            style="
+                width:100%;
+                padding:14px;
+                margin-top:10px;
+                background:#f8f0df;
+                color:#574735;
+                border:1px solid #eadcc3;
+                border-radius:12px;
+                cursor:pointer;
+            ">
+            ЛОГОПЕД КАБИНЕТІ
         </button>
-    </section>
+    </div>
 `;
 
 }
 
 function showDiagnosticMenu() {
 window.location.reload();
+}
+
+function escapeDiagnosticText(value) {
+return String(value)
+.replace(/&/g, “&”)
+.replace(/</g, “<”)
+.replace(/>/g, “>”)
+.replace(/”/g, “"”)
+.replace(/’/g, “'”);
 }
