@@ -1,409 +1,147 @@
 <!DOCTYPE html>
 <html lang="kk">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>АФАЗИЯ | Сөйлеу әлеміне саяхат</title>
-
-    <link rel="stylesheet" href="style.css">
+<title>АФАЗИЯ | Тілашар</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<!-- =================================
-     1. БАСТЫ БЕТ
-================================= -->
-
-<section id="home" class="home-page">
-
-    <div class="home-content">
-
-        <div class="home-decoration">✦</div>
-
-        <span class="home-label">
-            ЛОГОПЕДИЯЛЫҚ GAME PLATFORM
-        </span>
-
-        <h1>АФАЗИЯ</h1>
-
-        <div class="home-line"></div>
-
-        <p>
-            Афазиясы бар ересектерге арналған
-            сөйлеу қабілетін қалпына келтіру
-            және дамыту платформасы.
-        </p>
-
-        <button class="enter-button" onclick="enterCabinet()">
-            КІРУ <span>➜</span>
-        </button>
-
-        <div class="home-footer">
-            СӨЙЛЕУ ӘЛЕМІНЕ САЯХАТ
-        </div>
-
+<!-- БАСТЫ БЕТ -->
+<section id="home" class="home-panel">
+    <div class="home-label">ТІЛАШАР ЛОГОПЕДИЯЛЫҚ ЖОБАСЫ</div>
+    <h1>АФАЗИЯ</h1>
+    <div class="home-line"></div>
+    <h2>Сөйлеуді қалпына келтіру бағдарламасы</h2>
+    <p>
+        Афазиясы бар адамдардың сөйлеу, түсіну,
+        оқу және жазу дағдыларын дамытуға арналған
+        интерактивті логопедиялық бағдарлама.
+    </p>
+    <button class="enter-button" onclick="enterCabinet()">
+        БАҒДАРЛАМАҒА КІРУ
+    </button>
+    <div class="home-footer">
+        ТІЛАШАР • ЛОГОПЕДИЯЛЫҚ КАБИНЕТ
     </div>
-
 </section>
-
-
-<!-- =================================
-     2. ЛОГОПЕД КАБИНЕТІ
-================================= -->
-
-<section id="cabinet" class="cabinet-page" style="display:none;">
-
-
-    <!-- ЖОҒАРҒЫ ЖОЛАҚ -->
-
-    <header class="header">
-
-        <div class="header-logo" onclick="goHome()">
-            <span>✦</span> АФАЗИЯ
+<!-- ЛОГОПЕДИЯЛЫҚ БАҒДАРЛАМА -->
+<section id="cabinet" style="display:none;">
+    <header class="cabinet-header">
+        <div class="logo" onclick="goHome()">
+            ТІЛАШАР
         </div>
-
-        <div class="cabinet-title">
+        <div class="header-title">
+            АФАЗИЯ
+        </div>
+        <button
+            class="cabinet-button"
+            onclick="window.location.href='cabinet.html'">
             ЛОГОПЕД КАБИНЕТІ
-        </div>
-
+        </button>
     </header>
-
-
-    <!-- НЕГІЗГІ КОНТЕЙНЕР -->
-
     <div class="main-layout">
-
-
-        <!-- =================================
-             3. СОЛ ЖАҚ МӘЗІР
-        ================================= -->
-
+        <!-- СОЛ ЖАҚ МӘЗІР -->
         <aside class="sidebar">
-
-            <div class="sidebar-heading">
-                ✦ ОЙЫН ӘЛЕМДЕРІ ✦
-            </div>
-
-
-            <button class="menu-button"
+            <h3>БАҒДАРЛАМА</h3>
+            <button class="menu-button active"
                 onclick="openSection('breathing', this)">
-
-                <span class="menu-number">01</span>
-                <span>🌬️ Тыныс алу</span>
-
+                🌬️ Тыныс алу
             </button>
-
-
             <button class="menu-button"
                 onclick="openSection('articulation', this)">
-
-                <span class="menu-number">02</span>
-                <span>👄 Артикуляция</span>
-
+                👄 Артикуляция
             </button>
-
-
             <button class="menu-button"
                 onclick="openSection('vocabulary', this)">
-
-                <span class="menu-number">03</span>
-                <span>📚 Сөздік қор</span>
-
+                📚 Сөздік қор
             </button>
-
-
             <button class="menu-button"
                 onclick="openSection('understanding', this)">
-
-                <span class="menu-number">04</span>
-                <span>🧠 Сөйлеуді түсіну</span>
-
+                👂 Сөйлеуді түсіну
             </button>
-
-
             <button class="menu-button"
                 onclick="openSection('speech', this)">
-
-                <span class="menu-number">05</span>
-                <span>💬 Сөйлеуді қалыптастыру</span>
-
+                🗣️ Сөйлеуді қалыптастыру
             </button>
-
-
             <button class="menu-button"
                 onclick="openSection('reading', this)">
-
-                <span class="menu-number">06</span>
-                <span>✍️ Оқу және жазу</span>
-
+                📖 Оқу және жазу
             </button>
-
-
             <button class="menu-button"
                 onclick="openSection('rhythm', this)">
-
-                <span class="menu-number">07</span>
-                <span>🎵 Логоритмика</span>
-
+                🎵 Логоритмика
             </button>
-
-
             <button class="menu-button"
                 onclick="openSection('results', this)">
-
-                <span class="menu-number">08</span>
-                <span>🏆 Нәтижелер</span>
-
+                🏆 Нәтижелер
             </button>
-
-
-            <div class="sidebar-footer">
-
-                <span>✦ АФАЗИЯ ✦</span>
-
-                <small>
-                    СӨЙЛЕУДІ ҚАЛПЫНА КЕЛТІРУ
-                </small>
-
-            </div>
-
         </aside>
-
-
-        <!-- =================================
-             4. ОРТАЛЫҚ ЖҰМЫС АЙМАҒЫ
-        ================================= -->
-
+        <!-- НЕГІЗГІ БӨЛІМ -->
         <main class="workspace">
-
-
-            <!-- ЖОҒАРҒЫ АҚПАРАТ -->
-
-            <div class="workspace-top">
-
-                <div>
-
-                    <span class="workspace-label">
-                        ҚОШ КЕЛДІҢІЗ!
-                    </span>
-
-                    <h2>
-                        СӨЙЛЕУ ӘЛЕМІНЕ САЯХАТ
-                    </h2>
-
-                </div>
-
-                <div class="workspace-symbol">
-                    ✦
-                </div>
-
-            </div>
-
-
-            <!-- =================================
-                 5. БАСТАПҚЫ ОЙЫН КАРТАЛАРЫ
-            ================================= -->
-
             <div id="welcome" class="welcome-card">
-
-                <div class="welcome-decoration">
-                    ✨
-                </div>
-
-                <span class="welcome-label">
-                    СІЗДІҢ ЖАҢА САЯХАТЫҢЫЗ БАСТАЛАДЫ
-                </span>
-
-                <h2>
-                    Сөйлеу әлеміне қош келдіңіз!
-                </h2>
-
-                <p class="welcome-description">
-                    Әр әлем — жаңа мүмкіндік!
-                </p>
-
+                <span class="welcome-icon">✦</span>
+                <h1>Сөйлеу әлеміне қош келдіңіз!</h1>
                 <p>
-                    Өзіңізге қажетті бағытты таңдап,
-                    логопедиялық жұмыс әлеміне саяхат жасаңыз.
+                    Өзіңізге қажетті жаттығу бағытын таңдаңыз.
+                    Әр бөлім сөйлеу дағдыларын дамытуға арналған.
                 </p>
-
-
-                <!-- ОЙЫН КАРТАЛАРЫ -->
-
                 <div class="world-grid">
-
-
                     <div class="world-card"
-                        onclick="openSection('breathing', document.querySelectorAll('.menu-button')[0])">
-
-                        <span>🌬️</span>
-
+                        onclick="openSection('breathing')">
+                        <div class="world-icon">🌬️</div>
                         <h3>Тыныс алу</h3>
-
-                        <small>Тыныс әлемі</small>
-
-                        <div class="card-level">
-                            01 • ӘЛЕМ
-                        </div>
-
+                        <p>Тыныс жаттығулары</p>
                     </div>
-
-
                     <div class="world-card"
-                        onclick="openSection('articulation', document.querySelectorAll('.menu-button')[1])">
-
-                        <span>👄</span>
-
+                        onclick="openSection('articulation')">
+                        <div class="world-icon">👄</div>
                         <h3>Артикуляция</h3>
-
-                        <small>Қозғалыс әлемі</small>
-
-                        <div class="card-level">
-                            02 • ӘЛЕМ
-                        </div>
-
+                        <p>Артикуляциялық жаттығулар</p>
                     </div>
-
-
                     <div class="world-card"
-                        onclick="openSection('vocabulary', document.querySelectorAll('.menu-button')[2])">
-
-                        <span>📚</span>
-
+                        onclick="openSection('vocabulary')">
+                        <div class="world-icon">📚</div>
                         <h3>Сөздік қор</h3>
-
-                        <small>Сөздер әлемі</small>
-
-                        <div class="card-level">
-                            03 • ӘЛЕМ
-                        </div>
-
+                        <p>Сөздерді дамыту</p>
                     </div>
-
-
                     <div class="world-card"
-                        onclick="openSection('understanding', document.querySelectorAll('.menu-button')[3])">
-
-                        <span>🧠</span>
-
+                        onclick="openSection('understanding')">
+                        <div class="world-icon">👂</div>
                         <h3>Сөйлеуді түсіну</h3>
-
-                        <small>Түсіну әлемі</small>
-
-                        <div class="card-level">
-                            04 • ӘЛЕМ
-                        </div>
-
+                        <p>Тыңдау және түсіну</p>
                     </div>
-
-
                     <div class="world-card"
-                        onclick="openSection('speech', document.querySelectorAll('.menu-button')[4])">
-
-                        <span>💬</span>
-
+                        onclick="openSection('speech')">
+                        <div class="world-icon">🗣️</div>
                         <h3>Сөйлеуді қалыптастыру</h3>
-
-                        <small>Сөйлеу әлемі</small>
-
-                        <div class="card-level">
-                            05 • ӘЛЕМ
-                        </div>
-
+                        <p>Сөйлеу жаттығулары</p>
                     </div>
-
-
                     <div class="world-card"
-                        onclick="openSection('reading', document.querySelectorAll('.menu-button')[5])">
-
-                        <span>✍️</span>
-
+                        onclick="openSection('reading')">
+                        <div class="world-icon">📖</div>
                         <h3>Оқу және жазу</h3>
-
-                        <small>Әріптер әлемі</small>
-
-                        <div class="card-level">
-                            06 • ӘЛЕМ
-                        </div>
-
+                        <p>Жазбаша сөйлеу</p>
                     </div>
-
-
                     <div class="world-card"
-                        onclick="openSection('rhythm', document.querySelectorAll('.menu-button')[6])">
-
-                        <span>🎵</span>
-
+                        onclick="openSection('rhythm')">
+                        <div class="world-icon">🎵</div>
                         <h3>Логоритмика</h3>
-
-                        <small>Ырғақ әлемі</small>
-
-                        <div class="card-level">
-                            07 • ӘЛЕМ
-                        </div>
-
+                        <p>Ырғақ және қозғалыс</p>
                     </div>
-
-
                     <div class="world-card"
-                        onclick="openSection('results', document.querySelectorAll('.menu-button')[7])">
-
-                        <span>🏆</span>
-
+                        onclick="openSection('results')">
+                        <div class="world-icon">🏆</div>
                         <h3>Нәтижелер</h3>
-
-                        <small>Жетістіктер әлемі</small>
-
-                        <div class="card-level">
-                            08 • ӘЛЕМ
-                        </div>
-
+                        <p>Жаттығу көрсеткіштері</p>
                     </div>
-
-
                 </div>
-
             </div>
-
-
-            <!-- =================================
-                 6. БӨЛІМДЕРДІҢ ІШКІ АЙМАҒЫ
-            ================================= -->
-
-            <div id="section-content" style="display:none;">
-
-            </div>
-
-
-            <!-- =================================
-                 7. ТӨМЕНГІ ЖОЛАҚ
-            ================================= -->
-
-            <footer class="workspace-footer">
-
-                <span>✦ АФАЗИЯ ✦</span>
-
-                <span>
-                    СӨЙЛЕУДІ ҚАЛПЫНА КЕЛТІРУ ПЛАТФОРМАСЫ
-                </span>
-
-            </footer>
-
-
+            <!-- ТАПСЫРМАЛАР ШЫҒАТЫН ОРЫН -->
+            <div id="section-content" style="display:none;"></div>
         </main>
-
     </div>
-
 </section>
-
-
-<!-- =================================
-     8. JAVASCRIPT
-================================= -->
-
 <script src="script.js"></script>
-
 </body>
 </html>
