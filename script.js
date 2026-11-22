@@ -1,58 +1,128 @@
-// САЙТТЫҢ БАСТЫ БЕТІНЕН КАБИНЕТКЕ ӨТУ
+// ==================================
+// АФАЗИЯ — GAME PLATFORM
+// ==================================
+// 1. КАБИНЕТКЕ КІРУ
 function enterCabinet() {
     document.getElementById("home").style.display = "none";
     document.getElementById("cabinet").style.display = "block";
+    window.scrollTo(0, 0);
 }
-// БӨЛІМДЕРДІҢ АҚПАРАТЫ
+// 2. БАСТЫ БЕТКЕ ҚАЙТУ
+function goHome() {
+    document.getElementById("cabinet").style.display = "none";
+    document.getElementById("home").style.display = "flex";
+    window.scrollTo(0, 0);
+}
+// 3. БӨЛІМДЕР
 const sections = {
     breathing: {
+        number: "01",
+        icon: "🌬️",
         title: "ТЫНЫС АЛУ",
-        description: "Бұл бөлім афазиясы бар ересектердің сөйлеу тынысын дамытуға арналған."
+        subtitle: "Тыныс алу әлемі",
+        description:
+            "Сөйлеу тынысын дамытуға және тыныс пен сөйлеу үйлесімділігін жетілдіруге арналған бөлім."
     },
     articulation: {
+        number: "02",
+        icon: "👄",
         title: "АРТИКУЛЯЦИЯ",
-        description: "Бұл бөлім артикуляциялық аппараттың қозғалысын жетілдіруге арналған."
+        subtitle: "Артикуляция әлемі",
+        description:
+            "Артикуляциялық аппараттың қимыл-қозғалысын дамытуға арналған бөлім."
     },
     vocabulary: {
+        number: "03",
+        icon: "📚",
         title: "СӨЗДІК ҚОР",
-        description: "Бұл бөлім сөздік қорды белсендіруге және сөздерді еске түсіруге арналған."
+        subtitle: "Сөздер қазынасы",
+        description:
+            "Сөздерді еске түсіру, атау және сөздік қорды белсендіруге арналған бөлім."
     },
     understanding: {
+        number: "04",
+        icon: "🧠",
         title: "СӨЙЛЕУДІ ТҮСІНУ",
-        description: "Бұл бөлім ауызша сөйлеуді қабылдау және түсіну қабілетін дамытуға арналған."
+        subtitle: "Түсіну әлемі",
+        description:
+            "Ауызша сөйлеуді қабылдау, сөздердің мағынасын түсіну қабілетін дамытуға арналған бөлім."
     },
     speech: {
+        number: "05",
+        icon: "💬",
         title: "СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ",
-        description: "Бұл бөлім сөздерді, сөйлемдерді және байланыстырып сөйлеуді дамытуға арналған."
+        subtitle: "Сөйлеу әлемі",
+        description:
+            "Сөздерді, сөйлемдерді және байланыстырып сөйлеуді қалыптастыруға арналған бөлім."
     },
     reading: {
+        number: "06",
+        icon: "✍️",
         title: "ОҚУ ЖӘНЕ ЖАЗУ",
-        description: "Бұл бөлім оқу және жазу дағдыларын қалпына келтіруге арналған."
+        subtitle: "Әріптер әлемі",
+        description:
+            "Оқу және жазу дағдыларын қалпына келтіруге арналған бөлім."
     },
     rhythm: {
+        number: "07",
+        icon: "🎵",
         title: "ЛОГОРИТМИКА",
-        description: "Бұл бөлім қозғалыс, ырғақ және сөйлеуді үйлестіруге арналған."
+        subtitle: "Ырғақ әлемі",
+        description:
+            "Қозғалыс, ырғақ және сөйлеу әрекетін үйлестіруге арналған бөлім."
     },
     results: {
+        number: "08",
+        icon: "🏆",
         title: "НӘТИЖЕЛЕР",
-        description: "Бұл бөлімде орындалған тапсырмалар мен жұмыс нәтижелері көрсетіледі."
+        subtitle: "Жетістіктер әлемі",
+        description:
+            "Орындалған тапсырмалар мен жинақталған нәтижелер көрсетілетін бөлім."
     }
 };
-// БӨЛІМДІ АШУ
-function openSection(sectionName) {
+// 4. БӨЛІМДІ АШУ
+function openSection(sectionName, button) {
     const section = sections[sectionName];
     if (!section) return;
-    // Қош келдіңіз бөлімін жасыру
+    // Бастапқы ақпаратты жасыру
     document.getElementById("welcome").style.display = "none";
-    // Таңдалған бөлімнің ақпаратын көрсету
-    document.getElementById("section-content").innerHTML = `
-        <h2>${section.title}</h2>
-        <p>${section.description}</p>
-    `;
-    // Белсенді батырманы белгілеу
-    const buttons = document.querySelectorAll(".sidebar button");
-    buttons.forEach(button => {
-        button.classList.remove("active");
+    // Бұрынғы бөлімді жасыру
+    const content = document.getElementById("section-content");
+    content.style.display = "block";
+    // Барлық батырмалардың белсенділігін алып тастау
+    document.querySelectorAll(".menu-button").forEach(btn => {
+        btn.classList.remove("active");
     });
-    event.currentTarget.classList.add("active");
+    // Таңдалған батырманы белгілеу
+    button.classList.add("active");
+    // Жаңа бөлімді көрсету
+    content.innerHTML = `
+        <div class="game-section">
+            <div class="game-icon">
+                ${section.icon}
+            </div>
+            <span class="game-number">
+                ${section.number} • ЛОГОПЕДИЯЛЫҚ БӨЛІМ
+            </span>
+            <h2>${section.title}</h2>
+            <div class="game-line"></div>
+            <h3>${section.subtitle}</h3>
+            <p>${section.description}</p>
+            <div class="coming-soon">
+                <span>✦</span>
+                <div>
+                    <strong>БӨЛІМ ДАЙЫНДАЛУ ҮСТІНДЕ</strong>
+                    <small>Оқу материалдары мен тапсырмалар кейін қосылады.</small>
+                </div>
+            </div>
+        </div>
+    `;
+    // Анимация
+    content.classList.remove("section-animation");
+    void content.offsetWidth;
+    content.classList.add("section-animation");
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
