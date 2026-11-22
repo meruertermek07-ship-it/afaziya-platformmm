@@ -1,7 +1,3 @@
-// =============================================
-// АФАЗИЯ — НЕГІЗГІ БАҒДАРЛАМАНЫ БАСҚАРУ
-// =============================================
-
 document.addEventListener(“DOMContentLoaded”, function () {
 const home = document.getElementById(“home”);
 const cabinet = document.getElementById(“cabinet”);
@@ -11,10 +7,7 @@ if (cabinet) cabinet.style.display = "none";
 
 });
 
-// =============================================
-// БАҒДАРЛАМАҒА КІРУ
-// =============================================
-
+// Бағдарламаға кіру
 function enterCabinet() {
 const home = document.getElementById(“home”);
 const cabinet = document.getElementById(“cabinet”);
@@ -22,123 +15,66 @@ const cabinet = document.getElementById(“cabinet”);
 if (home) home.style.display = "none";
 if (cabinet) cabinet.style.display = "block";
 showWelcome();
-window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-});
 
 }
 
-// =============================================
-// БАСТЫ БЕТКЕ ҚАЙТУ
-// =============================================
-
+// Басты бетке қайту
 function goHome() {
 const home = document.getElementById(“home”);
 const cabinet = document.getElementById(“cabinet”);
 
 if (cabinet) cabinet.style.display = "none";
 if (home) home.style.display = "flex";
-window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-});
 
 }
 
-// =============================================
-// БӨЛІМДЕР ТІЗІМІ
-// =============================================
-
+// Бөлімдер
 const sections = {
-
 breathing: {
-    title: "ТЫНЫС АЛУ",
-    icon: "🌬️",
-    description: "Сөйлеу тынысын дамытуға арналған жаттығулар.",
-    exercises: [
-        "Дұрыс тыныс алу",
-        "Ұзақ дем шығару",
-        "Ауа ағынын дамыту"
-    ]
+title: “ТЫНЫС АЛУ”,
+icon: “🌬”,
+description: “Дұрыс тыныс алу сөйлеу әрекетінің маңызды бөлігі.”
 },
+
 articulation: {
     title: "АРТИКУЛЯЦИЯ",
     icon: "👄",
-    description: "Ерін, тіл және жақ бұлшықеттерінің қозғалысын дамыту.",
-    exercises: [
-        "Ерін жаттығулары",
-        "Тіл жаттығулары",
-        "Жақ жаттығулары"
-    ]
+    description: "Сөйлеу мүшелерінің қимылын жаттықтыру."
 },
 vocabulary: {
     title: "СӨЗДІК ҚОР",
     icon: "📚",
-    description: "Сөздерді түсіну, еске түсіру және қолдану.",
-    exercises: [
-        "Заттарды атау",
-        "Суреттермен жұмыс",
-        "Сөздерді топтастыру"
-    ]
+    description: "Сөздерді тану, түсіну және атау."
 },
 understanding: {
     title: "СӨЙЛЕУДІ ТҮСІНУ",
-    icon: "👂",
-    description: "Сөздер мен сөйлемдердің мағынасын түсіну.",
-    exercises: [
-        "Сөзді түсіну",
-        "Нұсқауды орындау",
-        "Сөйлемді түсіну"
-    ]
+    icon: "🧠",
+    description: "Сөздер мен сөйлемдердің мағынасын түсіну."
 },
 speech: {
     title: "СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ",
-    icon: "🗣️",
-    description: "Сөз, сөз тіркесі және сөйлем құрастыру.",
-    exercises: [
-        "Буындарды айту",
-        "Сөздерді айту",
-        "Сөйлем құрастыру"
-    ]
+    icon: "🗣",
+    description: "Сөздер мен сөйлемдерді құрастыру."
 },
 reading: {
     title: "ОҚУ ЖӘНЕ ЖАЗУ",
-    icon: "📖",
-    description: "Оқу және жазу дағдыларын дамыту.",
-    exercises: [
-        "Әріптерді тану",
-        "Сөздерді оқу",
-        "Сөздерді жазу"
-    ]
+    icon: "✍️",
+    description: "Оқу және жазу дағдыларын жаттықтыру."
 },
 rhythm: {
     title: "ЛОГОРИТМИКА",
     icon: "🎵",
-    description: "Сөйлеу мен қозғалысты ырғақ арқылы үйлестіру.",
-    exercises: [
-        "Ырғақты қайталау",
-        "Қимылмен сөз айту",
-        "Музыкалық жаттығулар"
-    ]
+    description: "Қимыл, ырғақ және сөйлеуді үйлестіру."
 },
 results: {
     title: "НӘТИЖЕЛЕР",
     icon: "🏆",
-    description: "Орындалған жаттығулар мен жетістіктер.",
-    exercises: [
-        "Орындалған тапсырмалар",
-        "Жиналған ұпайлар",
-        "Жалпы прогресс"
-    ]
+    description: "Орындалған тапсырмалар мен жинақталған ұпайлар."
 }
 
 };
 
-// =============================================
-// БАСТАПҚЫ ЭКРАН
-// =============================================
-
+// Басты мәзірді көрсету
 function showWelcome() {
 const welcome = document.getElementById(“welcome”);
 const content = document.getElementById(“section-content”);
@@ -148,102 +84,91 @@ if (content) {
     content.style.display = "none";
     content.innerHTML = "";
 }
-document.querySelectorAll(".menu-button").forEach(button => {
+document.querySelectorAll(".menu-button").forEach(function (button) {
     button.classList.remove("active");
 });
-const firstButton = document.querySelector(".menu-button");
-if (firstButton) firstButton.classList.add("active");
 
 }
 
-// =============================================
-// БӨЛІМДІ АШУ
-// =============================================
-
+// Бөлімді ашу
 function openSection(sectionName, button = null) {
 const section = sections[sectionName];
 
-if (!section) {
-    console.error("Бөлім табылмады:", sectionName);
-    return;
-}
+if (!section) return;
 const welcome = document.getElementById("welcome");
 const content = document.getElementById("section-content");
 if (!content) return;
 if (welcome) welcome.style.display = "none";
 content.style.display = "block";
-// Белсенді мәзір батырмасын белгілеу
-document.querySelectorAll(".menu-button").forEach(item => {
+document.querySelectorAll(".menu-button").forEach(function (item) {
     item.classList.remove("active");
 });
 if (button) {
     button.classList.add("active");
 } else {
-    document.querySelectorAll(".menu-button").forEach(item => {
-        const clickText = item.getAttribute("onclick") || "";
-        if (clickText.includes("'" + sectionName + "'")) {
-            item.classList.add("active");
-        }
+    const matchingButton = Array.from(
+        document.querySelectorAll(".menu-button")
+    ).find(function (item) {
+        return item.getAttribute("onclick")?.includes(
+            "'" + sectionName + "'"
+        );
     });
+    if (matchingButton) matchingButton.classList.add("active");
 }
-// Жаттығулар тізімін дайындау
-let exerciseHTML = "";
-section.exercises.forEach((exercise, index) => {
-    exerciseHTML += `
-        <div class="game-card">
-            <div class="game-number">${index + 1}</div>
-            <div>
-                <h3>${exercise}</h3>
-                <p>Жаттығу мазмұны келесі кезеңде қосылады.</p>
-            </div>
-            <span class="coming-soon">ДАЙЫНДАЛУДА</span>
-        </div>
-    `;
-});
+if (sectionName === "results") {
+    showResults();
+    return;
+}
 content.innerHTML = `
     <div class="game-section">
-        <div class="game-icon">${section.icon}</div>
-        <h1>${section.title}</h1>
-        <div class="game-line"></div>
+        <h1>${section.icon} ${section.title}</h1>
         <p>${section.description}</p>
-        <div class="exercise-list">
-            ${exerciseHTML}
+        <div class="result-item">
+            <h3>ЖАТТЫҒУЛАР</h3>
+            <p>Бұл бөлімнің интерактивті тапсырмалары келесі кезеңде қосылады.</p>
         </div>
-        <button class="back-button" onclick="showWelcome()">
+        <button class="enter-button" onclick="showWelcome()">
             ← БӨЛІМДЕРГЕ ҚАЙТУ
         </button>
     </div>
 `;
-content.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-});
 
 }
 
-// =============================================
-// ЛОГОПЕД КАБИНЕТІНЕ ӨТУ
-// =============================================
+// Нәтижелер бөлімі
+function showResults() {
+const content = document.getElementById(“section-content”);
 
+const results = JSON.parse(
+    localStorage.getItem("aphasiaDiagnosticResults") || "[]"
+);
+const completed = results.reduce(function (sum, item) {
+    return sum + (Number(item.completed) || 0);
+}, 0);
+const points = results.reduce(function (sum, item) {
+    return sum + (Number(item.score) || 0);
+}, 0);
+content.innerHTML = `
+    <div class="game-section">
+        <h1>🏆 НӘТИЖЕЛЕР</h1>
+        <div class="result-item">
+            <h3>Орындалған тапсырмалар</h3>
+            <h2>${completed}</h2>
+        </div>
+        <div class="result-item">
+            <h3>Жиналған балл</h3>
+            <h2>${points}</h2>
+        </div>
+        <p>Диагностикалық тапсырмалар нәтижелері логопед кабинетінде сақталады.</p>
+        <button class="enter-button" onclick="showWelcome()">
+            ← ҚАЙТУ
+        </button>
+    </div>
+`;
+
+}
+
+// Логопед кабинетіне өту
 function openLogopedCabinet() {
-window.location.href = “cabinet.html”;
-}
-
-// =============================================
-// ҚАУІПСІЗ МӘТІН
-// =============================================
-
-function safeText(value) {
-return String(value ?? “”).replace(/[&<>”’]/g, character => {
-const symbols = {
-“&”: “&”,
-“<”: “<”,
-“>”: “>”,
-‘”’: “"”,
-“’”: “'”
-};
-
-    return symbols[character];
-});
-
+window.location.href = “./cabinet.html”;
 }
