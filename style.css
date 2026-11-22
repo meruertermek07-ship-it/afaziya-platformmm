@@ -1,13 +1,13 @@
-@import url(‘https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap’);
+@import url(‘https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap’);
 
 :root {
-–dark: #280707;
-–red: #680f12;
-–red-light: #9e2929;
-–gold: #d6ad60;
-–gold-light: #f5dfa4;
+–dark: #31090e;
+–red: #761923;
+–red-light: #a52a35;
+–gold: #d7ad55;
+–gold-light: #f2d58d;
 –cream: #fff8e9;
-–text: #4c1010;
+–text: #54151b;
 –white: #ffffff;
 }
 
@@ -20,176 +20,122 @@
 body {
 min-height: 100vh;
 background:
-radial-gradient(circle at top, #781a1a, #250606 75%);
-color: var(–gold-light);
+radial-gradient(circle at top right, #84232d, transparent 40%),
+linear-gradient(135deg, #26070b, #4b1018 55%, #24060a);
+color: var(–cream);
 font-family: ‘Nunito’, sans-serif;
 }
 
-/* =================================
-БАСТЫ БЕТ
-================================= */
+button,
+input,
+textarea,
+select {
+font: inherit;
+}
+
+button {
+cursor: pointer;
+transition: .25s ease;
+}
+
+/* БАСТЫ БЕТ */
 
 .home-panel {
 min-height: 100vh;
 display: flex;
-flex-direction: column;
 justify-content: center;
 align-items: center;
 text-align: center;
-padding: 30px 20px;
-position: relative;
-overflow: hidden;
+padding: 25px;
 }
 
-.home-panel::before,
-.home-panel::after {
-content: “✦”;
-position: absolute;
-color: var(–gold);
-font-size: 100px;
-opacity: 0.15;
+.home-content {
+max-width: 750px;
+padding: 55px 30px;
+border: 1px solid var(–gold);
+border-radius: 30px;
+background: linear-gradient(145deg, #5c151e, #30090e);
+box-shadow: 0 20px 60px #0007;
 }
 
-.home-panel::before {
-top: 10%;
-left: 10%;
-}
-
-.home-panel::after {
-bottom: 10%;
-right: 10%;
-}
-
-.home-label {
-color: var(–gold);
-letter-spacing: 5px;
-font-size: 13px;
-margin-bottom: 25px;
-}
-
-.home-panel h1 {
+.home-logo,
+.logo {
 font-family: ‘Cinzel’, serif;
-font-size: clamp(55px, 12vw, 110px);
-letter-spacing: 12px;
 color: var(–gold-light);
-text-shadow: 0 5px 25px #000;
+font-size: 25px;
+font-weight: 800;
+letter-spacing: 4px;
 }
 
-.home-line {
-width: 180px;
-height: 2px;
-background: linear-gradient(
-90deg,
-transparent,
-var(–gold),
-transparent
-);
-margin: 25px 0;
-}
-
-.home-panel h2 {
+.home-content h1 {
 font-family: ‘Cinzel’, serif;
-font-size: clamp(17px, 3vw, 25px);
-margin-bottom: 20px;
-}
-
-.home-panel p {
-max-width: 650px;
-line-height: 1.8;
-color: #ead8b4;
-font-size: 16px;
-}
-
-.home-footer {
-margin-top: 70px;
+font-size: clamp(42px, 8vw, 75px);
 color: var(–gold);
-letter-spacing: 3px;
-font-size: 11px;
+margin: 25px 0;
+letter-spacing: 8px;
 }
 
-/* =================================
-НЕГІЗГІ БАТЫРМАЛАР
-================================= */
-
-button {
-font-family: ‘Nunito’, sans-serif;
-cursor: pointer;
-transition: 0.3s ease;
+.home-content p {
+font-size: 18px;
+line-height: 1.8;
+color: #f8e9c7;
+margin-bottom: 35px;
 }
+
+/* БАТЫРМАЛАР */
 
 .enter-button,
 .cabinet-button,
 .back-button {
-background: linear-gradient(
-135deg,
-#e6c477,
-#b78232
-);
-color: #390707;
-border: 1px solid #ffe5a6;
+border: 1px solid var(–gold);
 border-radius: 12px;
-padding: 15px 28px;
-font-size: 14px;
+background: linear-gradient(135deg, #d7ad55, #a87927);
+color: #3b0a10;
+padding: 14px 24px;
 font-weight: 900;
 letter-spacing: 1px;
-box-shadow: 0 6px 20px #0005;
-}
-
-.enter-button {
-margin-top: 35px;
 }
 
 .enter-button:hover,
 .cabinet-button:hover,
 .back-button:hover {
-transform: translateY(-4px);
-box-shadow: 0 10px 25px #0007;
+transform: translateY(-3px);
+box-shadow: 0 8px 20px #0005;
 }
 
-/* =================================
-ЖОҒАРҒЫ БӨЛІК
-================================= */
+/* ЖОҒАРҒЫ БӨЛІК */
 
-.cabinet-header {
+.main-header {
 min-height: 85px;
-padding: 15px 35px;
+padding: 15px 30px;
 display: flex;
-align-items: center;
 justify-content: space-between;
+align-items: center;
 gap: 15px;
 flex-wrap: wrap;
-background: linear-gradient(
-90deg,
-#240505,
-#641010,
-#240505
-);
-border-bottom: 1px solid var(–gold);
-box-shadow: 0 5px 20px #0005;
+border-bottom: 1px solid #c69b4360;
+background: #25070bdc;
+box-shadow: 0 5px 20px #0004;
 }
 
 .logo {
-color: var(–gold);
-font-family: ‘Cinzel’, serif;
-font-size: 22px;
-font-weight: 800;
 cursor: pointer;
 }
 
 .header-title {
-color: var(–gold-light);
+color: var(–gold);
 font-family: ‘Cinzel’, serif;
-font-size: 25px;
-letter-spacing: 5px;
+font-weight: 800;
+font-size: 22px;
+letter-spacing: 3px;
+text-align: center;
 }
 
 .cabinet-button {
-padding: 12px 18px;
+padding: 12px 17px;
 }
 
-/* =================================
-НЕГІЗГІ ОРНАЛАСУ
-================================= */
+/* НЕГІЗГІ МАКЕТ */
 
 .main-layout {
 display: grid;
@@ -197,381 +143,317 @@ grid-template-columns: 260px 1fr;
 min-height: calc(100vh - 85px);
 }
 
-/* =================================
-СОЛ ЖАҚ МӘЗІР
-================================= */
-
 .sidebar {
-background: linear-gradient(
-180deg,
-#360808,
-#210505
-);
-border-right: 1px solid #bd9149;
 padding: 25px 15px;
+background: #29080e;
+border-right: 1px solid #c69b4350;
 }
 
-.sidebar h3 {
+.sidebar h2 {
 color: var(–gold);
-font-family: ‘Cinzel’, serif;
-font-size: 15px;
 text-align: center;
-letter-spacing: 2px;
 margin-bottom: 25px;
+font-family: ‘Cinzel’, serif;
 }
 
 .menu-button {
 display: block;
 width: 100%;
 text-align: left;
-margin-bottom: 10px;
-padding: 14px;
-color: #f5dfb2;
-background: #ffffff08;
-border: 1px solid #d6ad6030;
-border-radius: 11px;
-font-size: 14px;
-font-weight: 700;
+padding: 15px;
+margin-bottom: 12px;
+border-radius: 12px;
+border: 1px solid #a8792760;
+background: #52121b;
+color: var(–cream);
+font-weight: 800;
 }
 
 .menu-button:hover,
 .menu-button.active {
-background: linear-gradient(
-90deg,
-#8c2525,
-#551010
-);
-border-color: var(–gold);
-color: var(–gold-light);
+background: linear-gradient(135deg, #d7ad55, #a87927);
+color: #31090e;
 transform: translateX(4px);
 }
 
-/* =================================
-ОҢ ЖАҚ НЕГІЗГІ БӨЛІМ
-================================= */
+/* НЕГІЗГІ МАЗМҰН */
 
-.workspace {
-padding: 35px;
+.main-content {
+padding: 30px;
 min-width: 0;
 }
 
-.welcome-card {
+.welcome-box {
+padding: 35px 25px;
 text-align: center;
-padding: 35px 20px;
+border: 1px solid var(–gold);
+border-radius: 22px;
+background: linear-gradient(135deg, #741b27, #3a0b12);
+box-shadow: 0 12px 30px #0004;
 }
 
-.welcome-icon {
-font-size: 55px;
-color: var(–gold);
-}
-
-.welcome-card h1 {
-font-family: ‘Cinzel’, serif;
-font-size: clamp(25px, 4vw, 38px);
+.welcome-box h1 {
 color: var(–gold-light);
+font-family: ‘Cinzel’, serif;
 margin: 15px 0;
 }
 
-.welcome-card > p {
-color: #e7d2ae;
+.welcome-box p {
 line-height: 1.8;
-max-width: 650px;
-margin: 0 auto 35px;
 }
 
-/* =================================
-ОЙЫН КАРТОЧКАЛАРЫ
-================================= */
+.welcome-icon {
+font-size: 45px;
+}
+
+.section-heading {
+color: var(–gold);
+font-family: ‘Cinzel’, serif;
+margin: 35px 0 20px;
+text-align: center;
+}
+
+/* КАРТОЧКАЛАР */
 
 .world-grid {
 display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 22px;
-max-width: 1000px;
-margin: auto;
+grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+gap: 20px;
+margin-top: 25px;
 }
 
 .world-card {
-padding: 27px 18px;
-background: linear-gradient(
-145deg,
-#fff8e9,
-#ead4a6
-);
+display: block;
+width: 100%;
+padding: 25px 18px;
 border: 1px solid var(–gold);
-border-radius: 20px;
+border-radius: 18px;
+background: linear-gradient(145deg, #fff8e9, #f1dfb9);
 color: var(–text);
-cursor: pointer;
+text-align: center;
 box-shadow: 0 8px 20px #0003;
-transition: 0.3s;
 }
 
 .world-card:hover {
-transform: translateY(-7px);
+transform: translateY(-6px);
 box-shadow: 0 15px 30px #0005;
 }
 
-.world-icon {
+.world-card span {
+display: block;
 font-size: 42px;
-margin-bottom: 15px;
+margin-bottom: 12px;
 }
 
 .world-card h3 {
 font-size: 17px;
-margin-bottom: 8px;
+margin-bottom: 10px;
+font-weight: 900;
 }
 
 .world-card p {
-font-size: 13px;
-color: #805050;
+font-size: 14px;
+line-height: 1.5;
 }
 
-/* =================================
-БӨЛІМ ІШІНДЕГІ КАРТОЧКАЛАР
-================================= */
+/* БӨЛІМДЕР */
 
 .game-section {
-background: linear-gradient(
-145deg,
-#fff8e9,
-#f0dfbb
-);
-color: var(–text);
-border: 1px solid var(–gold);
-border-radius: 22px;
 padding: 30px;
-box-shadow: 0 10px 30px #0004;
+border: 1px solid var(–gold);
+border-radius: 20px;
+background: linear-gradient(145deg, #fff8e9, #f1dfb9);
+color: var(–text);
+box-shadow: 0 12px 30px #0004;
 }
 
-.game-section h1 {
-font-family: ‘Cinzel’, serif;
-text-align: center;
-margin: 15px 0;
+.game-section h1,
+.game-section h2,
+.game-section h3 {
+margin-bottom: 15px;
 }
 
-.game-icon {
-text-align: center;
-font-size: 55px;
-}
-
-.game-line {
-height: 2px;
-max-width: 180px;
-margin: 20px auto;
-background: var(–gold);
-}
-
-.game-section > p {
-text-align: center;
+.game-section p {
 line-height: 1.7;
-margin-bottom: 25px;
 }
 
-.exercise-list {
-display: grid;
-gap: 13px;
+/* КАБИНЕТ */
+
+.cabinet-container,
+.diagnostics-container {
+max-width: 1150px;
+margin: 30px auto;
+padding: 20px;
 }
 
-.game-card {
-display: flex;
-align-items: center;
-gap: 15px;
-padding: 17px;
-background: #ffffff;
-border: 1px solid #dfc58f;
-border-radius: 13px;
-}
-
-.game-number {
-width: 38px;
-height: 38px;
-flex-shrink: 0;
-display: grid;
-place-items: center;
-background: var(–red);
-color: var(–gold-light);
-border-radius: 50%;
-font-weight: 900;
-}
-
-.game-card h3 {
-font-size: 15px;
-}
-
-.game-card p {
-font-size: 12px;
-margin-top: 5px;
-}
-
-.coming-soon {
-margin-left: auto;
-font-size: 10px;
-font-weight: 900;
-color: #98712d;
-white-space: nowrap;
-}
-
-.back-button {
-margin-top: 25px;
-}
-
-/* =================================
-ЛОГОПЕД КАБИНЕТІНЕ ОРТАҚ СТИЛЬ
-================================= */
-
-#patientContent,
-.task-area,
-.diagnostic-result {
+.patient-form {
+margin: 30px 0;
+padding: 30px;
+border: 1px solid var(–gold);
+border-radius: 20px;
 background: var(–cream);
 color: var(–text);
-border: 1px solid var(–gold);
-border-radius: 18px;
-padding: 25px;
+}
+
+.patient-form h2 {
+margin-bottom: 20px;
+color: var(–red);
+}
+
+.patient-form label {
+display: block;
+margin: 15px 0 7px;
+font-weight: 900;
+}
+
+.patient-form input,
+.patient-form textarea {
+width: 100%;
+padding: 13px;
+border: 1px solid #c69b43;
+border-radius: 10px;
+background: white;
+color: var(–text);
+outline: none;
+}
+
+.patient-form input:focus,
+.patient-form textarea:focus {
+border-color: var(–red);
+box-shadow: 0 0 0 3px #a52a3520;
+}
+
+.patient-form .enter-button {
 margin-top: 20px;
 }
 
+/* НӘТИЖЕ */
+
 .result-item {
-background: #fff;
-border: 1px solid #dfc58f;
-padding: 18px;
-border-radius: 13px;
 margin: 15px 0;
+padding: 20px;
+border-radius: 14px;
+border: 1px solid #c69b43;
+background: #fffdf6;
+color: var(–text);
 }
 
 .result-item h3 {
-margin-bottom: 10px;
+color: var(–red);
+margin-bottom: 12px;
 }
 
-/* =================================
-КЕСТЕЛЕР
-================================= */
-
-table {
-width: 100%;
-border-collapse: collapse;
+.result-item p {
+margin: 7px 0;
 }
 
-th,
-td {
-padding: 12px;
-border: 1px solid #d9bd83;
+.result-list {
+display: grid;
+gap: 12px;
 }
 
-th {
-background: #6b1515;
+/* ДИАГНОСТИКА */
+
+.diagnostic-heading {
 color: var(–gold-light);
 }
 
-td {
-background: #fff;
+.diagnostic-card {
+font-family: ‘Nunito’, sans-serif;
 }
 
-/* =================================
-ФОРМАЛАР
-================================= */
+#taskArea,
+#diagnosticResult {
+margin-top: 25px;
+padding: 25px;
+border: 1px solid var(–gold);
+border-radius: 20px;
+background: var(–cream);
+color: var(–text);
+}
 
-input,
-textarea,
-select {
+#taskArea h2,
+#diagnosticResult h2 {
+color: var(–red);
+margin-bottom: 20px;
+}
+
+.diagnostic-select {
+background: var(–cream);
+color: var(–text);
+}
+
+/* ҚОРЫТЫНДЫ */
+
+#speechConclusion {
 width: 100%;
-padding: 13px;
-border: 1px solid #c99b55;
-border-radius: 9px;
-font-family: inherit;
-font-size: 15px;
-margin: 7px 0 15px;
-}
-
-label {
-display: block;
-font-weight: 800;
-margin-top: 12px;
-}
-
-textarea {
-min-height: 100px;
+padding: 15px;
+margin: 12px 0;
+border: 1px solid var(–gold);
+border-radius: 10px;
 resize: vertical;
+font-family: inherit;
 }
 
-/* =================================
-АНИМАЦИЯ
-================================= */
+/* ҰЯЛЫ ТЕЛЕФОНҒА БЕЙІМДЕУ */
 
-@keyframes fadeIn {
-from {
-opacity: 0;
-transform: translateY(15px);
-}
-
-to {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-}
-
-.game-section,
-.world-card,
-.welcome-card {
-animation: fadeIn 0.5s ease;
-}
-
-/* =================================
-ТЕЛЕФОНҒА БЕЙІМДЕУ
-================================= */
-
-@media (max-width: 850px) {
-
+@media (max-width: 800px) {
 .main-layout {
-    grid-template-columns: 1fr;
+grid-template-columns: 1fr;
 }
+
 .sidebar {
     border-right: none;
-    border-bottom: 1px solid var(--gold);
+    border-bottom: 1px solid #c69b4350;
 }
-.sidebar h3 {
+.sidebar h2 {
     margin-bottom: 15px;
 }
 .menu-button {
     display: inline-block;
     width: auto;
-    margin: 4px;
+    margin: 5px;
 }
-.workspace {
-    padding: 18px;
+.main-content {
+    padding: 15px;
 }
-.cabinet-header {
+.main-header {
     justify-content: center;
     text-align: center;
 }
-
-}
-
-@media (max-width: 550px) {
-
-.world-grid {
-    grid-template-columns: 1fr;
-}
-.home-panel h1 {
-    letter-spacing: 5px;
-}
-.home-label {
-    letter-spacing: 2px;
-}
-.game-section {
-    padding: 18px;
-}
-.game-card {
-    flex-wrap: wrap;
-}
-.coming-soon {
-    margin-left: 53px;
-}
 .header-title {
-    font-size: 20px;
+    width: 100%;
+    order: 3;
+    font-size: 18px;
 }
-.cabinet-button {
-    font-size: 11px;
+.world-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.world-card {
+    padding: 18px 10px;
+}
+.cabinet-container,
+.diagnostics-container {
+    padding: 12px;
+}
+
+}
+
+@media (max-width: 430px) {
+.world-grid {
+grid-template-columns: 1fr;
+}
+
+.home-content {
+    padding: 35px 18px;
+}
+.home-content p {
+    font-size: 15px;
+}
+.game-section,
+.patient-form {
+    padding: 18px;
 }
 
 }
