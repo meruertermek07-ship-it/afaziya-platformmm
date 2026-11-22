@@ -3,187 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Афазия диагностикасы | Тілашар</title>
+    <title>ТІЛАШАР | Афазия диагностикасы</title>
     <link rel="stylesheet" href="style.css">
-<style>
-    .diagnostic-page {
-        max-width: 1150px;
-        margin: 35px auto;
-        padding: 20px;
-    }
-    .diagnostic-header {
-        background: linear-gradient(135deg, #4b0808, #8d2020);
-        color: #f5d78e;
-        padding: 30px;
-        border: 1px solid #c99b45;
-        border-radius: 22px;
+    <style>
+        .diagnostics-container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+    .diagnostic-heading {
         text-align: center;
-    }
-    .diagnostic-header h1 {
-        font-size: 30px;
-        margin-bottom: 10px;
-    }
-    .patient-name {
-        margin: 20px 0;
-        padding: 18px;
-        background: #fff8e9;
-        border: 1px solid #c99b45;
-        border-radius: 15px;
-        color: #5b1010;
-        font-weight: bold;
-    }
-    .assessment-selector {
-        margin: 20px 0;
-        padding: 25px;
-        background: #fff8e9;
-        border: 1px solid #c99b45;
-        border-radius: 18px;
-        color: #541010;
-    }
-    .assessment-selector select {
-        display: block;
-        width: 100%;
-        padding: 14px;
-        margin: 12px 0;
-        border: 1px solid #c99b45;
-        border-radius: 10px;
-        font-size: 16px;
+        color: #e7bd69;
+        margin-bottom: 25px;
     }
     .diagnostic-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 18px;
-        margin: 25px 0;
     }
     .diagnostic-card {
         background: #fff8e9;
-        border: 1px solid #c99b45;
+        border: 2px solid #c69b43;
         border-radius: 18px;
-        padding: 22px;
+        padding: 25px 15px;
         text-align: center;
-        color: #541010;
+        cursor: pointer;
+        color: #65151c;
+        transition: .25s;
+    }
+    .diagnostic-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px #0003;
+    }
+    .diagnostic-card span {
+        font-size: 38px;
     }
     .diagnostic-card h3 {
-        margin: 10px 0;
+        margin: 12px 0;
     }
-    .diagnostic-card button,
-    .back-button {
-        background: linear-gradient(135deg, #690e0e, #a62b25);
-        color: #f8df9e;
-        border: 1px solid #c99b45;
-        padding: 12px 20px;
+    .diagnostic-card p {
+        font-size: 14px;
+    }
+    .diagnostic-card button {
+        background: #861e27;
+        color: white;
+        border: none;
         border-radius: 10px;
+        padding: 11px 20px;
+        margin-top: 10px;
         cursor: pointer;
-        font-weight: bold;
-        margin-top: 12px;
     }
-    .task-area,
-    .diagnostic-result {
+    .diagnostic-select {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 13px;
+        border-radius: 10px;
+        border: 1px solid #c69b43;
+        font-size: 16px;
+    }
+    #taskArea, #diagnosticResult {
         background: #fff8e9;
-        color: #541010;
+        color: #54151b;
         padding: 25px;
-        margin-top: 22px;
-        border: 1px solid #c99b45;
+        margin-top: 25px;
         border-radius: 18px;
     }
-    .task-area button {
-        margin: 7px;
-        padding: 12px 18px;
-        border: 1px solid #c99b45;
+    .back-button {
+        padding: 12px 20px;
+        background: #861e27;
+        color: white;
+        border: none;
         border-radius: 10px;
         cursor: pointer;
+        margin: 10px 0;
     }
     @media(max-width:600px) {
-        .diagnostic-page {
+        .diagnostics-container {
             padding: 12px;
-        }
-        .diagnostic-header h1 {
-            font-size: 23px;
         }
     }
 </style>
 </head>
 <body>
-<div class="diagnostic-page">
-<header class="diagnostic-header">
-    <h1>ТІЛАШАР</h1>
-    <h2>АФАЗИЯ ДИАГНОСТИКАСЫ</h2>
-    <p>Сөйлеу қызметін кешенді бағалау жүйесі</p>
+<header class="main-header">
+    <div class="logo" onclick="window.location.href='index.html'">
+        ТІЛАШАР
+    </div>
+    <div class="header-title">АФАЗИЯ ДИАГНОСТИКАСЫ</div>
+    <button class="cabinet-button"
+        onclick="window.location.href='cabinet.html'">
+        ← КАБИНЕТ
+    </button>
 </header>
-<div class="patient-name" id="patientName">
-    Пациент туралы ақпарат жүктелуде...
-</div>
-<section class="assessment-selector">
-    <h2>Диагностика кезеңі</h2>
+<main class="diagnostics-container">
+    <h1 class="diagnostic-heading">
+        🧠 СӨЙЛЕУ ҚАБІЛЕТІН ДИАГНОСТИКАЛАУ
+    </h1>
+    <div class="result-item">
+        <h3>ПАЦИЕНТ</h3>
+        <p id="patientName">Пациент мәліметтері жүктелуде...</p>
+    </div>
     <label for="assessmentType">
-        Бағалау түрін таңдаңыз:
+        <b>Тексеру түрін таңдаңыз:</b>
     </label>
-    <select id="assessmentType">
+    <select id="assessmentType" class="diagnostic-select">
         <option value="initial">Бастапқы диагностика</option>
         <option value="repeat">Қайталама диагностика</option>
     </select>
-    <p>
-        Бастапқы диагностика пациенттің алғашқы сөйлеу жағдайын
-        бағалауға арналған.
-    </p>
-    <p>
-        Қайталама диагностика түзету жұмыстарының нәтижесін
-        салыстыруға арналған.
-    </p>
-</section>
-<h2 style="color:#f1d18b;">Диагностикалық бағыттар</h2>
-<div class="diagnostic-grid">
-    <div class="diagnostic-card">
-        <h3>Сөйлеуді түсіну</h3>
-        <p>Сөздер мен нұсқауларды түсіну қабілетін бағалау.</p>
-        <button onclick="startCategory('understanding')">
-            Бастау
-        </button>
+    <h2 class="diagnostic-heading">ДИАГНОСТИКАЛЫҚ БАҒЫТТАР</h2>
+    <div class="diagnostic-grid">
+        <div class="diagnostic-card">
+            <span>👂</span>
+            <h3>Сөйлеуді түсіну</h3>
+            <p>Сөздер мен нұсқауларды түсіну қабілеті</p>
+            <button onclick="startCategory('understanding')">
+                БАСТАУ
+            </button>
+        </div>
+        <div class="diagnostic-card">
+            <span>🖼️</span>
+            <h3>Заттарды атау</h3>
+            <p>Суреттегі заттардың атауын анықтау</p>
+            <button onclick="startCategory('naming')">
+                БАСТАУ
+            </button>
+        </div>
+        <div class="diagnostic-card">
+            <span>🗣️</span>
+            <h3>Қайталау</h3>
+            <p>Сөздер мен сөйлемдерді қайталау</p>
+            <button onclick="startCategory('repetition')">
+                БАСТАУ
+            </button>
+        </div>
+        <div class="diagnostic-card">
+            <span>📚</span>
+            <h3>Сөздік қор</h3>
+            <p>Сөздердің мағынасын ажырату</p>
+            <button onclick="startCategory('vocabulary')">
+                БАСТАУ
+            </button>
+        </div>
+        <div class="diagnostic-card">
+            <span>📖</span>
+            <h3>Оқу</h3>
+            <p>Сөздер мен сөйлемдерді оқу</p>
+            <button onclick="startCategory('reading')">
+                БАСТАУ
+            </button>
+        </div>
+        <div class="diagnostic-card">
+            <span>✍️</span>
+            <h3>Жазу</h3>
+            <p>Сөздер мен сөйлемдерді жазу</p>
+            <button onclick="startCategory('writing')">
+                БАСТАУ
+            </button>
+        </div>
     </div>
-    <div class="diagnostic-card">
-        <h3>Заттарды атау</h3>
-        <p>Заттардың атауын еске түсіру қабілетін бағалау.</p>
-        <button onclick="startCategory('naming')">
-            Бастау
-        </button>
-    </div>
-    <div class="diagnostic-card">
-        <h3>Қайталау</h3>
-        <p>Сөздер мен сөйлемдерді қайталау дағдысын бағалау.</p>
-        <button onclick="startCategory('repetition')">
-            Бастау
-        </button>
-    </div>
-    <div class="diagnostic-card">
-        <h3>Сөздік қор</h3>
-        <p>Сөздерді таңдау және қолдану дағдысын бағалау.</p>
-        <button onclick="startCategory('vocabulary')">
-            Бастау
-        </button>
-    </div>
-    <div class="diagnostic-card">
-        <h3>Оқу</h3>
-        <p>Оқу және оқылған ақпаратты түсіну дағдысын бағалау.</p>
-        <button onclick="startCategory('reading')">
-            Бастау
-        </button>
-    </div>
-    <div class="diagnostic-card">
-        <h3>Жазу</h3>
-        <p>Жазбаша сөйлеу дағдысын бағалау.</p>
-        <button onclick="startCategory('writing')">
-            Бастау
-        </button>
-    </div>
-</div>
-<section id="taskArea" class="task-area" style="display:none;">
-</section>
-<section id="diagnosticResult" class="diagnostic-result" style="display:none;">
-</section>
-<button class="back-button" onclick="location.href='cabinet.html'">
-    ← Логопед кабинетіне қайту
-</button>
-</div>
+    <section id="taskArea" style="display:none;"></section>
+    <section id="diagnosticResult" style="display:none;"></section>
+    <button class="back-button"
+        onclick="window.location.href='cabinet.html'">
+        ← ЛОГОПЕД КАБИНЕТІНЕ ҚАЙТУ
+    </button>
+</main>
 <script src="diagnostics.js"></script>
 </body>
 </html>
