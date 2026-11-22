@@ -1,141 +1,109 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>АФАЗИЯ | ТІЛАШАР</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>АФАЗИЯ | ТІЛАШАР</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- БАСТЫ БЕТ -->
+<!-- 1. БАСТЫ БЕТ -->
 <section id="home" class="home-panel">
-    <div class="home-content">
-        <div class="home-logo">✦ ТІЛАШАР ✦</div>
+<div class="home-content">
+    <div class="home-logo">✦ ТІЛАШАР ✦</div>
     <h1>АФАЗИЯ</h1>
-    <h2>Сөйлеуді қалпына келтіру бағдарламасы</h2>
-    <p>
-        Сөйлеу дағдыларын дамытуға,
-        қарым-қатынасты қалыптастыруға
-        және тілдік мүмкіндіктерді жетілдіруге арналған
-        интерактивті бағдарлама.
-    </p>
-    <button type="button" class="start-button" onclick="enterCabinet()">
-        БАҒДАРЛАМАҒА КІРУ →
+    <p>Сөйлеуді қалпына келтіру бағдарламасы</p>
+    <button type="button" class="start-button" onclick="enterProgram()">
+        КІРУ →
     </button>
 </div>
 </section>
-<!-- НЕГІЗГІ БАҒДАРЛАМА -->
-<section id="cabinet" style="display:none;">
+<!-- 2. БАҒДАРЛАМА -->
+<section id="program" style="display:none;">
+<!-- ЖОҒАРҒЫ БӨЛІК -->
 <header class="main-header">
     <div class="brand">✦ ТІЛАШАР</div>
     <h1>АФАЗИЯ</h1>
-    <button type="button" class="cabinet-button"
-        onclick="window.location.href='cabinet.html'">
+    <button class="cabinet-button" onclick="openLogopedCabinet()">
         🩺 ЛОГОПЕД КАБИНЕТІ
     </button>
 </header>
-<div class="main-layout">
-    <!-- МӘЗІР -->
-    <aside class="sidebar">
-        <h2>БАҒДАРЛАМА</h2>
-        <button class="menu-button" onclick="openSection('breathing', this)">
-            🌬️ Тыныс алу
+<!-- БӨЛІМДЕР -->
+<main class="program-container">
+    <div class="program-heading">
+        <h2>СӨЙЛЕУ ӘЛЕМІНЕ ҚОШ КЕЛДІҢІЗ!</h2>
+        <p>Өзіңізге қажетті бөлімді таңдаңыз</p>
+    </div>
+    <div class="world-grid">
+        <button class="world-card" onclick="openSection('breathing', this)">
+            <span>🌬️</span>
+            <h3>ТЫНЫС АЛУ</h3>
+            <p>Тыныс алу жаттығулары</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="openSection('articulation', this)">
-            👄 Артикуляция
+        <button class="world-card" onclick="openSection('articulation', this)">
+            <span>👄</span>
+            <h3>АРТИКУЛЯЦИЯ</h3>
+            <p>Артикуляциялық жаттығулар</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="openSection('vocabulary', this)">
-            📚 Сөздік қор
+        <button class="world-card" onclick="openSection('vocabulary', this)">
+            <span>📚</span>
+            <h3>СӨЗДІК ҚОР</h3>
+            <p>Сөздік қорды дамыту</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="openSection('understanding', this)">
-            🧠 Сөйлеуді түсіну
+        <button class="world-card" onclick="openSection('understanding', this)">
+            <span>🧠</span>
+            <h3>СӨЙЛЕУДІ ТҮСІНУ</h3>
+            <p>Сөзді тыңдау және түсіну</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="openSection('speech', this)">
-            💬 Сөйлеуді қалыптастыру
+        <button class="world-card" onclick="openSection('speech', this)">
+            <span>💬</span>
+            <h3>СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ</h3>
+            <p>Сөйлеу дағдыларын дамыту</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="openSection('reading', this)">
-            📖 Оқу және жазу
+        <button class="world-card" onclick="openSection('reading', this)">
+            <span>📖</span>
+            <h3>ОҚУ ЖӘНЕ ЖАЗУ</h3>
+            <p>Оқу және жазу тапсырмалары</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="openSection('logorhythmics', this)">
-            🎵 Логоритмика
+        <button class="world-card" onclick="openSection('logorhythmics', this)">
+            <span>🎵</span>
+            <h3>ЛОГОРИТМИКА</h3>
+            <p>Қимыл мен ырғақ жаттығулары</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="openSection('results', this)">
-            🏆 Нәтижелер
+        <button class="world-card" onclick="openSection('results', this)">
+            <span>🏆</span>
+            <h3>НӘТИЖЕЛЕР</h3>
+            <p>Жетістіктер мен көрсеткіштер</p>
+            <b>КІРУ →</b>
         </button>
-        <button class="menu-button" onclick="goHome()">
-            🏠 Басты бет
-        </button>
-    </aside>
-    <!-- НЕГІЗГІ МАЗМҰН -->
-    <main class="content-area">
-        <div id="welcome">
-            <div class="welcome-box">
-                <span>✦ ҚОШ КЕЛДІҢІЗ! ✦</span>
-                <h2>Сөйлеу әлеміне саяхат</h2>
-                <p>
-                    Өзіңізге қажетті жаттығу бағытын таңдаңыз.
-                    Әр тапсырманы орындап, нәтижелеріңізді бақылаңыз.
-                </p>
-            </div>
-            <div class="world-grid">
-                <button class="world-card" onclick="openSection('breathing')">
-                    🌬️
-                    <h3>Тыныс алу</h3>
-                    <p>Тыныс жаттығулары</p>
-                </button>
-                <button class="world-card" onclick="openSection('articulation')">
-                    👄
-                    <h3>Артикуляция</h3>
-                    <p>Сөйлеу мүшелеріне арналған жаттығулар</p>
-                </button>
-                <button class="world-card" onclick="openSection('vocabulary')">
-                    📚
-                    <h3>Сөздік қор</h3>
-                    <p>Сөздерді дамыту</p>
-                </button>
-                <button class="world-card" onclick="openSection('understanding')">
-                    🧠
-                    <h3>Сөйлеуді түсіну</h3>
-                    <p>Тыңдау және түсіну</p>
-                </button>
-                <button class="world-card" onclick="openSection('speech')">
-                    💬
-                    <h3>Сөйлеуді қалыптастыру</h3>
-                    <p>Сөйлеу дағдылары</p>
-                </button>
-                <button class="world-card" onclick="openSection('reading')">
-                    📖
-                    <h3>Оқу және жазу</h3>
-                    <p>Оқу мен жазу жаттығулары</p>
-                </button>
-                <button class="world-card" onclick="openSection('logorhythmics')">
-                    🎵
-                    <h3>Логоритмика</h3>
-                    <p>Қимыл және ырғақ</p>
-                </button>
-                <button class="world-card" onclick="openSection('results')">
-                    🏆
-                    <h3>Нәтижелер</h3>
-                    <p>Жетістіктерді бақылау</p>
-                </button>
-            </div>
-        </div>
-        <div id="section-content" style="display:none;"></div>
-    </main>
-</div>
+    </div>
+    <div id="section-content" style="display:none;"></div>
+    <button type="button" class="back-button" onclick="showProgramMenu()">
+        ← БӨЛІМДЕРГЕ ҚАЙТУ
+    </button>
+</main>
 </section>
 <script src="script.js"></script>
 <script>
-function enterCabinet() {
+function enterProgram() {
     document.getElementById('home').style.display = 'none';
-    document.getElementById('cabinet').style.display = 'block';
-    if (typeof showWelcome === 'function') {
-        showWelcome();
-    }
+    document.getElementById('program').style.display = 'block';
 }
-function goHome() {
-    document.getElementById('cabinet').style.display = 'none';
-    document.getElementById('home').style.display = 'flex';
+function openLogopedCabinet() {
+    window.location.href = 'cabinet.html';
+}
+function showProgramMenu() {
+    document.getElementById('section-content').style.display = 'none';
+    document.querySelector('.world-grid').style.display = 'grid';
+    document.querySelector('.program-heading').style.display = 'block';
+    document.querySelector('.back-button').style.display = 'none';
 }
 </script>
 </body>
