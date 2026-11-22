@@ -3,83 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ТІЛАШАР | Логопед кабинеті</title>
-    <link rel="stylesheet" href="style.css">
+<title>Логопед кабинеті | Тілашар</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    .cabinet-page {
+        width: 94%;
+        max-width: 1250px;
+        margin: 35px auto;
+    }
+    .cabinet-welcome {
+        text-align: center;
+        padding: 35px 20px;
+        margin-bottom: 30px;
+        background: linear-gradient(135deg, #4b101b, #210810);
+        border: 1px solid #e8bd67;
+        border-radius: 22px;
+    }
+    .cabinet-welcome h2 {
+        color: #ffe5a6;
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+    .cabinet-welcome p {
+        color: #fff8ed;
+        font-size: 17px;
+    }
+    .patient-form {
+        padding: 25px;
+        margin-bottom: 30px;
+        background: #321018;
+        border: 1px solid #a8792d;
+        border-radius: 20px;
+    }
+    .patient-form h3 {
+        color: #ffe5a6;
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .form-field label {
+        display: block;
+        color: #ffe5a6;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .form-field input,
+    .form-field textarea {
+        width: 100%;
+        padding: 13px;
+        border-radius: 9px;
+        border: 1px solid #e8bd67;
+        background: #fffaf1;
+        color: #241015;
+        font-size: 15px;
+    }
+    .cabinet-save {
+        margin-top: 20px;
+        padding: 14px 25px;
+        border: none;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #f3d58f, #c08b3b);
+        color: #350b12;
+        font-weight: 900;
+        cursor: pointer;
+    }
+    .cabinet-menu-title {
+        color: #ffe5a6;
+        font-size: 25px;
+        text-align: center;
+        margin: 35px 0 20px;
+    }
+    .cabinet-menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .cabinet-card {
+        min-height: 170px;
+        padding: 25px;
+        border: 1px solid #e8bd67;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #541421, #270a12);
+        color: #fff8ed;
+        cursor: pointer;
+        text-align: left;
+        transition: 0.25s;
+    }
+    .cabinet-card:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(145deg, #761d2d, #3c0b17);
+    }
+    .cabinet-card .icon {
+        font-size: 35px;
+        display: block;
+        margin-bottom: 12px;
+    }
+    .cabinet-card h3 {
+        color: #ffe5a6;
+        font-size: 19px;
+        margin-bottom: 8px;
+    }
+    .cabinet-card p {
+        color: #fff1df;
+        font-size: 14px;
+    }
+    #patientContent {
+        margin-top: 30px;
+    }
+    .patient-message {
+        margin-top: 15px;
+        color: #ffe5a6;
+        font-weight: bold;
+    }
+    @media(max-width:650px) {
+        .form-grid,
+        .cabinet-menu {
+            grid-template-columns: 1fr;
+        }
+        .cabinet-welcome h2 {
+            font-size: 23px;
+        }
+    }
+</style>
 </head>
-<body class="cabinet-page">
+<body>
+<!-- ЖОҒАРҒЫ БӨЛІК -->
 <header class="main-header">
-    <div class="logo" onclick="window.location.href='index.html'">
-        ТІЛАШАР
-    </div>
-    <div class="header-title">ЛОГОПЕД КАБИНЕТІ</div>
-    <button class="cabinet-button"
+<div class="brand">✦ ТІЛАШАР ✦</div>
+<h1>ЛОГОПЕД КАБИНЕТІ</h1>
+<button class="cabinet-button"
         onclick="window.location.href='index.html'">
-        ← БАСТЫ БЕТ
-    </button>
+    ← БАҒДАРЛАМАҒА ҚАЙТУ
+</button>
 </header>
-<main class="cabinet-container">
-    <section class="welcome-box">
-        <h1>🩺 ЛОГОПЕД КАБИНЕТІ</h1>
-        <p>Пациент туралы мәліметтерді енгізіп, диагностика нәтижелерін бақылаңыз.</p>
-    </section>
-    <!-- ПАЦИЕНТТІ ТІРКЕУ -->
-    <section class="patient-form">
-        <h2>👤 ПАЦИЕНТТІ ТІРКЕУ</h2>
-        <form id="patientForm">
-            <label for="fullName">Аты-жөні:</label>
-            <input type="text" id="fullName"
-                placeholder="Пациенттің аты-жөнін енгізіңіз" required>
-            <label for="birthDate">Туған күні:</label>
-            <input type="date" id="birthDate" required>
-            <label for="age">Жасы:</label>
-            <input type="number" id="age"
-                placeholder="Жасы" min="1" max="120" required>
-            <label for="diagnosis">Диагнозы:</label>
-            <input type="text" id="diagnosis"
-                placeholder="Диагнозды енгізіңіз">
-            <label for="testDate">Тексеру күні:</label>
-            <input type="date" id="testDate" required>
-            <button type="submit" class="enter-button">
-                💾 МӘЛІМЕТТЕРДІ САҚТАУ
-            </button>
-        </form>
-        <div id="patientMessage"></div>
-    </section>
-    <!-- ПАЦИЕНТ БӨЛІМДЕРІ -->
-    <section class="patient-sections">
-        <h2>📋 ПАЦИЕНТТІҢ ЖҰМЫС КАРТАСЫ</h2>
-        <div class="world-grid">
-            <button class="world-card"
-                onclick="showPatientSection('speechCard')">
-                <span>📄</span>
-                <h3>СӨЙЛЕУ КАРТАСЫ</h3>
-                <p>Пациенттің жеке сөйлеу картасы</p>
-            </button>
-            <button class="world-card"
-                onclick="showPatientSection('diagnostics')">
-                <span>🔎</span>
-                <h3>ДИАГНОСТИКА</h3>
-                <p>Сөйлеу дағдыларын тексеру тапсырмалары</p>
-            </button>
-            <button class="world-card"
-                onclick="showPatientSection('initialResult')">
-                <span>📊</span>
-                <h3>БАСТАПҚЫ НӘТИЖЕ</h3>
-                <p>Алғашқы тексеру көрсеткіштері</p>
-            </button>
-            <button class="world-card"
-                onclick="showPatientSection('dynamics')">
-                <span>📈</span>
-                <h3>ДИНАМИКА</h3>
-                <p>Бастапқы және қайталама нәтижелерді салыстыру</p>
-            </button>
+<main class="cabinet-page">
+<!-- ҚОШ КЕЛДІҢІЗ -->
+<section class="cabinet-welcome">
+    <h2>ЛОГОПЕДТІҢ ЖҰМЫС КЕҢІСТІГІ</h2>
+    <p>
+        «Тілашар» логопедиялық кабинетіне қош келдіңіз!
+    </p>
+    <p>
+        Мұнда жеке мәліметтерді тіркеуге,
+        сөйлеу картасын толтыруға,
+        диагностика жүргізуге және даму динамикасын бақылауға болады.
+    </p>
+</section>
+<!-- ПАЦИЕНТ МӘЛІМЕТТЕРІ -->
+<section class="patient-form">
+    <h3>👤 ПАЦИЕНТ ТУРАЛЫ МӘЛІМЕТТЕР</h3>
+    <form id="patientForm">
+        <div class="form-grid">
+            <div class="form-field">
+                <label for="fullName">Аты-жөні</label>
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Аты-жөнін енгізіңіз"
+                    required>
+            </div>
+            <div class="form-field">
+                <label for="birthDate">Туған күні</label>
+                <input
+                    type="date"
+                    id="birthDate">
+            </div>
+            <div class="form-field">
+                <label for="age">Жасы</label>
+                <input
+                    type="number"
+                    id="age"
+                    min="18"
+                    placeholder="Жасын енгізіңіз">
+            </div>
+            <div class="form-field">
+                <label for="diagnosis">Медициналық қорытынды</label>
+                <input
+                    type="text"
+                    id="diagnosis"
+                    placeholder="Маман енгізген қорытынды">
+            </div>
+            <div class="form-field">
+                <label for="testDate">Тексеру күні</label>
+                <input
+                    type="date"
+                    id="testDate">
+            </div>
         </div>
-    </section>
-    <!-- ТАҢДАЛҒАН БӨЛІМ -->
-    <section id="patientContent" class="game-section"
-        style="display:none;">
-    </section>
+        <button type="submit" class="cabinet-save">
+            💾 МӘЛІМЕТТЕРДІ САҚТАУ
+        </button>
+        <p id="patientMessage" class="patient-message"></p>
+    </form>
+</section>
+<!-- КАБИНЕТ МӘЗІРІ -->
+<h2 class="cabinet-menu-title">
+    ✦ ЛОГОПЕДТІҢ ЖҰМЫС МӘЗІРІ ✦
+</h2>
+<section class="cabinet-menu">
+    <button class="cabinet-card"
+            onclick="showPatientSection('speechCard')">
+        <span class="icon">📋</span>
+        <h3>СӨЙЛЕУ КАРТАСЫ</h3>
+        <p>
+            Пациенттің жеке мәліметтері,
+            сөйлеу дағдылары және логопед қорытындысы.
+        </p>
+    </button>
+    <button class="cabinet-card"
+            onclick="showPatientSection('diagnostics')">
+        <span class="icon">🧠</span>
+        <h3>ДИАГНОСТИКА</h3>
+        <p>
+            Сөйлеу дағдыларын тексеруге
+            арналған тапсырмалар.
+        </p>
+    </button>
+    <button class="cabinet-card"
+            onclick="showPatientSection('initialResult')">
+        <span class="icon">📊</span>
+        <h3>БАСТАПҚЫ НӘТИЖЕ</h3>
+        <p>
+            Алғашқы тексеру нәтижелері
+            мен балдық көрсеткіштер.
+        </p>
+    </button>
+    <button class="cabinet-card"
+            onclick="showPatientSection('dynamics')">
+        <span class="icon">📈</span>
+        <h3>ДАМУ ДИНАМИКАСЫ</h3>
+        <p>
+            Бастапқы және қайталама
+            бақылау нәтижелерін салыстыру.
+        </p>
+    </button>
+</section>
+<!-- ТАҢДАЛҒАН БӨЛІМ -->
+<div id="patientContent" style="display:none;"></div>
 </main>
+<!-- СКРИПТТЕР -->
 <script src="cabinet.js"></script>
 <script src="speech-card.js"></script>
 <script src="dynamics.js"></script>
