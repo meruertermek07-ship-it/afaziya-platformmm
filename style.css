@@ -1,15 +1,12 @@
-@import url(‘https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap’);
-
 :root {
-–gold: #e8bd67;
-–gold-light: #ffe5a6;
-–gold-dark: #a8792d;
-–red: #650b17;
-–red-light: #941e2e;
-–dark: #19070b;
-–dark-card: #321018;
-–white: #fff8ed;
-–muted: #ead9c5;
+–gold: #b58a43;
+–gold-light: #e6c98e;
+–cream: #fffaf0;
+–white: #ffffff;
+–text: #574735;
+–muted: #8d7b65;
+–border: #eadcc3;
+–soft: #f8f0df;
 }
 
 * {
@@ -23,334 +20,238 @@ scroll-behavior: smooth;
 }
 
 body {
+font-family: Arial, sans-serif;
+background: var(–cream);
+color: var(–text);
 min-height: 100vh;
-background:
-radial-gradient(circle at top, #571321 0%, #240b11 48%, #120509 100%);
-color: var(–white);
-font-family: ‘Nunito’, sans-serif;
 }
 
-/* БАСТЫ БЕТ */
+button {
+font-family: inherit;
+cursor: pointer;
+}
 
-.home-panel {
+button:hover {
+filter: brightness(0.97);
+}
+
+#home {
 min-height: 100vh;
 display: flex;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 text-align: center;
 padding: 25px;
 background:
-radial-gradient(circle at center, #761b2b 0%, #350d17 48%, #130509 100%);
+radial-gradient(circle at top right, #f5e8c9, transparent 35%),
+linear-gradient(135deg, #fffaf0, #ffffff);
 }
 
-.home-content {
-width: 100%;
-max-width: 750px;
-padding: 55px 30px;
-border: 1px solid var(–gold);
-border-radius: 30px;
-background: rgba(29, 6, 12, 0.75);
-box-shadow: 0 0 45px rgba(232, 189, 103, 0.15);
-}
-
-.home-logo,
-.brand {
-color: var(–gold-light);
-font-family: ‘Cinzel’, serif;
-font-size: 22px;
-font-weight: 800;
-letter-spacing: 5px;
-}
-
-.home-content h1 {
-margin: 25px 0 15px;
-color: var(–gold-light);
-font-family: ‘Cinzel’, serif;
-font-size: clamp(55px, 10vw, 100px);
-font-weight: 800;
+#home h1 {
+color: var(–gold);
+font-size: clamp(42px, 9vw, 78px);
 letter-spacing: 8px;
-text-shadow: 0 0 25px rgba(232, 189, 103, 0.3);
+margin-bottom: 20px;
 }
 
-.home-content p {
-color: var(–white);
-font-size: 19px;
-line-height: 1.8;
+#home p {
+color: var(–muted);
+font-size: clamp(16px, 3vw, 22px);
 margin-bottom: 35px;
-}
-
-/* БАТЫРМАЛАР */
-
-button {
-font-family: ‘Nunito’, sans-serif;
-cursor: pointer;
-transition: 0.25s ease;
-}
-
-.start-button {
-min-width: 230px;
-padding: 17px 35px;
-border: 2px solid var(–gold-light);
-border-radius: 50px;
-background: linear-gradient(135deg, #f3d58f, #c08b3b);
-color: #350b12;
-font-size: 17px;
-font-weight: 900;
-letter-spacing: 2px;
-box-shadow: 0 7px 25px rgba(232, 189, 103, 0.25);
-}
-
-.start-button:hover {
-transform: translateY(-4px);
-background: var(–gold-light);
-box-shadow: 0 10px 30px rgba(232, 189, 103, 0.4);
-}
-
-/* ЖОҒАРҒЫ HEADER */
-
-.main-header {
-min-height: 100px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 20px;
-padding: 20px 4%;
-border-bottom: 1px solid rgba(232, 189, 103, 0.4);
-background: rgba(20, 5, 9, 0.96);
-}
-
-.main-header h1 {
-color: var(–gold-light);
-font-family: ‘Cinzel’, serif;
-font-size: 34px;
-letter-spacing: 5px;
-}
-
-.cabinet-button {
-padding: 13px 22px;
-border: 1px solid var(–gold);
-border-radius: 30px;
-background: linear-gradient(135deg, #7d1727, #4a0b17);
-color: #fff2d7;
-font-size: 14px;
-font-weight: 900;
-}
-
-.cabinet-button:hover {
-background: var(–gold);
-color: #310a10;
-}
-
-/* НЕГІЗГІ МӘЗІР */
-
-.program-container {
-width: 92%;
-max-width: 1300px;
-margin: 45px auto;
-}
-
-.program-heading {
-text-align: center;
-margin-bottom: 40px;
-}
-
-.program-heading h2 {
-color: var(–gold-light);
-font-family: ‘Cinzel’, serif;
-font-size: clamp(24px, 4vw, 36px);
-margin-bottom: 12px;
-}
-
-.program-heading p {
-color: var(–white);
-font-size: 18px;
-}
-
-/* БӨЛІМ КАРТОЧКАЛАРЫ */
-
-.world-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 22px;
-}
-
-.world-card {
-min-height: 230px;
-padding: 25px 18px;
-border: 1px solid rgba(232, 189, 103, 0.65);
-border-radius: 22px;
-background: linear-gradient(145deg, #49121e, #260a12);
-color: var(–white);
-text-align: center;
-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-}
-
-.world-card:hover {
-transform: translateY(-7px);
-border-color: var(–gold-light);
-background: linear-gradient(145deg, #751d2d, #3c0b17);
-box-shadow: 0 10px 30px rgba(232, 189, 103, 0.18);
-}
-
-.world-card span {
-display: block;
-font-size: 43px;
-margin-bottom: 14px;
-}
-
-.world-card h3 {
-color: var(–gold-light);
-font-size: 17px;
-font-weight: 900;
-margin-bottom: 10px;
-}
-
-.world-card p {
-color: #fff1df;
-font-size: 14px;
-line-height: 1.5;
-margin-bottom: 15px;
-}
-
-.world-card b {
-color: var(–gold-light);
-font-size: 14px;
-letter-spacing: 1px;
-}
-
-/* КЕРІ ҚАЙТУ */
-
-.back-button {
-display: block;
-margin: 30px auto;
-padding: 13px 25px;
-border: 1px solid var(–gold);
-border-radius: 30px;
-background: #4a101c;
-color: var(–gold-light);
-font-size: 15px;
-font-weight: 900;
-}
-
-.back-button:hover {
-background: var(–gold);
-color: #300910;
-}
-
-/* ЛОГОПЕД КАБИНЕТІ ЖӘНЕ ФОРМАЛАР */
-
-input,
-select,
-textarea {
-width: 100%;
-padding: 13px 15px;
-border: 1px solid var(–gold);
-border-radius: 10px;
-background: #fff9ef;
-color: #241015;
-font-family: ‘Nunito’, sans-serif;
-font-size: 16px;
-}
-
-input::placeholder,
-textarea::placeholder {
-color: #65545a;
-}
-
-label {
-display: block;
-margin: 12px 0 6px;
-color: var(–gold-light);
-font-weight: 800;
-}
-
-h2, h3, h4 {
-color: var(–gold-light);
-}
-
-p, li, span {
 line-height: 1.6;
 }
 
-/* ДИАГНОСТИКА */
-
-.diagnostic-card {
-color: var(–white);
+#home button {
+background: var(–gold);
+color: white;
+border: none;
+border-radius: 14px;
+padding: 17px 55px;
+font-size: 17px;
+font-weight: bold;
+letter-spacing: 2px;
+box-shadow: 0 6px 18px rgba(181, 138, 67, 0.2);
 }
 
-.diagnostic-card h3 {
-color: var(–gold-light);
+#program {
+min-height: 100vh;
+padding: 20px;
+background: var(–cream);
+}
+
+header {
+width: 100%;
+}
+
+.program-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 15px;
+padding: 15px 5px 25px;
+border-bottom: 1px solid var(–border);
+flex-wrap: wrap;
+}
+
+.logo {
+color: var(–gold);
+font-size: 25px;
+font-weight: bold;
+letter-spacing: 2px;
+}
+
+.cabinet-button {
+background: white;
+color: var(–gold);
+border: 1px solid var(–gold-light);
+padding: 12px 18px;
+border-radius: 12px;
+font-weight: bold;
+}
+
+.program-title {
+text-align: center;
+margin: 35px 0 10px;
+color: var(–gold);
+font-size: clamp(27px, 5vw, 40px);
+}
+
+.program-description {
+text-align: center;
+color: var(–muted);
+line-height: 1.6;
+margin-bottom: 30px;
+}
+
+#world-grid,
+.world-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+gap: 18px;
+max-width: 1100px;
+margin: 30px auto;
+}
+
+.world-card,
+.world-button,
+.menu-card {
+background: var(–white);
+border: 1px solid var(–border);
+border-radius: 18px;
+padding: 25px 18px;
+color: var(–text);
+text-align: center;
+font-size: 16px;
+font-weight: bold;
+box-shadow: 0 5px 18px rgba(120, 90, 40, 0.05);
+transition: 0.2s;
+}
+
+.world-card:hover,
+.world-button:hover,
+.menu-card:hover {
+transform: translateY(-4px);
+border-color: var(–gold);
+box-shadow: 0 8px 20px rgba(120, 90, 40, 0.12);
+}
+
+.world-card .icon,
+.world-icon {
+display: block;
+font-size: 35px;
+margin-bottom: 12px;
 }
 
 #section-content {
-color: var(–white);
+max-width: 950px;
+margin: 30px auto;
+padding: 25px;
+background: white;
+border: 1px solid var(–border);
+border-radius: 18px;
+line-height: 1.7;
 }
 
 #section-content h2,
 #section-content h3 {
-color: var(–gold-light);
+color: var(–gold);
+margin-bottom: 15px;
 }
 
 #section-content p {
-color: var(–white);
+color: var(–muted);
+margin-bottom: 12px;
 }
 
-/* НӘТИЖЕЛЕР */
-
-.result-card {
-padding: 20px;
-margin: 15px 0;
-border: 1px solid var(–gold);
-border-radius: 15px;
-background: var(–dark-card);
-color: var(–white);
+#logopedLogin {
+min-height: 100vh;
+padding: 25px;
+display: flex;
+justify-content: center;
+align-items: center;
+background: var(–cream);
 }
 
-/* МОБИЛЬДІ НҰСҚА */
+.login-box {
+width: 100%;
+max-width: 450px;
+padding: 35px 25px;
+text-align: center;
+background: white;
+border: 1px solid var(–border);
+border-radius: 22px;
+box-shadow: 0 8px 25px rgba(120, 90, 40, 0.08);
+}
 
-@media (max-width: 900px) {
+.login-box h2 {
+color: var(–gold);
+margin-bottom: 20px;
+}
+
+.login-box button {
+width: 100%;
+padding: 15px;
+margin-top: 15px;
+background: var(–gold);
+color: white;
+border: none;
+border-radius: 12px;
+font-size: 15px;
+font-weight: bold;
+}
+
+.back-button {
+background: white;
+color: var(–text);
+border: 1px solid var(–gold-light);
+padding: 11px 18px;
+border-radius: 12px;
+}
+
+input,
+select,
+textarea {
+font-family: inherit;
+}
+
+@media (max-width: 600px) {
+#program {
+padding: 14px;
+}
+
+.program-header {
+    align-items: flex-start;
+}
+.logo {
+    font-size: 21px;
+}
+#world-grid,
 .world-grid {
-grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
 }
-
-.main-header {
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-}
-.main-header h1 {
-    order: -1;
-    width: 100%;
-}
-
-}
-
-@media (max-width: 550px) {
-.world-grid {
-grid-template-columns: 1fr;
-}
-
-.home-content {
-    padding: 40px 18px;
-}
-.home-content h1 {
-    letter-spacing: 4px;
-}
-.home-content p {
-    font-size: 16px;
-}
-.brand {
-    font-size: 17px;
-}
-.main-header h1 {
-    font-size: 27px;
-}
-.cabinet-button {
-    font-size: 12px;
-}
-.program-container {
-    width: 94%;
-    margin: 25px auto;
+#section-content {
+    padding: 18px;
 }
 
 }
