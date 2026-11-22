@@ -1,213 +1,177 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ТІЛАШАР — Диагностика</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТІЛАШАР — Диагностика</title>
 <style>
-:root {
-    --gold: #b58a43;
-    --gold-light: #e6c98e;
-    --cream: #fffaf0;
-    --white: #ffffff;
-    --text: #574735;
-    --muted: #8d7b65;
-    --border: #eadcc3;
-}
-* {
-    box-sizing: border-box;
-}
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: var(--cream);
-    color: var(--text);
-}
-.diagnostics-page {
-    min-height: 100vh;
-    padding: 25px 18px 50px;
-    max-width: 1100px;
-    margin: auto;
-}
-.diagnostics-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 35px;
-    flex-wrap: wrap;
-}
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: var(--gold);
-    letter-spacing: 2px;
-}
-.back-button {
-    border: 1px solid var(--gold-light);
-    background: white;
-    color: var(--text);
-    padding: 11px 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 14px;
-}
-.back-button:hover {
-    background: #f8efdF;
-}
-.page-title {
-    text-align: center;
-    margin: 25px 0 10px;
-    font-size: 30px;
-    color: var(--gold);
-}
-.page-description {
-    text-align: center;
-    color: var(--muted);
-    line-height: 1.6;
-    margin: 0 auto 30px;
-    max-width: 650px;
-}
-.assessment-box {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 20px;
-    max-width: 500px;
-    margin: 0 auto 30px;
-    box-shadow: 0 5px 18px rgba(120, 90, 40, 0.06);
-}
-.assessment-box label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.assessment-box select {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--cream);
-    color: var(--text);
-    font-size: 15px;
-}
-.diagnostic-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-}
-.diagnostic-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 25px 18px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.2s;
-    box-shadow: 0 5px 18px rgba(120, 90, 40, 0.05);
-}
-.diagnostic-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--gold);
-    box-shadow: 0 8px 22px rgba(120, 90, 40, 0.12);
-}
-.card-icon {
-    font-size: 38px;
-    margin-bottom: 12px;
-}
-.diagnostic-card h3 {
-    color: var(--gold);
-    margin: 8px 0;
-    font-size: 18px;
-}
-.diagnostic-card p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.5;
-}
-.diagnostic-note {
-    margin: 30px auto 0;
-    max-width: 750px;
-    padding: 17px;
-    background: #f8f0df;
-    border: 1px solid var(--gold-light);
-    border-radius: 14px;
-    color: var(--muted);
-    line-height: 1.6;
-    font-size: 13px;
-}
-@media(max-width:600px) {
-    .page-title {
-        font-size: 24px;
+    * {
+        box-sizing: border-box;
     }
-    .diagnostics-header {
-        align-items: flex-start;
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #fffaf0;
+        color: #493b2b;
     }
-    .diagnostic-grid {
-        grid-template-columns: 1fr;
+    .diagnostics-page {
+        max-width: 1050px;
+        margin: 30px auto;
+        padding: 30px;
+        background: white;
+        border: 1px solid #ead8b5;
+        border-radius: 22px;
+        box-shadow: 0 8px 30px rgba(120, 90, 40, 0.08);
     }
-}
+    .top {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .top h1 {
+        color: #a77a27;
+        font-size: 30px;
+    }
+    .top p {
+        color: #82745f;
+        line-height: 1.6;
+    }
+    .patient-box {
+        padding: 18px;
+        margin-bottom: 25px;
+        background: #fff8e9;
+        border-radius: 15px;
+        border: 1px solid #efdfbd;
+    }
+    select {
+        width: 100%;
+        padding: 14px;
+        margin-top: 10px;
+        border: 1px solid #d8bd84;
+        border-radius: 10px;
+        background: white;
+        font-size: 16px;
+    }
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 25px;
+    }
+    .category-card {
+        padding: 22px;
+        border: 1px solid #ead9b7;
+        border-radius: 17px;
+        background: #fffdf8;
+    }
+    .category-card h3 {
+        color: #98702c;
+    }
+    .category-card p {
+        color: #786d5b;
+        line-height: 1.5;
+    }
+    button {
+        padding: 13px 20px;
+        border: none;
+        border-radius: 10px;
+        background: #b58a3b;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 12px;
+    }
+    button:hover {
+        background: #96702d;
+    }
+    .back-button {
+        background: #776b59;
+        margin-top: 30px;
+    }
+    .diagnostic-task {
+        margin-top: 25px;
+        padding: 25px;
+        background: #fffaf0;
+        border-radius: 17px;
+        border: 1px solid #ead9b7;
+    }
+    @media(max-width: 650px) {
+        body {
+            padding: 10px;
+        }
+        .diagnostics-page {
+            padding: 18px;
+            margin: 10px auto;
+        }
+        .category-grid {
+            grid-template-columns: 1fr;
+        }
+        .top h1 {
+            font-size: 24px;
+        }
+    }
 </style>
 </head>
 <body>
-<div class="diagnostics-page">
-<header class="diagnostics-header">
-    <div class="logo">ТІЛАШАР</div>
-    <button class="back-button" onclick="window.location.href='cabinet.html'">
-        ← Логопед кабинеті
-    </button>
-</header>
-<h1 class="page-title">СӨЙЛЕУ ДИАГНОСТИКАСЫ</h1>
-<p class="page-description">
-    Афазиясы бар ересектердің сөйлеу дағдыларын бағалауға арналған
-    диагностикалық тапсырмалар.
-</p>
-<div class="assessment-box">
-    <label for="assessmentType">Бағалау түрін таңдаңыз:</label>
+<main class="diagnostics-page">
+<div class="top">
+    <h1>ТІЛАШАР</h1>
+    <h2>ЛОГОПЕДИЯЛЫҚ ДИАГНОСТИКА</h2>
+    <p>
+        Афазиясы бар ересектердің сөйлеу және тілдік
+        дағдыларын бағалау жүйесі
+    </p>
+</div>
+<div class="patient-box">
+    <h3>Диагностика түрін таңдаңыз</h3>
     <select id="assessmentType">
         <option value="initial">Бастапқы диагностика</option>
-        <option value="repeat">Қайта диагностика</option>
+        <option value="repeat">Қайталама диагностика</option>
     </select>
+    <p>
+        Бастапқы диагностика адамның қазіргі сөйлеу жағдайын
+        бағалауға арналған. Қайталама диагностика даму динамикасын
+        салыстыру үшін қолданылады.
+    </p>
 </div>
-<div class="diagnostic-grid">
-    <div class="diagnostic-card" onclick="startCategory('understanding')">
-        <div class="card-icon">👂</div>
-        <h3>Сөйлеуді түсіну</h3>
-        <p>Сөздерді, нұсқауларды және сөйлемдерді түсіну қабілетін бағалау.</p>
+<h2>Диагностикалық бағыттар</h2>
+<div class="category-grid">
+    <div class="category-card">
+        <h3>1. Сөйлеуді түсіну</h3>
+        <p>Сөздерді, нұсқауларды және сөйлемдерді түсіну қабілеті.</p>
+        <button onclick="startCategory('understanding')">БАСТАУ</button>
     </div>
-    <div class="diagnostic-card" onclick="startCategory('naming')">
-        <div class="card-icon">🖼️</div>
-        <h3>Заттарды атау</h3>
-        <p>Суреттерді тану және олардың атауын айту дағдыларын бағалау.</p>
+    <div class="category-card">
+        <h3>2. Заттарды атау</h3>
+        <p>Заттар мен бейнелерді дұрыс атау қабілеті.</p>
+        <button onclick="startCategory('naming')">БАСТАУ</button>
     </div>
-    <div class="diagnostic-card" onclick="startCategory('repetition')">
-        <div class="card-icon">🗣️</div>
-        <h3>Қайталау</h3>
-        <p>Дыбыстарды, сөздерді және сөйлемдерді қайталау дағдыларын бағалау.</p>
+    <div class="category-card">
+        <h3>3. Қайталап айту</h3>
+        <p>Дыбыстарды, сөздерді және сөйлемдерді қайталау.</p>
+        <button onclick="startCategory('repetition')">БАСТАУ</button>
     </div>
-    <div class="diagnostic-card" onclick="startCategory('vocabulary')">
-        <div class="card-icon">📚</div>
-        <h3>Сөздік қор</h3>
-        <p>Сөздерді еске түсіру және мағынасына қарай қолдану қабілетін бағалау.</p>
+    <div class="category-card">
+        <h3>4. Сөздік қор</h3>
+        <p>Сөздерді табу, мағынасын түсіну және қолдану.</p>
+        <button onclick="startCategory('vocabulary')">БАСТАУ</button>
     </div>
-    <div class="diagnostic-card" onclick="startCategory('reading')">
-        <div class="card-icon">📖</div>
-        <h3>Оқу</h3>
-        <p>Әріптерді, сөздерді және сөйлемдерді оқу дағдыларын бағалау.</p>
+    <div class="category-card">
+        <h3>5. Оқу</h3>
+        <p>Әріптерді, сөздерді және сөйлемдерді оқу дағдылары.</p>
+        <button onclick="startCategory('reading')">БАСТАУ</button>
     </div>
-    <div class="diagnostic-card" onclick="startCategory('writing')">
-        <div class="card-icon">✍️</div>
-        <h3>Жазу</h3>
-        <p>Әріптерді, сөздерді және қысқа сөйлемдерді жазу дағдыларын бағалау.</p>
+    <div class="category-card">
+        <h3>6. Жазу</h3>
+        <p>Әріптерді, сөздерді және сөйлемдерді жазу дағдылары.</p>
+        <button onclick="startCategory('writing')">БАСТАУ</button>
     </div>
 </div>
-<div class="diagnostic-note">
-    <strong>Ескерту:</strong> Бұл бөлім логопедтің жұмысын қолдауға арналған
-    оқу-әдістемелік құрал. Нәтижелер автоматты түрде тапсырма жауаптары
-    бойынша есептеледі. Ол медициналық диагноз қоймайды және адамның
-    сөйлеуін өздігінен толық бағаламайды.
-</div>
-</div>
+<button class="back-button"
+    onclick="window.location.href='cabinet.html'">
+    ← ЛОГОПЕД КАБИНЕТІНЕ ҚАЙТУ
+</button>
+</main>
 <script src="diagnostics.js"></script>
 </body>
 </html>
