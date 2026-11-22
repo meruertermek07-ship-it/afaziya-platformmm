@@ -1,161 +1,213 @@
 // =====================================
 // ЛОГОПЕД КАБИНЕТІ
 // =====================================
-// Жасты автоматты есептеу
-const birthInput = document.getElementById("birthDate");
-const ageInput = document.getElementById("age");
-birthInput.addEventListener("change", function () {
-    const birth = new Date(this.value);
+
+// Пациент деректерін жүктеу
+document.addEventListener(“DOMContentLoaded”, function () {
+const birthInput = document.getElementById(“birthDate”);
+const ageInput = document.getElementById(“age”);
+const dateInput = document.getElementById(“testDate”);
+const patientForm = document.getElementById(“patientForm”);
+
+// Бүгінгі күнді автоматты қою
+if (dateInput && !dateInput.value) {
     const today = new Date();
-    if (isNaN(birth.getTime()) || birth > today) {
-        ageInput.value = "";
-        return;
-    }
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDifference = today.getMonth() - birth.getMonth();
-    if (
-        monthDifference < 0 ||
-        (monthDifference === 0 && today.getDate() < birth.getDate())
-    ) {
-        age--;
-    }
-    ageInput.value = age;
-});
-// Тексеру күнін автоматты қою
-document.getElementById("testDate").value =
-    new Date().toISOString().split("T")[0];
-// =====================================
-// ПАЦИЕНТ МӘЛІМЕТТЕРІН САҚТАУ
-// =====================================
-const patientForm = document.getElementById("patientForm");
-patientForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const patient = {
-        fullName: document.getElementById("fullName").value.trim(),
-        birthDate: document.getElementById("birthDate").value,
-        age: document.getElementById("age").value,
-        diagnosis: document.getElementById("diagnosis").value.trim(),
-        testDate: document.getElementById("testDate").value
-    };
-    if (!patient.fullName || !patient.birthDate || !patient.age) {
-        alert("Міндетті мәліметтерді толық енгізіңіз!");
-        return;
-    }
-    // Осы демо-нұсқада мәліметтер браузерде сақталады.
-    localStorage.setItem("aphasiaPatient", JSON.stringify(patient));
-    document.getElementById("saveMessage").innerHTML = `
-        <div class="coming-soon">
-            <span>✓</span>
-            <div>
-                <strong>МӘЛІМЕТТЕР САҚТАЛДЫ</strong>
-                <small>Пациенттің жеке мәліметтері енгізілді.</small>
-            </div>
-        </div>
-    `;
-    showPatientSection("speechCard");
-});
-// =====================================
-// САҚТАЛҒАН МӘЛІМЕТТІ ҚАЙТА ШЫҒАРУ
-// =====================================
-function loadPatient() {
-    const saved = localStorage.getItem("aphasiaPatient");
-    if (!saved) return;
-    const patient = JSON.parse(saved);
-    document.getElementById("fullName").value = patient.fullName;
-    document.getElementById("birthDate").value = patient.birthDate;
-    document.getElementById("age").value = patient.age;
-    document.getElementById("diagnosis").value = patient.diagnosis;
-    document.getElementById("testDate").value = patient.testDate;
+    const localDate = new Date(
+        today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().split("T")[0];
+    dateInput.value = localDate;
 }
+// Туған күн бойынша жасты есептеу
+if (birthInput && ageInput) {
+    birthInput.addEventListener("change", function () {
+        ageInput.value = calculateAge(birthInput.value);
+    });
+}
+// Бұрын сақталған пациент деректерін шығару
 loadPatient();
-// =====================================
-// КАБИНЕТ БӨЛІМДЕРІ
-// =====================================
-function showPatientSection(section) {
-    const patient = JSON.parse(
-        localStorage.getItem("aphasiaPatient") || "null"
-    );
-    const content = document.getElementById("patientContent");
-    content.style.display = "block";
-    if (!patient) {
-        content.innerHTML = `
-            <h2>АЛДЫМЕН ПАЦИЕНТ МӘЛІМЕТТЕРІН ЕНГІЗІҢІЗ</h2>
-            <p>Бөлімдерді ашу үшін пациент туралы мәліметтерді сақтаңыз.</p>
-        `;
-        content.scrollIntoView({ behavior: "smooth" });
-        return;
-    }
-    const patientInfo = `
-        <div class="coming-soon">
-            <div>
-                <strong>${escapeHTML(patient.fullName)}</strong>
-                <small>
-                    Жасы: ${escapeHTML(patient.age)} |
-                    Диагнозы: ${escapeHTML(patient.diagnosis || "Енгізілмеген")}
-                </small>
-            </div>
-        </div>
-    `;
-    if (section === "speechCard") {
-        content.innerHTML = `
-            <h2>📋 СӨЙЛЕУ КАРТАСЫ</h2>
-            ${patientInfo}
-            <h3>Жалпы мәліметтер</h3>
-            <p>Туған күні: ${escapeHTML(patient.birthDate)}</p>
-            <p>Тексеру күні: ${escapeHTML(patient.testDate)}</p>
-            <h3>Сөйлеу қызметін тексеру</h3>
-            <p>Сөйлеуді түсіну: тексеру нәтижесі енгізіледі.</p>
-            <p>Заттарды атау: тексеру нәтижесі енгізіледі.</p>
-            <p>Қайталау: тексеру нәтижесі енгізіледі.</p>
-            <p>Оқу және жазу: тексеру нәтижесі енгізіледі.</p>
-            <p>Байланыстырып сөйлеу: тексеру нәтижесі енгізіледі.</p>
-        `;
-    }
-    else if (section === "diagnostics") {
-        content.innerHTML = `
-            <h2>🧠 БАСТАПҚЫ ДИАГНОСТИКА</h2>
-            ${patientInfo}
-            <p>
-                Бұл бөлімде афазия кезіндегі сөйлеу қызметін
-                бағалауға арналған диагностикалық тапсырмалар орналасады.
-            </p>
-            <div class="coming-soon">
-                <div>
-                    <strong>ДИАГНОСТИКАЛЫҚ ТАПСЫРМАЛАР</strong>
-                    <small>Келесі кезеңде жеке тапсырмалар жүйесін енгіземіз.</small>
-                </div>
-            </div>
-        `;
-    }
-    else if (section === "initialResult") {
-        content.innerHTML = `
-            <h2>📊 БАСТАПҚЫ НӘТИЖЕ</h2>
-            ${patientInfo}
-            <p>Диагностика аяқталғаннан кейін бастапқы бағалау көрсетіледі.</p>
-            <p>Жиналған балл: әзірге нәтиже жоқ.</p>
-        `;
-    }
-    else if (section === "dynamics") {
-        content.innerHTML = `
-            <h2>🏆 НӘТИЖЕЛЕР ДИНАМИКАСЫ</h2>
-            ${patientInfo}
-            <p>Қайталама диагностика нәтижелері осы бөлімде салыстырылады.</p>
-        `;
-    }
-    content.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+// Пациент мәліметтерін сақтау
+if (patientForm) {
+    patientForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const patient = {
+            fullName: document.getElementById("fullName").value.trim(),
+            birthDate: document.getElementById("birthDate").value,
+            age: document.getElementById("age").value,
+            diagnosis: document.getElementById("diagnosis").value.trim(),
+            testDate: document.getElementById("testDate").value
+        };
+        if (!patient.fullName || !patient.birthDate) {
+            alert("Пациенттің аты-жөні мен туған күнін енгізіңіз!");
+            return;
+        }
+        localStorage.setItem(
+            "aphasiaPatient",
+            JSON.stringify(patient)
+        );
+        alert("Пациент мәліметтері сәтті сақталды!");
+        loadPatient();
     });
 }
-// HTML ішіне енгізілетін пациент мәтінін қауіпсіз көрсету
+
+});
+
+// =====================================
+// ЖАСЫН ЕСЕПТЕУ
+// =====================================
+
+function calculateAge(birthDate) {
+if (!birthDate) return “”;
+
+const birth = new Date(birthDate);
+const today = new Date();
+let age = today.getFullYear() - birth.getFullYear();
+const monthDifference = today.getMonth() - birth.getMonth();
+if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birth.getDate())
+) {
+    age--;
+}
+return age >= 0 ? age : "";
+
+}
+
+// =====================================
+// ПАЦИЕНТ ДЕРЕКТЕРІН ЖҮКТЕУ
+// =====================================
+
+function loadPatient() {
+const savedPatient = localStorage.getItem(“aphasiaPatient”);
+
+if (!savedPatient) return;
+const patient = JSON.parse(savedPatient);
+const fullName = document.getElementById("fullName");
+const birthDate = document.getElementById("birthDate");
+const age = document.getElementById("age");
+const diagnosis = document.getElementById("diagnosis");
+const testDate = document.getElementById("testDate");
+if (fullName) fullName.value = patient.fullName || "";
+if (birthDate) birthDate.value = patient.birthDate || "";
+if (age) age.value = patient.age || "";
+if (diagnosis) diagnosis.value = patient.diagnosis || "";
+if (testDate) testDate.value = patient.testDate || "";
+
+}
+
+// =====================================
+// КАБИНЕТ БӨЛІМДЕРІН АШУ
+// =====================================
+
+function showPatientSection(section) {
+const content = document.getElementById(“patientContent”);
+
+if (!content) return;
+const savedPatient = localStorage.getItem("aphasiaPatient");
+if (!savedPatient) {
+    content.style.display = "block";
+    content.innerHTML = `
+        <h2>Пациент тіркелмеген</h2>
+        <p>Алдымен пациенттің мәліметтерін енгізіп, сақтаңыз.</p>
+    `;
+    return;
+}
+const patient = JSON.parse(savedPatient);
+content.style.display = "block";
+// СӨЙЛЕУ КАРТАСЫ
+if (section === "speechCard") {
+    if (typeof loadSpeechCard === "function") {
+        loadSpeechCard();
+    } else {
+        content.innerHTML = `
+            <h2>Сөйлеу картасы</h2>
+            <p>Сөйлеу картасы модулі әлі қосылмаған.</p>
+        `;
+    }
+    return;
+}
+// ДИАГНОСТИКА
+if (section === "diagnostics") {
+    window.location.href = "diagnostics.html";
+    return;
+}
+// БАСТАПҚЫ НӘТИЖЕ
+if (section === "initialResult") {
+    showInitialResult();
+    return;
+}
+// ДИНАМИКА
+if (section === "dynamics") {
+    if (typeof loadDynamics === "function") {
+        loadDynamics();
+    } else {
+        content.innerHTML = `
+            <h2>Диагностика динамикасы</h2>
+            <p>Динамика бөлімі келесі кезеңде қосылады.</p>
+        `;
+    }
+    return;
+}
+
+}
+
+// =====================================
+// БАСТАПҚЫ ДИАГНОСТИКА НӘТИЖЕСІ
+// =====================================
+
+function showInitialResult() {
+const content = document.getElementById(“patientContent”);
+
+const allResults = JSON.parse(
+    localStorage.getItem("aphasiaDiagnosticResults") || "[]"
+);
+const initialResults = allResults.filter(
+    result => result.assessmentType === "initial"
+);
+if (initialResults.length === 0) {
+    content.innerHTML = `
+        <h2>Бастапқы диагностика нәтижесі</h2>
+        <p>Әзірге бастапқы диагностика нәтижелері сақталмаған.</p>
+        <button onclick="window.location.href='diagnostics.html'">
+            Диагностиканы бастау
+        </button>
+    `;
+    return;
+}
+let html = `
+    <h2>Бастапқы диагностика нәтижесі</h2>
+    <p>Төменде бастапқы бағалау нәтижелері көрсетілген.</p>
+    <div class="result-list">
+`;
+initialResults.forEach(result => {
+    html += `
+        <div class="result-item">
+            <h3>${escapeHTML(result.title || "")}</h3>
+            <p>Жиналған балл: ${result.score || 0} / ${result.maxScore || 0}</p>
+            <p>Орындалған тапсырма: ${result.completed || 0}</p>
+            <p>Нәтиже: ${result.percentage || 0}%</p>
+        </div>
+    `;
+});
+html += `</div>`;
+content.innerHTML = html;
+
+}
+
+// =====================================
+// HTML ҚАУІПСІЗ МӘТІН
+// =====================================
+
 function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, function (character) {
-        return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        }[character];
-    });
+return String(value ?? “”).replace(/[&<>”’]/g, function (character) {
+const entities = {
+“&”: “&”,
+“<”: “<”,
+“>”: “>”,
+‘”’: “"”,
+“’”: “'”
+};
+
+    return entities[character];
+});
+
 }
