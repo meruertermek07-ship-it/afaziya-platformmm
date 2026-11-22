@@ -1,326 +1,382 @@
-function loadSpeechCard() {
-const content = document.getElementById(“patientContent”);
-if (!content) return;
+const speechCardSections = [
+{
+title: “Сөйлеуді түсіну”,
+items: [
+“Жеке сөздерді түсіну”,
+“Зат атауларын түсіну”,
+“Қарапайым нұсқауларды орындау”,
+“Күрделі нұсқауларды орындау”,
+“Сөйлемдердің мағынасын түсіну”
+]
+},
+{
+title: “Экспрессивті сөйлеу”,
+items: [
+“Жеке сөздерді айту”,
+“Қарапайым сөйлем құрау”,
+“Сурет бойынша әңгімелеу”,
+“Сұрақтарға жауап беру”,
+“Өз ойын жеткізу”
+]
+},
+{
+title: “Сөздік қор”,
+items: [
+“Заттарды атау”,
+“Әрекеттерді атау”,
+“Суреттерді сипаттау”,
+“Сөздерді мағынасына қарай топтастыру”,
+“Қажетті сөзді еске түсіру”
+]
+},
+{
+title: “Қайталап айту”,
+items: [
+“Дыбыстарды қайталау”,
+“Буындарды қайталау”,
+“Жеке сөздерді қайталау”,
+“Сөз тіркестерін қайталау”,
+“Сөйлемдерді қайталау”
+]
+},
+{
+title: “Автоматтандырылған сөйлеу”,
+items: [
+“1-ден 10-ға дейін санау”,
+“Апта күндерін айту”,
+“Ай атауларын айту”,
+“Таныс өлең жолдарын айту”,
+“Автоматтандырылған тіркестерді айту”
+]
+},
+{
+title: “Оқу”,
+items: [
+“Әріптерді тану”,
+“Буындарды оқу”,
+“Жеке сөздерді оқу”,
+“Сөйлемдерді оқу”,
+“Оқыған мәтінді түсіну”
+]
+},
+{
+title: “Жазу”,
+items: [
+“Әріптерді жазу”,
+“Сөздерді көшіру”,
+“Диктант бойынша жазу”,
+“Сөйлем құрастырып жазу”,
+“Өздігінен жазу”
+]
+},
+{
+title: “Дыбыс айту және артикуляция”,
+items: [
+“Артикуляциялық қалыптарды орындау”,
+“Дыбыстарды айту”,
+“Буындарды айту”,
+“Сөздердің дыбыстық құрамын сақтау”,
+“Сөйлеу қарқыны мен анықтығы”
+]
+}
+];
 
+function loadSpeechCard() {
 const patient = JSON.parse(
-    localStorage.getItem("aphasiaPatient") || "{}"
+localStorage.getItem(“aphasiaPatient”) || “{}”
 );
+
+const content = document.getElementById("patientContent");
+if (!content) return;
 const saved = JSON.parse(
     localStorage.getItem("aphasiaSpeechCardData") || "{}"
 );
-const sections = [
-    {
-        title: "1. Сөйлеуді түсіну",
-        tasks: [
-            "Жеке сөздерді түсіну",
-            "Қарапайым нұсқауларды түсіну",
-            "Күрделі нұсқауларды түсіну",
-            "Сұрақтарды түсіну",
-            "Сөйлемдердің мағынасын түсіну"
-        ]
-    },
-    {
-        title: "2. Сөздік қор және атау",
-        tasks: [
-            "Заттарды атау",
-            "Суреттерді атау",
-            "Әрекеттерді атау",
-            "Сөздерді еске түсіру",
-            "Заттардың қызметін түсіндіру"
-        ]
-    },
-    {
-        title: "3. Ауызша сөйлеу",
-        tasks: [
-            "Жеке сөздерді айту",
-            "Қарапайым сөйлем құрастыру",
-            "Күрделі сөйлем құрастыру",
-            "Сурет бойынша әңгімелеу",
-            "Өз ойын жеткізу"
-        ]
-    },
-    {
-        title: "4. Қайталап айту",
-        tasks: [
-            "Дыбыстарды қайталау",
-            "Буындарды қайталау",
-            "Жеке сөздерді қайталау",
-            "Сөз тіркестерін қайталау",
-            "Сөйлемдерді қайталау"
-        ]
-    },
-    {
-        title: "5. Оқу дағдылары",
-        tasks: [
-            "Әріптерді тану",
-            "Буындарды оқу",
-            "Сөздерді оқу",
-            "Сөйлемдерді оқу",
-            "Оқығанын түсіну"
-        ]
-    },
-    {
-        title: "6. Жазу дағдылары",
-        tasks: [
-            "Әріптерді жазу",
-            "Сөздерді көшіріп жазу",
-            "Есту арқылы жазу",
-            "Сөйлемдерді жазу",
-            "Өздігінен мәтін құрастыру"
-        ]
-    }
-];
-const patientName = patient.fullName || "";
-const patientAge = patient.age || "";
-const patientDiagnosis = patient.diagnosis || "";
-let html = `
+let sectionsHTML = speechCardSections.map((section, index) => {
+    return `
+        <div class="speech-section">
+            <h3>${index + 1}. ${section.title}</h3>
+            ${section.items.map((item, itemIndex) => {
+                const key = `s${index}_i${itemIndex}`;
+                const selected = saved[key] ?? "";
+                return `
+                    <div class="speech-item">
+                        <label>${item}</label>
+                        <select data-key="${key}">
+                            <option value="" ${selected === "" ? "selected" : ""}>
+                                Бағалауды таңдаңыз
+                            </option>
+                            <option value="3" ${selected === "3" ? "selected" : ""}>
+                                3 — толық орындайды
+                            </option>
+                            <option value="2" ${selected === "2" ? "selected" : ""}>
+                                2 — аздаған қиындықпен
+                            </option>
+                            <option value="1" ${selected === "1" ? "selected" : ""}>
+                                1 — елеулі қиындықпен
+                            </option>
+                            <option value="0" ${selected === "0" ? "selected" : ""}>
+                                0 — орындай алмайды
+                            </option>
+                        </select>
+                    </div>
+                `;
+            }).join("")}
+        </div>
+    `;
+}).join("");
+content.innerHTML = `
     <style>
         .speech-card {
             color: #574735;
-            font-family: Arial, sans-serif;
         }
-        .speech-card h2,
-        .speech-card h3 {
+        .speech-card h2 {
             color: #b58a43;
+            text-align: center;
+            margin-bottom: 10px;
         }
-        .speech-card .sc-intro {
-            background: #fffaf0;
+        .speech-card .subtitle {
+            text-align: center;
+            color: #8d7b65;
+            margin-bottom: 25px;
+        }
+        .speech-section {
+            background: white;
             border: 1px solid #eadcc3;
-            border-radius: 14px;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+        .speech-section h3 {
+            color: #b58a43;
+            margin-bottom: 17px;
+        }
+        .speech-item {
+            display: grid;
+            grid-template-columns: 1fr minmax(180px, 260px);
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0e7d7;
+        }
+        .speech-item:last-child {
+            border-bottom: none;
+        }
+        .speech-item select,
+        .speech-card input,
+        .speech-card textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #eadcc3;
+            border-radius: 9px;
+            background: #fffaf0;
+            color: #574735;
+            font-size: 15px;
+        }
+        .speech-info {
+            background: white;
+            border: 1px solid #eadcc3;
+            border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
         }
-        .speech-card .sc-section {
-            background: #fffdf8;
-            border: 1px solid #eadcc3;
-            border-radius: 14px;
-            padding: 20px;
-            margin: 20px 0;
+        .speech-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
-        .speech-card input,
-        .speech-card textarea,
-        .speech-card select {
-            width: 100%;
-            padding: 11px;
-            border: 1px solid #dfcfb2;
-            border-radius: 8px;
-            background: white;
-            color: #574735;
-            margin: 6px 0 14px;
+        .speech-field label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #8d7b65;
+        }
+        .speech-field {
+            min-width: 0;
         }
         .speech-card textarea {
-            min-height: 80px;
+            min-height: 90px;
             resize: vertical;
+            margin-top: 8px;
         }
-        .speech-card table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        .speech-card th,
-        .speech-card td {
-            border: 1px solid #eadcc3;
-            padding: 10px;
-            text-align: left;
-        }
-        .speech-card th {
-            background: #f5ead6;
-            color: #8b672f;
-        }
-        .speech-card .sc-actions {
+        .speech-actions {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin: 20px 0;
         }
-        .speech-card button {
+        .speech-actions button {
+            flex: 1;
+            min-width: 140px;
+            padding: 14px;
             border: none;
-            border-radius: 9px;
+            border-radius: 10px;
             background: #b58a43;
             color: white;
-            padding: 12px 18px;
-            cursor: pointer;
             font-weight: bold;
         }
-        .speech-card .sc-back {
-            background: #8c795f;
+        .speech-actions .secondary {
+            background: #f8f0df;
+            color: #574735;
+            border: 1px solid #eadcc3;
         }
         @media(max-width:600px) {
-            .speech-card table {
-                font-size: 12px;
+            .speech-item {
+                grid-template-columns: 1fr;
             }
-            .speech-card th,
-            .speech-card td {
-                padding: 6px;
-            }
-        }
-        @media print {
-            .speech-card .sc-actions,
-            .speech-card .sc-back {
-                display: none;
+            .speech-info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
     <div class="speech-card">
-        <button class="sc-back" onclick="backToCabinetMenu()">
-            ← Кабинетке оралу
-        </button>
-        <div class="sc-intro">
-            <h2>ТІЛАШАР</h2>
-            <h3>ЭЛЕКТРОНДЫ СӨЙЛЕУ КАРТАСЫ</h3>
-            <p>Афазиясы бар ересектерге арналған логопедиялық бақылау картасы.</p>
-            <p>
-                Мақсаты: сөйлеу дағдыларының қазіргі жағдайын
-                тіркеу, қиындықтарды белгілеу және түзету жұмысын жоспарлау.
-            </p>
-        </div>
-        <div class="sc-section">
-            <h3>1. ЖАЛПЫ МӘЛІМЕТТЕР</h3>
-            <label>Аты-жөні</label>
-            <input id="sc_name" value="${escapeHTML(patientName)}">
-            <label>Жасы</label>
-            <input id="sc_age" value="${escapeHTML(patientAge)}">
-            <label>Диагнозы</label>
-            <input id="sc_diagnosis" value="${escapeHTML(patientDiagnosis)}">
-            <label>Тексеру күні</label>
-            <input id="sc_date" type="date" value="${escapeHTML(patient.testDate || "")}">
-        </div>
-        <div class="sc-section">
-            <h3>2. ЖАЛПЫ БАҚЫЛАУ</h3>
-            <label>Жалпы жағдайы</label>
-            <select id="sc_general">
-                <option value="">Таңдаңыз</option>
-                <option>Қанағаттанарлық</option>
-                <option>Орташа</option>
-                <option>Қосымша бақылау қажет</option>
-            </select>
-            <label>Қарым-қатынасқа түсуі</label>
-            <select id="sc_communication">
-                <option value="">Таңдаңыз</option>
-                <option>Белсенді</option>
-                <option>Көмекпен қатысады</option>
-                <option>Қарым-қатынасқа түсуі шектеулі</option>
-            </select>
-            <label>Қосымша бақылау</label>
-            <textarea id="sc_observation" placeholder="Бақылау нәтижесін енгізіңіз..."></textarea>
-        </div>
-`;
-sections.forEach((section, sectionIndex) => {
-    html += `
-        <div class="sc-section">
-            <h3>${section.title}</h3>
-            <p>
-                Бағалау шкаласы:
-                3 – толық орындайды;
-                2 – аздаған көмекпен;
-                1 – едәуір көмекпен;
-                0 – орындай алмайды.
-            </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Бағалау тапсырмасы</th>
-                        <th>Ұпай (0–3)</th>
-                    </tr>
-                </thead>
-                <tbody>
-    `;
-    section.tasks.forEach((task, taskIndex) => {
-        const id = `sc_${sectionIndex}_${taskIndex}`;
-        html += `
-            <tr>
-                <td>${task}</td>
-                <td>
-                    <select id="${id}" class="sc-score">
-                        <option value="">—</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+        <h2>«ТІЛАШАР» ЛОГОПЕДИЯЛЫҚ КАБИНЕТІ</h2>
+        <p class="subtitle">Афазиясы бар ересектерге арналған сөйлеу картасы</p>
+        <div class="speech-info">
+            <h3>1. Жалпы мәліметтер</h3>
+            <div class="speech-info-grid">
+                <div class="speech-field">
+                    <label>Аты-жөні</label>
+                    <input id="scName" value="${escapeHTML(patient.fullName || "")}">
+                </div>
+                <div class="speech-field">
+                    <label>Туған күні</label>
+                    <input id="scBirth" type="date" value="${escapeHTML(patient.birthDate || "")}">
+                </div>
+                <div class="speech-field">
+                    <label>Жасы</label>
+                    <input id="scAge" value="${escapeHTML(patient.age || "")}">
+                </div>
+                <div class="speech-field">
+                    <label>Жынысы</label>
+                    <select id="scGender">
+                        <option value="">Таңдаңыз</option>
+                        <option>Әйел</option>
+                        <option>Ер</option>
                     </select>
-                </td>
-            </tr>
-        `;
-    });
-    html += `
-                </tbody>
-            </table>
+                </div>
+                <div class="speech-field">
+                    <label>Білімі</label>
+                    <input id="scEducation" placeholder="Білімі">
+                </div>
+                <div class="speech-field">
+                    <label>Мамандығы</label>
+                    <input id="scProfession" placeholder="Мамандығы">
+                </div>
+                <div class="speech-field">
+                    <label>Негізгі қолы</label>
+                    <select id="scHand">
+                        <option value="">Таңдаңыз</option>
+                        <option>Оң қол</option>
+                        <option>Сол қол</option>
+                    </select>
+                </div>
+                <div class="speech-field">
+                    <label>Тексеру күні</label>
+                    <input id="scDate" type="date">
+                </div>
+                <div class="speech-field">
+                    <label>Диагноз</label>
+                    <input id="scDiagnosis" value="${escapeHTML(patient.diagnosis || "")}">
+                </div>
+                <div class="speech-field">
+                    <label>Логопедтің аты-жөні</label>
+                    <input id="scLogoped" placeholder="Логопед">
+                </div>
+            </div>
         </div>
-    `;
-});
-html += `
-        <div class="sc-section">
-            <h3>3. ЛОГОПЕД ҚОРЫТЫНДЫСЫ</h3>
-            <label>Анықталған қиындықтар</label>
-            <textarea id="sc_difficulties"></textarea>
+        <div class="speech-info">
+            <h3>2. Анамнездік мәліметтер</h3>
+            <label>Афазияның пайда болу себебі</label>
+            <textarea id="scCause">${escapeHTML(saved.cause || "")}</textarea>
+            <label>Ауру басталған күні</label>
+            <input id="scIllnessDate" type="date">
+            <label>Қосымша диагноздары</label>
+            <textarea id="scExtraDiagnosis">${escapeHTML(saved.extraDiagnosis || "")}</textarea>
+            <label>Бұрын жүргізілген оңалту жұмыстары</label>
+            <textarea id="scRehabilitation">${escapeHTML(saved.rehabilitation || "")}</textarea>
+            <label>Науқастың шағымдары</label>
+            <textarea id="scComplaints">${escapeHTML(saved.complaints || "")}</textarea>
+        </div>
+        <h3 style="color:#b58a43;margin:20px 0;">
+            3. Сөйлеу қызметін зерттеу
+        </h3>
+        ${sectionsHTML}
+        <div class="speech-info">
+            <h3>4. Танымдық қызметтер</h3>
+            <label>Есту арқылы есте сақтау</label>
+            <textarea id="scAuditoryMemory">${escapeHTML(saved.auditoryMemory || "")}</textarea>
+            <label>Көру арқылы есте сақтау</label>
+            <textarea id="scVisualMemory">${escapeHTML(saved.visualMemory || "")}</textarea>
+            <label>Зейін</label>
+            <textarea id="scAttention">${escapeHTML(saved.attention || "")}</textarea>
+            <label>Ойлау</label>
+            <textarea id="scThinking">${escapeHTML(saved.thinking || "")}</textarea>
+            <label>Кеңістікті бағдарлау</label>
+            <textarea id="scOrientation">${escapeHTML(saved.orientation || "")}</textarea>
+        </div>
+        <div class="speech-info">
+            <h3>5. Логопедиялық қорытынды</h3>
             <label>Сақталған дағдылар</label>
-            <textarea id="sc_strengths"></textarea>
-            <label>Түзету жұмысының мақсаттары</label>
-            <textarea id="sc_goals"></textarea>
-            <label>Логопедтің қорытындысы</label>
-            <textarea id="sc_conclusion"></textarea>
-            <label>Логопедтің аты-жөні</label>
-            <input id="sc_logopedist">
+            <textarea id="scPreserved">${escapeHTML(saved.preserved || "")}</textarea>
+            <label>Қиындық туғызатын дағдылар</label>
+            <textarea id="scDifficulties">${escapeHTML(saved.difficulties || "")}</textarea>
+            <label>Логопедиялық қорытынды</label>
+            <textarea id="scConclusion">${escapeHTML(saved.conclusion || "")}</textarea>
+            <label>Түзету жұмысының ұсыныстары</label>
+            <textarea id="scRecommendations">${escapeHTML(saved.recommendations || "")}</textarea>
         </div>
-        <div class="sc-actions">
+        <div class="speech-actions">
             <button onclick="saveSpeechCard()">САҚТАУ</button>
-            <button onclick="window.print()">БАСЫП ШЫҒАРУ</button>
-            <button onclick="exportSpeechCard()">JSON ЖҮКТЕУ</button>
+            <button class="secondary" onclick="window.print()">БАСЫП ШЫҒАРУ</button>
+            <button class="secondary" onclick="backToCabinetMenu()">← КАБИНЕТКЕ ҚАЙТУ</button>
         </div>
-        <p id="sc_message"></p>
+        <p id="speechSaveMessage" style="color:#b58a43;"></p>
     </div>
 `;
-content.innerHTML = html;
-// Бұрын сақталған деректерді енгізу
-Object.entries(saved).forEach(([id, value]) => {
-    const element = document.getElementById(id);
-    if (element && value !== undefined && value !== null) {
-        element.value = value;
-    }
-});
+document.getElementById("scDate").value =
+    saved.testDate || new Date().toISOString().slice(0, 10);
+document.getElementById("scGender").value = saved.gender || "";
+document.getElementById("scEducation").value = saved.education || "";
+document.getElementById("scProfession").value = saved.profession || "";
+document.getElementById("scHand").value = saved.hand || "";
+document.getElementById("scLogoped").value = saved.logoped || "";
+document.getElementById("scIllnessDate").value = saved.illnessDate || "";
 
 }
 
-// Сөйлеу картасын сақтау
 function saveSpeechCard() {
-const content = document.getElementById(“patientContent”);
-if (!content) return;
-
 const data = {};
-content.querySelectorAll(
-    ".speech-card input, .speech-card textarea, .speech-card select"
-).forEach(element => {
-    if (element.id) {
-        data[element.id] = element.value;
-    }
+
+document.querySelectorAll(".speech-card input, .speech-card select, .speech-card textarea")
+    .forEach(element => {
+        if (element.id) {
+            data[element.id] = element.value;
+        }
+    });
+document.querySelectorAll(".speech-card select[data-key]")
+    .forEach(element => {
+        data[element.dataset.key] = element.value;
+    });
+const textFields = [
+    "cause", "extraDiagnosis", "rehabilitation", "complaints",
+    "auditoryMemory", "visualMemory", "attention", "thinking",
+    "orientation", "preserved", "difficulties", "conclusion",
+    "recommendations"
+];
+textFields.forEach(key => {
+    const element = document.getElementById("sc" +
+        key.charAt(0).toUpperCase() + key.slice(1));
+    if (element) data[key] = element.value;
 });
-localStorage.setItem(
-    "aphasiaSpeechCardData",
-    JSON.stringify(data)
-);
-const message = document.getElementById("sc_message");
-if (message) {
-    message.textContent = "Сөйлеу картасы сәтті сақталды!";
-    message.style.color = "#54834e";
-}
-
-}
-
-// JSON файлын жүктеу
-function exportSpeechCard() {
-const data = JSON.parse(
-localStorage.getItem(“aphasiaSpeechCardData”) || “{}”
-);
-
-const blob = new Blob(
-    [JSON.stringify(data, null, 2)],
-    { type: "application/json" }
-);
-const url = URL.createObjectURL(blob);
-const link = document.createElement("a");
-link.href = url;
-link.download = "tilashar-soyleu-kartasy.json";
-link.click();
-URL.revokeObjectURL(url);
+data.gender = document.getElementById("scGender").value;
+data.education = document.getElementById("scEducation").value;
+data.profession = document.getElementById("scProfession").value;
+data.hand = document.getElementById("scHand").value;
+data.logoped = document.getElementById("scLogoped").value;
+data.testDate = document.getElementById("scDate").value;
+data.illnessDate = document.getElementById("scIllnessDate").value;
+localStorage.setItem("aphasiaSpeechCardData", JSON.stringify(data));
+const message = document.getElementById("speechSaveMessage");
+if (message) message.textContent = "✓ Сөйлеу картасы сәтті сақталды!";
 
 }
