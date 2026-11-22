@@ -1,19 +1,32 @@
-// ==================================
-// АФАЗИЯ — GAME PLATFORM
-// ==================================
-// 1. КАБИНЕТКЕ КІРУ
+// ===================================
+// АФАЗИЯ — НЕГІЗГІ ЖҮЙЕ
+// ===================================
+// КАБИНЕТКЕ КІРУ
 function enterCabinet() {
     document.getElementById("home").style.display = "none";
     document.getElementById("cabinet").style.display = "block";
-    window.scrollTo(0, 0);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
-// 2. БАСТЫ БЕТКЕ ҚАЙТУ
+// БАСТЫ БЕТКЕ ҚАЙТУ
 function goHome() {
     document.getElementById("cabinet").style.display = "none";
     document.getElementById("home").style.display = "flex";
-    window.scrollTo(0, 0);
+    document.getElementById("welcome").style.display = "block";
+    document.getElementById("section-content").style.display = "none";
+    document.querySelectorAll(".menu-button").forEach(button => {
+        button.classList.remove("active");
+    });
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
-// 3. БӨЛІМДЕР
+// ===================================
+// БӨЛІМДЕР ТУРАЛЫ АҚПАРАТ
+// ===================================
 const sections = {
     breathing: {
         number: "01",
@@ -21,7 +34,7 @@ const sections = {
         title: "ТЫНЫС АЛУ",
         subtitle: "Тыныс алу әлемі",
         description:
-            "Сөйлеу тынысын дамытуға және тыныс пен сөйлеу үйлесімділігін жетілдіруге арналған бөлім."
+            "Бұл бөлімде тыныс алуды реттеуге, тыныс шығаруды бірқалыпты қалыптастыруға және сөйлеу кезіндегі тыныс үйлесімділігін дамытуға арналған жаттығулар ұсынылады."
     },
     articulation: {
         number: "02",
@@ -29,7 +42,7 @@ const sections = {
         title: "АРТИКУЛЯЦИЯ",
         subtitle: "Артикуляция әлемі",
         description:
-            "Артикуляциялық аппараттың қимыл-қозғалысын дамытуға арналған бөлім."
+            "Бұл бөлім ерін, тіл және жақ қимылдарын дамытуға бағытталған. Артикуляциялық жаттығулар сөйлеу мүшелерінің қозғалысын жетілдіруге көмектеседі."
     },
     vocabulary: {
         number: "03",
@@ -37,7 +50,7 @@ const sections = {
         title: "СӨЗДІК ҚОР",
         subtitle: "Сөздер қазынасы",
         description:
-            "Сөздерді еске түсіру, атау және сөздік қорды белсендіруге арналған бөлім."
+            "Бұл бөлімде заттардың атауын еске түсіру, сөздерді сәйкестендіру, мағынасына қарай топтастыру және белсенді сөздік қорды дамыту тапсырмалары беріледі."
     },
     understanding: {
         number: "04",
@@ -45,7 +58,7 @@ const sections = {
         title: "СӨЙЛЕУДІ ТҮСІНУ",
         subtitle: "Түсіну әлемі",
         description:
-            "Ауызша сөйлеуді қабылдау, сөздердің мағынасын түсіну қабілетін дамытуға арналған бөлім."
+            "Бұл бөлім ауызша нұсқауларды, сөздерді, сөйлемдерді және сұрақтарды түсіну дағдыларын дамытуға арналған."
     },
     speech: {
         number: "05",
@@ -53,7 +66,7 @@ const sections = {
         title: "СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ",
         subtitle: "Сөйлеу әлемі",
         description:
-            "Сөздерді, сөйлемдерді және байланыстырып сөйлеуді қалыптастыруға арналған бөлім."
+            "Бұл бөлімде сөздерді, сөз тіркестерін және сөйлемдерді құрастыруға арналған тапсырмалар ұсынылады. Мақсаты — күнделікті қарым-қатынасты қолдау."
     },
     reading: {
         number: "06",
@@ -61,7 +74,7 @@ const sections = {
         title: "ОҚУ ЖӘНЕ ЖАЗУ",
         subtitle: "Әріптер әлемі",
         description:
-            "Оқу және жазу дағдыларын қалпына келтіруге арналған бөлім."
+            "Бұл бөлім әріптерді тану, сөздерді оқу, қысқа мәтіндерді түсіну және жазу дағдыларын дамытуға бағытталған."
     },
     rhythm: {
         number: "07",
@@ -69,7 +82,7 @@ const sections = {
         title: "ЛОГОРИТМИКА",
         subtitle: "Ырғақ әлемі",
         description:
-            "Қозғалыс, ырғақ және сөйлеу әрекетін үйлестіруге арналған бөлім."
+            "Бұл бөлімде қозғалыс, ырғақ, музыка және сөйлеу әрекетін үйлестіруге арналған жаттығулар қарастырылады."
     },
     results: {
         number: "08",
@@ -77,25 +90,31 @@ const sections = {
         title: "НӘТИЖЕЛЕР",
         subtitle: "Жетістіктер әлемі",
         description:
-            "Орындалған тапсырмалар мен жинақталған нәтижелер көрсетілетін бөлім."
+            "Бұл бөлімде орындалған тапсырмалар, жинақталған ұпайлар, бонус саны және оқу барысындағы жетістіктер көрсетіледі."
     }
 };
-// 4. БӨЛІМДІ АШУ
+// ===================================
+// БӨЛІМДІ АШУ
+// ===================================
 function openSection(sectionName, button) {
     const section = sections[sectionName];
-    if (!section) return;
-    // Бастапқы ақпаратты жасыру
+    if (!section) {
+        return;
+    }
+    // Бастапқы экранды жасыру
     document.getElementById("welcome").style.display = "none";
-    // Бұрынғы бөлімді жасыру
+    // Бөлім мазмұнын көрсету
     const content = document.getElementById("section-content");
     content.style.display = "block";
-    // Барлық батырмалардың белсенділігін алып тастау
+    // Барлық мәзір батырмаларының белсенділігін алып тастау
     document.querySelectorAll(".menu-button").forEach(btn => {
         btn.classList.remove("active");
     });
     // Таңдалған батырманы белгілеу
-    button.classList.add("active");
-    // Жаңа бөлімді көрсету
+    if (button) {
+        button.classList.add("active");
+    }
+    // Бөлім мазмұны
     content.innerHTML = `
         <div class="game-section">
             <div class="game-icon">
@@ -104,15 +123,25 @@ function openSection(sectionName, button) {
             <span class="game-number">
                 ${section.number} • ЛОГОПЕДИЯЛЫҚ БӨЛІМ
             </span>
-            <h2>${section.title}</h2>
+            <h2>
+                ${section.title}
+            </h2>
             <div class="game-line"></div>
-            <h3>${section.subtitle}</h3>
-            <p>${section.description}</p>
+            <h3>
+                ${section.subtitle}
+            </h3>
+            <p>
+                ${section.description}
+            </p>
             <div class="coming-soon">
                 <span>✦</span>
                 <div>
-                    <strong>БӨЛІМ ДАЙЫНДАЛУ ҮСТІНДЕ</strong>
-                    <small>Оқу материалдары мен тапсырмалар кейін қосылады.</small>
+                    <strong>
+                        БӨЛІМ ДАЙЫНДАЛУ ҮСТІНДЕ
+                    </strong>
+                    <small>
+                        Оқу материалдары мен интерактивті тапсырмалар келесі кезеңде енгізіледі.
+                    </small>
                 </div>
             </div>
         </div>
