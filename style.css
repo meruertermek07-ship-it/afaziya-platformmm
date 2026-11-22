@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Cinzel:wght@600;700;800&display=swap');
 :root {
-    --gold: #d4a64a;
-    --dark-gold: #9d7025;
-    --red: #8f1825;
-    --dark-red: #570d17;
-    --cream: #fff9ef;
-    --white: #ffffff;
+    --gold: #f6ca70;
+    --gold-light: #ffe8a9;
+    --red: #83172a;
+    --dark: #310810;
+    --cream: #fff6e5;
 }
 * {
     margin: 0;
@@ -13,169 +12,358 @@
     box-sizing: border-box;
 }
 body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--cream);
-    color: #392b24;
+    font-family: 'Nunito', sans-serif;
+    background: #fff4e2;
 }
-/* БАСТЫ БЕТ */
+/* =====================
+   БАСТЫ БЕТ
+===================== */
 .home-page {
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    background:
-        radial-gradient(circle at 20% 20%, #b77b32 0%, transparent 35%),
-        linear-gradient(135deg, #4d0912, #8f1825, #31070d);
-    position: relative;
     overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(circle at 20% 20%, #b94c42, transparent 30%),
+        radial-gradient(circle at 80% 80%, #c28b36, transparent 30%),
+        linear-gradient(135deg, #26060c, #761325, #380810);
+}
+.home-page::before,
+.home-page::after {
+    content: "✦";
+    position: absolute;
+    color: var(--gold);
+    font-size: 65px;
+    animation: sparkle 3s infinite alternate;
 }
 .home-page::before {
-    content: "";
-    position: absolute;
-    inset: 25px;
-    border: 2px solid rgba(221, 180, 91, 0.65);
-    pointer-events: none;
+    top: 15%;
+    left: 12%;
+}
+.home-page::after {
+    bottom: 15%;
+    right: 12%;
+}
+@keyframes sparkle {
+    from {
+        opacity: .3;
+        transform: scale(.7) rotate(0deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.3) rotate(30deg);
+    }
 }
 .home-content {
     position: relative;
     z-index: 2;
-    padding: 40px 20px;
+    width: min(90%, 750px);
+    padding: 70px 30px;
+    border: 2px solid var(--gold);
+    border-radius: 35px;
+    background: rgba(55, 5, 14, .65);
+    box-shadow:
+        0 0 30px rgba(246, 202, 112, .25),
+        inset 0 0 30px rgba(246, 202, 112, .08);
+}
+.home-decoration {
+    font-size: 55px;
+    color: var(--gold);
+    animation: sparkle 2s infinite alternate;
 }
 .home-content h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(65px, 12vw, 125px);
-    color: #e9c477;
-    letter-spacing: 15px;
-    text-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    font-family: 'Cinzel', serif;
+    font-size: clamp(55px, 10vw, 110px);
+    color: var(--gold-light);
+    letter-spacing: 12px;
+    text-shadow: 0 5px 25px #000;
+}
+.home-line {
+    width: 150px;
+    height: 4px;
+    margin: 25px auto;
+    border-radius: 10px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 .home-content p {
-    color: #fff3db;
-    font-size: 16px;
-    line-height: 1.9;
-    margin: 25px auto 40px;
-    max-width: 550px;
-}
-.home-content button {
-    padding: 17px 65px;
-    border: 2px solid #f2d18a;
-    background: linear-gradient(135deg, #f0d18c, #b98130);
-    color: #570d17;
+    color: white;
     font-size: 17px;
-    font-weight: 800;
+    line-height: 1.9;
+    max-width: 520px;
+    margin: auto;
+}
+.enter-button {
+    margin-top: 45px;
+    padding: 18px 65px;
+    border: 2px solid #fff0bd;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #ffe7a3, #d49a36);
+    color: #58101c;
+    font-size: 19px;
+    font-weight: 900;
     letter-spacing: 4px;
     cursor: pointer;
-    transition: 0.3s;
+    box-shadow: 0 8px 0 #80521b, 0 15px 25px #170306;
+    transition: .25s;
 }
-.home-content button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+.enter-button span {
+    margin-left: 15px;
 }
-/* КАБИНЕТ */
+.enter-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 13px 0 #80521b, 0 20px 30px #170306;
+}
+.enter-button:active {
+    transform: translateY(5px);
+    box-shadow: 0 3px 0 #80521b;
+}
+.home-footer {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-top: 55px;
+}
+/* =====================
+   КАБИНЕТ
+===================== */
 .cabinet-page {
     min-height: 100vh;
-    background: #f8f2e8;
+    background:
+        radial-gradient(circle at top right, #fff0d1, transparent 35%),
+        #f8edda;
 }
-/* ЖОҒАРҒЫ ЖОЛАҚ */
+/* HEADER */
 .header {
-    height: 85px;
-    background: linear-gradient(100deg, #570d17, #921d2a);
+    height: 90px;
+    padding: 0 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(100deg, #3a0810, #85172a, #4b0a14);
+    border-bottom: 4px solid var(--gold);
+    box-shadow: 0 7px 20px rgba(60, 8, 15, .25);
+}
+.header-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 27px;
+    color: var(--gold-light);
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+.header-logo span {
+    color: var(--gold);
+}
+.cabinet-title {
+    color: var(--gold-light);
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    padding: 13px 22px;
+    border: 1px solid var(--gold);
+    border-radius: 15px;
+    background: rgba(255,255,255,.06);
+}
+/* MAIN LAYOUT */
+.main-layout {
+    display: flex;
+    min-height: calc(100vh - 90px);
+}
+/* =====================
+   GAME MENU
+===================== */
+.sidebar {
+    width: 285px;
+    flex-shrink: 0;
+    padding: 25px 17px;
+    background: linear-gradient(180deg, #681020, #350810);
+    border-right: 4px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.sidebar-heading {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-align: center;
+    margin: 10px 0 18px;
+}
+.menu-button {
+    min-height: 61px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 10px 13px;
+    border: 1px solid rgba(246,202,112,.4);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #8b2635, #5b101d);
+    color: #fff1d2;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 5px 0 #300710;
+    transition: .25s;
+}
+.menu-number {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: linear-gradient(145deg, #ffe6a2, #c68b35);
+    color: #57101a;
+    font-size: 11px;
+    font-weight: 900;
+}
+.menu-button:hover,
+.menu-button.active {
+    transform: translateX(5px) translateY(-2px);
+    background: linear-gradient(145deg, #ffe5a0, #d49b40);
+    color: #57101a;
+    box-shadow: 0 7px 0 #8b6027, 0 8px 20px rgba(0,0,0,.2);
+}
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 25px;
+    text-align: center;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+.sidebar-footer span {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+/* =====================
+   WORKSPACE
+===================== */
+.workspace {
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+}
+.workspace-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 45px;
-    border-bottom: 3px solid var(--gold);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-}
-.header-logo {
-    font-family: 'Playfair Display', serif;
-    color: #e9c477;
-    font-size: 29px;
-    font-weight: 800;
-    letter-spacing: 5px;
-}
-.cabinet-title {
-    color: #f4dca8;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 3px;
-}
-/* НЕГІЗГІ ОРНАЛАСУ */
-.main-layout {
-    display: flex;
-    min-height: calc(100vh - 85px);
-}
-/* СОЛ ЖАҚ МӘЗІР */
-.sidebar {
-    width: 280px;
-    flex-shrink: 0;
-    background: linear-gradient(180deg, #68111c, #400a11);
-    padding: 30px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-    border-right: 3px solid var(--gold);
-}
-.sidebar button {
-    width: 100%;
-    min-height: 57px;
-    padding: 12px 15px;
-    border: 1px solid rgba(226, 185, 105, 0.4);
-    background: rgba(255,255,255,0.06);
-    color: #fff0d4;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.25s;
-}
-.sidebar button:hover,
-.sidebar button.active {
-    background: linear-gradient(100deg, #e0b45e, #b77d30);
-    color: #4c1015;
-    border-color: #f5d99e;
-    transform: translateX(5px);
-}
-/* ОРТАЛЫҚ ЖҰМЫС АЙМАҒЫ */
-.workspace {
-    flex: 1;
-    padding: 45px;
-    min-width: 0;
-}
-#welcome,
-#section-content {
-    background: white;
-    min-height: 400px;
-    padding: 45px;
-    border: 1px solid #ead8b5;
-    border-top: 5px solid var(--gold);
-    box-shadow: 0 8px 30px rgba(85, 42, 22, 0.07);
-}
-.workspace h2 {
-    font-family: 'Playfair Display', serif;
-    color: #791722;
-    font-size: 32px;
     margin-bottom: 25px;
 }
-.workspace p {
-    color: #75665a;
-    font-size: 15px;
-    line-height: 1.9;
-    margin-bottom: 15px;
+.workspace-label {
+    color: #a17a38;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
 }
-/* ТЕЛЕФОНҒА БЕЙІМДЕУ */
-@media (max-width: 768px) {
+.workspace-top h2 {
+    margin-top: 8px;
+    color: #681321;
+    font-family: 'Cinzel', serif;
+    font-size: 27px;
+}
+.workspace-symbol {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #ffe8ac, #d6a044);
+    color: #721728;
+    font-size: 30px;
+    box-shadow: 0 6px 0 #aa782d;
+}
+/* WELCOME CARD */
+.welcome-card {
+    min-height: 440px;
+    padding: 55px 30px;
+    text-align: center;
+    border: 2px solid #e4bd70;
+    border-radius: 30px;
+    background:
+        radial-gradient(circle at top right, #fff1ce, transparent 35%),
+        white;
+    box-shadow: 0 12px 30px rgba(96, 51, 22, .10);
+}
+.welcome-decoration {
+    font-size: 55px;
+    color: #d2a044;
+}
+.welcome-label {
+    color: #aa8039;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+.welcome-card h2 {
+    color: #781728;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(23px, 3vw, 35px);
+    margin: 25px 0;
+}
+.welcome-line {
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #d5a34a, transparent);
+    margin: 25px auto;
+}
+.welcome-card p {
+    color: #786658;
+    font-size: 15px;
+    line-height: 2;
+    max-width: 650px;
+    margin: 15px auto;
+}
+.welcome-description {
+    color: #a02032 !important;
+    font-weight: 900;
+    font-size: 20px !important;
+}
+.welcome-footer {
+    margin-top: 50px;
+    color: #a17a38;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+.welcome-footer span {
+    margin: 0 12px;
+}
+/* FOOTER */
+.workspace-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    padding: 15px 5px;
+    color: #a17a38;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+/* MOBILE */
+@media(max-width: 768px) {
     .header {
-        padding: 0 18px;
         height: 75px;
+        padding: 0 13px;
     }
     .header-logo {
-        font-size: 21px;
+        font-size: 19px;
+        letter-spacing: 2px;
     }
     .cabinet-title {
-        font-size: 10px;
+        font-size: 9px;
         letter-spacing: 1px;
+        padding: 10px;
     }
     .main-layout {
         flex-direction: column;
@@ -185,26 +373,39 @@ body {
         padding: 15px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 9px;
+        gap: 10px;
     }
-    .sidebar button {
-        min-height: 60px;
+    .sidebar-heading,
+    .sidebar-footer {
+        grid-column: 1 / -1;
+    }
+    .menu-button {
+        min-height: 65px;
         font-size: 11px;
-        text-align: center;
         padding: 8px;
+        gap: 7px;
+    }
+    .menu-number {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
     }
     .workspace {
-        padding: 15px;
+        padding: 18px 13px;
     }
-    #welcome,
-    #section-content {
-        padding: 25px 18px;
-        min-height: 350px;
+    .workspace-top h2 {
+        font-size: 19px;
     }
-    .home-content h1 {
-        letter-spacing: 7px;
+    .workspace-symbol {
+        width: 45px;
+        height: 45px;
     }
-    .home-content p {
-        font-size: 13px;
+    .welcome-card {
+        padding: 35px 18px;
+        min-height: 400px;
+    }
+    .workspace-footer {
+        font-size: 8px;
+        gap: 10px;
     }
 }
