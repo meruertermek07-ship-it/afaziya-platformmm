@@ -1,157 +1,249 @@
-// ===================================
-// АФАЗИЯ — НЕГІЗГІ ЖҮЙЕ
-// ===================================
-// КАБИНЕТКЕ КІРУ
+// =============================================
+// АФАЗИЯ — НЕГІЗГІ БАҒДАРЛАМАНЫ БАСҚАРУ
+// =============================================
+
+document.addEventListener(“DOMContentLoaded”, function () {
+const home = document.getElementById(“home”);
+const cabinet = document.getElementById(“cabinet”);
+
+if (home) home.style.display = "flex";
+if (cabinet) cabinet.style.display = "none";
+
+});
+
+// =============================================
+// БАҒДАРЛАМАҒА КІРУ
+// =============================================
+
 function enterCabinet() {
-    document.getElementById("home").style.display = "none";
-    document.getElementById("cabinet").style.display = "block";
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+const home = document.getElementById(“home”);
+const cabinet = document.getElementById(“cabinet”);
+
+if (home) home.style.display = "none";
+if (cabinet) cabinet.style.display = "block";
+showWelcome();
+window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+});
+
 }
+
+// =============================================
 // БАСТЫ БЕТКЕ ҚАЙТУ
+// =============================================
+
 function goHome() {
-    document.getElementById("cabinet").style.display = "none";
-    document.getElementById("home").style.display = "flex";
-    document.getElementById("welcome").style.display = "block";
-    document.getElementById("section-content").style.display = "none";
-    document.querySelectorAll(".menu-button").forEach(button => {
-        button.classList.remove("active");
-    });
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+const home = document.getElementById(“home”);
+const cabinet = document.getElementById(“cabinet”);
+
+if (cabinet) cabinet.style.display = "none";
+if (home) home.style.display = "flex";
+window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+});
+
+}
+
+// =============================================
+// БӨЛІМДЕР ТІЗІМІ
+// =============================================
+
+const sections = {
+
+breathing: {
+    title: "ТЫНЫС АЛУ",
+    icon: "🌬️",
+    description: "Сөйлеу тынысын дамытуға арналған жаттығулар.",
+    exercises: [
+        "Дұрыс тыныс алу",
+        "Ұзақ дем шығару",
+        "Ауа ағынын дамыту"
+    ]
+},
+articulation: {
+    title: "АРТИКУЛЯЦИЯ",
+    icon: "👄",
+    description: "Ерін, тіл және жақ бұлшықеттерінің қозғалысын дамыту.",
+    exercises: [
+        "Ерін жаттығулары",
+        "Тіл жаттығулары",
+        "Жақ жаттығулары"
+    ]
+},
+vocabulary: {
+    title: "СӨЗДІК ҚОР",
+    icon: "📚",
+    description: "Сөздерді түсіну, еске түсіру және қолдану.",
+    exercises: [
+        "Заттарды атау",
+        "Суреттермен жұмыс",
+        "Сөздерді топтастыру"
+    ]
+},
+understanding: {
+    title: "СӨЙЛЕУДІ ТҮСІНУ",
+    icon: "👂",
+    description: "Сөздер мен сөйлемдердің мағынасын түсіну.",
+    exercises: [
+        "Сөзді түсіну",
+        "Нұсқауды орындау",
+        "Сөйлемді түсіну"
+    ]
+},
+speech: {
+    title: "СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ",
+    icon: "🗣️",
+    description: "Сөз, сөз тіркесі және сөйлем құрастыру.",
+    exercises: [
+        "Буындарды айту",
+        "Сөздерді айту",
+        "Сөйлем құрастыру"
+    ]
+},
+reading: {
+    title: "ОҚУ ЖӘНЕ ЖАЗУ",
+    icon: "📖",
+    description: "Оқу және жазу дағдыларын дамыту.",
+    exercises: [
+        "Әріптерді тану",
+        "Сөздерді оқу",
+        "Сөздерді жазу"
+    ]
+},
+rhythm: {
+    title: "ЛОГОРИТМИКА",
+    icon: "🎵",
+    description: "Сөйлеу мен қозғалысты ырғақ арқылы үйлестіру.",
+    exercises: [
+        "Ырғақты қайталау",
+        "Қимылмен сөз айту",
+        "Музыкалық жаттығулар"
+    ]
+},
+results: {
+    title: "НӘТИЖЕЛЕР",
+    icon: "🏆",
+    description: "Орындалған жаттығулар мен жетістіктер.",
+    exercises: [
+        "Орындалған тапсырмалар",
+        "Жиналған ұпайлар",
+        "Жалпы прогресс"
+    ]
+}
+
+};
+
+// =============================================
+// БАСТАПҚЫ ЭКРАН
+// =============================================
+
+function showWelcome() {
+const welcome = document.getElementById(“welcome”);
+const content = document.getElementById(“section-content”);
+
+if (welcome) welcome.style.display = "block";
+if (content) {
+    content.style.display = "none";
+    content.innerHTML = "";
+}
+document.querySelectorAll(".menu-button").forEach(button => {
+    button.classList.remove("active");
+});
+const firstButton = document.querySelector(".menu-button");
+if (firstButton) firstButton.classList.add("active");
+
+}
+
+// =============================================
+// БӨЛІМДІ АШУ
+// =============================================
+
+function openSection(sectionName, button = null) {
+const section = sections[sectionName];
+
+if (!section) {
+    console.error("Бөлім табылмады:", sectionName);
+    return;
+}
+const welcome = document.getElementById("welcome");
+const content = document.getElementById("section-content");
+if (!content) return;
+if (welcome) welcome.style.display = "none";
+content.style.display = "block";
+// Белсенді мәзір батырмасын белгілеу
+document.querySelectorAll(".menu-button").forEach(item => {
+    item.classList.remove("active");
+});
+if (button) {
+    button.classList.add("active");
+} else {
+    document.querySelectorAll(".menu-button").forEach(item => {
+        const clickText = item.getAttribute("onclick") || "";
+        if (clickText.includes("'" + sectionName + "'")) {
+            item.classList.add("active");
+        }
     });
 }
-// ===================================
-// БӨЛІМДЕР ТУРАЛЫ АҚПАРАТ
-// ===================================
-const sections = {
-    breathing: {
-        number: "01",
-        icon: "🌬️",
-        title: "ТЫНЫС АЛУ",
-        subtitle: "Тыныс алу әлемі",
-        description:
-            "Бұл бөлімде тыныс алуды реттеуге, тыныс шығаруды бірқалыпты қалыптастыруға және сөйлеу кезіндегі тыныс үйлесімділігін дамытуға арналған жаттығулар ұсынылады."
-    },
-    articulation: {
-        number: "02",
-        icon: "👄",
-        title: "АРТИКУЛЯЦИЯ",
-        subtitle: "Артикуляция әлемі",
-        description:
-            "Бұл бөлім ерін, тіл және жақ қимылдарын дамытуға бағытталған. Артикуляциялық жаттығулар сөйлеу мүшелерінің қозғалысын жетілдіруге көмектеседі."
-    },
-    vocabulary: {
-        number: "03",
-        icon: "📚",
-        title: "СӨЗДІК ҚОР",
-        subtitle: "Сөздер қазынасы",
-        description:
-            "Бұл бөлімде заттардың атауын еске түсіру, сөздерді сәйкестендіру, мағынасына қарай топтастыру және белсенді сөздік қорды дамыту тапсырмалары беріледі."
-    },
-    understanding: {
-        number: "04",
-        icon: "🧠",
-        title: "СӨЙЛЕУДІ ТҮСІНУ",
-        subtitle: "Түсіну әлемі",
-        description:
-            "Бұл бөлім ауызша нұсқауларды, сөздерді, сөйлемдерді және сұрақтарды түсіну дағдыларын дамытуға арналған."
-    },
-    speech: {
-        number: "05",
-        icon: "💬",
-        title: "СӨЙЛЕУДІ ҚАЛЫПТАСТЫРУ",
-        subtitle: "Сөйлеу әлемі",
-        description:
-            "Бұл бөлімде сөздерді, сөз тіркестерін және сөйлемдерді құрастыруға арналған тапсырмалар ұсынылады. Мақсаты — күнделікті қарым-қатынасты қолдау."
-    },
-    reading: {
-        number: "06",
-        icon: "✍️",
-        title: "ОҚУ ЖӘНЕ ЖАЗУ",
-        subtitle: "Әріптер әлемі",
-        description:
-            "Бұл бөлім әріптерді тану, сөздерді оқу, қысқа мәтіндерді түсіну және жазу дағдыларын дамытуға бағытталған."
-    },
-    rhythm: {
-        number: "07",
-        icon: "🎵",
-        title: "ЛОГОРИТМИКА",
-        subtitle: "Ырғақ әлемі",
-        description:
-            "Бұл бөлімде қозғалыс, ырғақ, музыка және сөйлеу әрекетін үйлестіруге арналған жаттығулар қарастырылады."
-    },
-    results: {
-        number: "08",
-        icon: "🏆",
-        title: "НӘТИЖЕЛЕР",
-        subtitle: "Жетістіктер әлемі",
-        description:
-            "Бұл бөлімде орындалған тапсырмалар, жинақталған ұпайлар, бонус саны және оқу барысындағы жетістіктер көрсетіледі."
-    }
-};
-// ===================================
-// БӨЛІМДІ АШУ
-// ===================================
-function openSection(sectionName, button) {
-    const section = sections[sectionName];
-    if (!section) {
-        return;
-    }
-    // Бастапқы экранды жасыру
-    document.getElementById("welcome").style.display = "none";
-    // Бөлім мазмұнын көрсету
-    const content = document.getElementById("section-content");
-    content.style.display = "block";
-    // Барлық мәзір батырмаларының белсенділігін алып тастау
-    document.querySelectorAll(".menu-button").forEach(btn => {
-        btn.classList.remove("active");
-    });
-    // Таңдалған батырманы белгілеу
-    if (button) {
-        button.classList.add("active");
-    }
-    // Бөлім мазмұны
-    content.innerHTML = `
-        <div class="game-section">
-            <div class="game-icon">
-                ${section.icon}
+// Жаттығулар тізімін дайындау
+let exerciseHTML = "";
+section.exercises.forEach((exercise, index) => {
+    exerciseHTML += `
+        <div class="game-card">
+            <div class="game-number">${index + 1}</div>
+            <div>
+                <h3>${exercise}</h3>
+                <p>Жаттығу мазмұны келесі кезеңде қосылады.</p>
             </div>
-            <span class="game-number">
-                ${section.number} • ЛОГОПЕДИЯЛЫҚ БӨЛІМ
-            </span>
-            <h2>
-                ${section.title}
-            </h2>
-            <div class="game-line"></div>
-            <h3>
-                ${section.subtitle}
-            </h3>
-            <p>
-                ${section.description}
-            </p>
-            <div class="coming-soon">
-                <span>✦</span>
-                <div>
-                    <strong>
-                        БӨЛІМ ДАЙЫНДАЛУ ҮСТІНДЕ
-                    </strong>
-                    <small>
-                        Оқу материалдары мен интерактивті тапсырмалар келесі кезеңде енгізіледі.
-                    </small>
-                </div>
-            </div>
+            <span class="coming-soon">ДАЙЫНДАЛУДА</span>
         </div>
     `;
-    // Анимация
-    content.classList.remove("section-animation");
-    void content.offsetWidth;
-    content.classList.add("section-animation");
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+});
+content.innerHTML = `
+    <div class="game-section">
+        <div class="game-icon">${section.icon}</div>
+        <h1>${section.title}</h1>
+        <div class="game-line"></div>
+        <p>${section.description}</p>
+        <div class="exercise-list">
+            ${exerciseHTML}
+        </div>
+        <button class="back-button" onclick="showWelcome()">
+            ← БӨЛІМДЕРГЕ ҚАЙТУ
+        </button>
+    </div>
+`;
+content.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+});
+
+}
+
+// =============================================
+// ЛОГОПЕД КАБИНЕТІНЕ ӨТУ
+// =============================================
+
+function openLogopedCabinet() {
+window.location.href = “cabinet.html”;
+}
+
+// =============================================
+// ҚАУІПСІЗ МӘТІН
+// =============================================
+
+function safeText(value) {
+return String(value ?? “”).replace(/[&<>”’]/g, character => {
+const symbols = {
+“&”: “&”,
+“<”: “<”,
+“>”: “>”,
+‘”’: “"”,
+“’”: “'”
+};
+
+    return symbols[character];
+});
+
 }
